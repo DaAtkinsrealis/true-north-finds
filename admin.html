@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理后台 · True North Finds</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#C41E3A;--primary-dark:#9A1830;--accent:#D4A574;--bg:#f5f5f5;--card:#fff;--text:#1a1a1a;--text-light:#666;--border:#e0e0e0;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-hover:0 8px 32px rgba(0,0,0,.12);--success:#2d8a4e;--danger:#C41E3A;--warning:#e6a700}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f0eb 0%,#e8e0d8 100%);padding:20px}
+.login-box{background:var(--card);padding:48px 40px;border-radius:20px;box-shadow:var(--shadow-hover);width:100%;max-width:400px;text-align:center}
+.login-box .logo-icon{font-size:3rem;margin-bottom:12px}
+.login-box h1{font-size:1.4rem;margin-bottom:6px}
+.login-box p{color:var(--text-light);font-size:.9rem;margin-bottom:28px}
+.login-box input{width:100%;padding:14px 18px;border:2px solid var(--border);border-radius:12px;font-size:1rem;font-family:inherit;margin-bottom:16px;transition:border-color .3s}
+.login-box input:focus{outline:none;border-color:var(--primary)}
+.login-box button{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit}
+.login-box button:hover{background:var(--primary-dark)}
+.login-error{color:var(--danger);font-size:.85rem;margin-top:12px;display:none}
+.admin-layout{display:none}
+.admin-layout.active{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:100}
+.sidebar-header{padding:24px 20px;border-bottom:1px solid var(--border)}
+.sidebar-header .logo{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.sidebar-header .logo-icon{font-size:1.4rem}
+.sidebar-header .sub{font-size:.75rem;color:var(--text-light);margin-top:2px}
+.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;cursor:pointer;transition:all .2s;font-size:.9rem;color:var(--text-light);text-decoration:none;border:none;background:none;width:100%;font-family:inherit}
+.nav-item:hover{background:#f5f5f5;color:var(--text)}
+.nav-item.active{background:#fef2f2;color:var(--primary);font-weight:600}
+.nav-icon{font-size:1.1rem;width:22px;text-align:center}
+.sidebar-footer{padding:16px 20px;border-top:1px solid var(--border)}
+.sidebar-footer button{width:100%;padding:10px;background:transparent;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.85rem;color:var(--text-light);font-family:inherit;transition:all .2s}
+.sidebar-footer button:hover{border-color:var(--primary);color:var(--primary)}
+.main-content{margin-left:240px;flex:1;padding:32px 36px;max-width:calc(100% - 240px)}
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.page-header h2{font-size:1.4rem;font-weight:700}
+.btn-primary{padding:10px 20px;background:var(--primary);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:.88rem;font-weight:500;transition:all .3s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-secondary{padding:10px 18px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:.85rem;transition:all .3s;font-family:inherit}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary)}
+.btn-danger{padding:8px 14px;background:#fef2f2;color:var(--danger);border:1px solid #fecaca;border-radius:8px;cursor:pointer;font-size:.8rem;transition:all .3s;font-family:inherit}
+.btn-danger:hover{background:var(--danger);color:#fff}
+.btn-small{padding:6px 12px;font-size:.78rem;border-radius:6px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.stat-card .label{font-size:.82rem;color:var(--text-light);margin-bottom:6px}
+.stat-card .value{font-size:1.6rem;font-weight:700;color:var(--primary)}
+.data-table-wrap{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{text-align:left;padding:14px 18px;font-size:.8rem;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);background:#fafafa}
+.data-table td{padding:14px 18px;font-size:.88rem;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+.data-table tr:hover td{background:#fafafa}
+.data-table tr:last-child td{border-bottom:none}
+.td-img{width:48px;height:48px;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#f0ebe5,#e5ddd4)}
+.td-name{font-weight:600}
+.td-price{color:var(--primary);font-weight:600}
+.td-actions{display:flex;gap:6px}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;backdrop-filter:blur(3px)}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--card);border-radius:16px;width:100%;max-width:560px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-header h3{font-size:1.1rem}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-light);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:#f5f5f5}
+.modal-body{padding:20px 24px;overflow-y:auto;flex:1}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--text)}
+.form-group label .req{color:var(--danger)}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.92rem;font-family:inherit;transition:border-color .3s;background:var(--card)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-group small{display:block;margin-top:4px;font-size:.78rem;color:#999}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+.image-urls-list{display:flex;flex-direction:column;gap:8px}
+.image-url-row{display:flex;gap:8px;align-items:center}
+.image-url-row input{flex:1}
+.image-url-row .img-preview{width:44px;height:44px;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#f0ebe5,#e5ddd4);flex-shrink:0}
+.image-url-row .img-preview.placeholder{display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#ccc}
+.btn-add-img{padding:10px;background:#f5f5f5;border:1.5px dashed var(--border);border-radius:10px;cursor:pointer;font-size:.85rem;color:var(--text-light);width:100%;font-family:inherit;transition:all .2s}
+.btn-add-img:hover{border-color:var(--primary);color:var(--primary);background:#fef2f2}
+.btn-remove-img{background:none;border:none;color:#ccc;cursor:pointer;font-size:1rem;padding:4px;transition:color .2s}
+.btn-remove-img:hover{color:var(--danger)}
+.publish-card{background:var(--card);border-radius:14px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:20px}
+.publish-card h3{font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.publish-card p{font-size:.85rem;color:var(--text-light);margin-bottom:16px;line-height:1.7}
+.publish-card .form-group{margin-bottom:14px}
+.publish-card .form-group label{font-size:.8rem}
+.publish-card .form-group input{font-size:.85rem;padding:9px 12px}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:500}
+.status-badge.ok{background:#e8f5e9;color:var(--success);border:1px solid #c8e6c9}
+.status-badge.err{background:#ffebee;color:var(--danger);border:1px solid #ffcdd2}
+.status-badge.warn{background:#fff3e0;color:#e65100;border:1px solid #ffe0b2}
+.code-block{background:#1e1e1e;color:#d4d4d4;padding:14px 16px;border-radius:10px;font-family:monospace;font-size:.78rem;line-height:1.8;overflow-x:auto;margin:10px 0}
+.backup-area{background:var(--card);border-radius:14px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:20px}
+.backup-area h3{font-size:1rem;margin-bottom:10px}
+.backup-area p{font-size:.85rem;color:var(--text-light);margin-bottom:14px}
+.backup-textarea{width:100%;min-height:180px;padding:14px;border:1.5px solid var(--border);border-radius:10px;font-size:.8rem;font-family:monospace;background:#fafafa;resize:vertical}
+.toast{position:fixed;bottom:30px;right:30px;background:#2d2d2d;color:#fff;padding:14px 24px;border-radius:12px;font-size:.88rem;z-index:3000;opacity:0;transform:translateY(20px);transition:all .4s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-light)}
+.empty-state-icon{font-size:3rem;margin-bottom:12px}
+@media(max-width:768px){
+  .sidebar{width:100%;position:relative}
+  .admin-layout.active{flex-direction:column}
+  .main-content{margin-left:0;max-width:100%;padding:20px}
+  .sidebar{display:none}
+  .mobile-nav{display:flex!important;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);padding:8px 0;z-index:100;justify-content:space-around}
+  .mobile-nav .nav-item{flex-direction:column;padding:4px 8px;font-size:.7rem;gap:2px}
+  .mobile-nav .nav-icon{font-size:1.2rem}
+  .main-content{padding-bottom:80px}
+}
+.mobile-nav{display:none}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="logo-icon">🍁</div>
+    <h1>True North Finds</h1>
+    <p>管理后台登录</p>
+    <input type="email" id="loginEmail" placeholder="管理员邮箱" onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+    <input type="password" id="loginPassword" placeholder="密码" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()" id="loginBtn">进入后台</button>
+    <div class="login-error" id="loginError">登录失败，请重试</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-layout" id="adminLayout">
+  <div id="cloudSyncBadge" style="position:fixed;top:16px;right:16px;z-index:500"></div>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"><span class="logo-icon">🍁</span><span>管理后台</span></div>
+      <div class="sub">True North Finds</div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showPage('products')" data-page="products"><span class="nav-icon">📦</span>商品管理</button>
+      <button class="nav-item" onclick="showPage('categories')" data-page="categories"><span class="nav-icon">🏷️</span>分类管理</button>
+      <button class="nav-item" onclick="showPage('orders')" data-page="orders"><span class="nav-icon">🧾</span>订单管理</button>
+      <button class="nav-item" onclick="showPage('levels')" data-page="levels"><span class="nav-icon">💎</span>会员等级</button>
+      <button class="nav-item" onclick="showPage('backup')" data-page="backup"><span class="nav-icon">💾</span>数据备份</button>
+      <button class="nav-item" onclick="showPage('settings')" data-page="settings"><span class="nav-icon">⚙️</span>设置</button>
+      <a href="index.html" class="nav-item" style="margin-top:auto"><span class="nav-icon">🌐</span>查看网站</a>
+    </nav>
+    <div class="sidebar-footer"><button onclick="doLogout()">🚪 退出登录</button></div>
+  </aside>
+
+  <nav class="mobile-nav">
+    <button class="nav-item active" onclick="showPage('products')" data-page="products"><span class="nav-icon">📦</span>商品</button>
+    <button class="nav-item" onclick="showPage('categories')" data-page="categories"><span class="nav-icon">🏷️</span>分类</button>
+    <button class="nav-item" onclick="showPage('orders')" data-page="orders"><span class="nav-icon">🧾</span>订单</button>
+    <button class="nav-item" onclick="showPage('levels')" data-page="levels"><span class="nav-icon">💎</span>会员</button>
+    <button class="nav-item" onclick="showPage('settings')" data-page="settings"><span class="nav-icon">⚙️</span>设置</button>
+  </nav>
+
+  <main class="main-content" id="mainContent">
+    <!-- Products -->
+    <div id="page-products">
+      <div class="page-header"><h2>📦 商品管理</h2><div style="display:flex;gap:8px"><button class="btn-secondary" onclick="checkBrokenImages()" id="checkImagesBtn">🔍 检查图片链接</button><button class="btn-primary" onclick="openProductModal()">+ 添加商品</button></div></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="label">商品总数</div><div class="value" id="statTotal">0</div></div>
+        <div class="stat-card"><div class="label">分类数量</div><div class="value" id="statCats">0</div></div>
+        <div class="stat-card"><div class="label">有图商品</div><div class="value" id="statImages">0</div></div>
+        <div class="stat-card"><div class="label">网站访问次数</div><div class="value" id="statVisits">-</div></div>
+      </div>
+      <div id="brokenImagesPanel" style="display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px 16px;margin-bottom:16px"></div>
+      <div class="data-table-wrap">
+        <table class="data-table"><thead><tr><th>图片</th><th>商品名称</th><th>分类</th><th>价格</th><th>图片数</th><th style="text-align:right">操作</th></tr></thead><tbody id="productsTableBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div id="page-categories" style="display:none">
+      <div class="page-header"><h2>🏷️ 分类管理</h2><button class="btn-primary" onclick="addCategory()">+ 添加分类</button></div>
+      <div class="data-table-wrap">
+        <table class="data-table"><thead><tr><th>分类ID</th><th>分类名称</th><th>商品数量</th><th style="text-align:right">操作</th></tr></thead><tbody id="categoriesTableBody"></tbody></table>
+      </div>
+      <p style="margin-top:16px;font-size:.82rem;color:#999">⚠️ 删除分类前，请先将该分类下的商品移到其他分类。</p>
+    </div>
+
+    <!-- Orders -->
+    <div id="page-orders" style="display:none">
+      <div class="page-header"><h2>🧾 订单管理</h2></div>
+      <div class="data-table-wrap">
+        <table class="data-table"><thead><tr><th>下单时间</th><th>客户</th><th>商品</th><th>金额</th><th>状态</th><th>物流单号</th><th style="text-align:right">操作</th></tr></thead><tbody id="ordersTableBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- Membership Levels -->
+    <div id="page-levels" style="display:none">
+      <div class="page-header"><h2>💎 会员等级</h2><button class="btn-primary" onclick="addLevel()">+ 添加等级</button></div>
+      <p style="margin-bottom:16px;font-size:.85rem;color:var(--text-light)">客户累计消费达到「消费门槛」后会自动升级到对应等级；下单结算时会自动按「折扣」计算优惠。</p>
+      <div class="data-table-wrap">
+        <table class="data-table"><thead><tr><th>等级名称</th><th>消费门槛（¥）</th><th>折扣（%）</th><th style="text-align:right">操作</th></tr></thead><tbody id="levelsTableBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- Backup -->
+    <div id="page-backup" style="display:none">
+      <div class="page-header"><h2>💾 数据备份</h2></div>
+      <div class="backup-area">
+        <h3>📤 导出数据</h3>
+        <p>点击「导出」将所有商品和分类数据生成 JSON 备份文件。</p>
+        <button class="btn-primary" onclick="exportBackup()">导出备份文件</button>
+      </div>
+      <div class="backup-area">
+        <h3>📥 导入数据</h3>
+        <p>粘贴之前导出的 JSON 数据恢复。</p>
+        <div class="form-group"><textarea class="backup-textarea" id="importTextarea" placeholder='粘贴 JSON 数据'></textarea></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="importBackup()">导入数据</button>
+          <button class="btn-secondary" onclick="document.getElementById('importFile').click()">📁 从文件读取</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" onchange="readImportFile(this)">
+          <button class="btn-danger" onclick="clearAllData()">🗑️ 清空所有数据</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div id="page-settings" style="display:none">
+      <div class="page-header"><h2>⚙️ 设置</h2></div>
+      <div class="backup-area">
+        <h3>🔐 管理员账号</h3>
+        <p>当前登录邮箱：<strong id="settingsEmail">-</strong></p>
+        <p style="margin-top:8px">修改密码：点击下方按钮，系统会发一封重置密码邮件到你的邮箱。</p>
+        <button class="btn-primary" style="margin-top:10px" onclick="sendResetPasswordEmail()">发送重置密码邮件</button>
+      </div>
+      <div class="backup-area">
+        <h3>🖼️ 图片上传指南</h3>
+        <p style="font-size:.85rem;color:var(--text-light);line-height:2">
+          <strong>Postimages</strong> — <a href="https://postimages.org" target="_blank" style="color:var(--primary)">postimages.org</a>（推荐，无需注册）<br>
+          <strong>Imgur</strong> — <a href="https://imgur.com" target="_blank" style="color:var(--primary)">imgur.com</a>（需注册，稳定）<br>
+          <strong>SM.MS</strong> — <a href="https://sm.ms" target="_blank" style="color:var(--primary)">sm.ms</a>（国内速度快）<br>
+          上传后复制「直接链接」粘贴到商品图片 URL 输入框即可。
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="productModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal-box">
+    <div class="modal-header"><h3 id="productModalTitle">添加商品</h3><button class="modal-close" onclick="closeProductModal()">&times;</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="editProductId">
+      <div class="form-group"><label>商品名称 <span class="req">*</span></label><input type="text" id="productName" placeholder="例如：Maple Brownie 枫糖布朗尼"></div>
+      <div class="form-group"><label>价格（人民币） <span class="req">*</span></label><input type="number" id="productPrice" placeholder="例如：128"></div>
+      <div class="form-group"><label>分类 <span class="req">*</span></label><select id="productCategory"></select></div>
+      <div class="form-group"><label>商品描述</label><textarea id="productDesc" placeholder="描述商品特点、规格、注意事项等"></textarea></div>
+      <div class="form-group">
+        <label>商品图片 <span class="req">*</span></label>
+        <small>支持多张图片，顾客可滑动查看。上传的图片会自动压缩并存到云端，加载更快。</small>
+        <div class="image-urls-list" id="imageUrlsList" style="margin-top:10px"></div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button class="btn-add-img" onclick="document.getElementById('imageFileInput').click()">📤 上传图片</button>
+          <button class="btn-add-img" onclick="addImageUrlRow()">+ 粘贴图片 URL</button>
+        </div>
+        <input type="file" id="imageFileInput" accept="image/*" multiple style="display:none" onchange="handleImageFiles(this.files)">
+        <div id="uploadProgress" style="font-size:.78rem;color:var(--text-light);margin-top:6px;display:none"></div>
+      </div>
+      <div class="form-group">
+        <label>阶梯价（可选）</label>
+        <small>例如：买满2件，总价580元（而不是单价乘以数量）。不设置则按单价计算。</small>
+        <div id="tiersList" style="margin-top:10px;display:flex;flex-direction:column;gap:8px"></div>
+        <button class="btn-add-img" onclick="addTierRow()" style="margin-top:8px">+ 添加阶梯价</button>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeProductModal()">取消</button><button class="btn-primary" onclick="saveProduct()">保存商品</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orderDetailModal" onclick="if(event.target===this)document.getElementById('orderDetailModal').classList.remove('active')">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-header"><h3>订单详情</h3><button class="modal-close" onclick="document.getElementById('orderDetailModal').classList.remove('active')">&times;</button></div>
+    <div class="modal-body" id="orderDetailBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://cyaegfnkjwwdsjkfnlfl.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5YWVnZm5rand3ZHNqa2ZubGZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NDQ3ODksImV4cCI6MjEwMTEyMDc4OX0._W7WMcSW7tOCI6NmeegHWcR6CDZ0WMIJMyCMZvLcwU0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+</script>
+<script>
+// ===================== AUTH =====================
+let currentUser=null;
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const password=document.getElementById('loginPassword').value;
+  const btn=document.getElementById('loginBtn');
+  const errEl=document.getElementById('loginError');errEl.style.display='none';
+  if(!email||!password){errEl.textContent='请输入邮箱和密码';errEl.style.display='block';return}
+  btn.disabled=true;btn.textContent='登录中...';
+  try{
+    const{data,error}=await sb.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    const{data:isAdminResult,error:adminErr}=await sb.rpc('is_admin');
+    if(adminErr||!isAdminResult){
+      await sb.auth.signOut();
+      errEl.textContent='该账号没有管理员权限';errEl.style.display='block';
+      btn.disabled=false;btn.textContent='进入后台';return
+    }
+    currentUser=data.user;
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('adminLayout').classList.add('active');
+    await initAdmin();
+  }catch(e){
+    errEl.textContent=(e.message||'').includes('Invalid login')?'邮箱或密码错误':(e.message||'登录失败');
+    errEl.style.display='block';
+  }
+  btn.disabled=false;btn.textContent='进入后台';
+}
+async function doLogout(){await sb.auth.signOut();location.reload()}
+async function sendResetPasswordEmail(){
+  if(!currentUser){showToast('请先登录','error');return}
+  const{error}=await sb.auth.resetPasswordForEmail(currentUser.email);
+  if(error){showToast('发送失败：'+error.message,'error');return}
+  showToast('重置密码邮件已发送','success');
+}
+(async function checkExistingSession(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session){
+    const{data:isAdminResult}=await sb.rpc('is_admin');
+    if(isAdminResult){
+      currentUser=session.user;
+      document.getElementById('loginWrap').style.display='none';
+      document.getElementById('adminLayout').classList.add('active');
+      await initAdmin();
+    }
+  }
+})();
+
+// ===================== DATA (Supabase) =====================
+const DEFAULT_CATEGORIES=[{id:'all',name:'全部'},{id:'food',name:'食品'},{id:'fashion',name:'服饰'},{id:'beauty',name:'美妆'},{id:'other',name:'其他'}];
+let productsCache=[],categoriesCache=[],tiersCache={},ordersCache=[],levelsCache=[];
+
+function getProducts(){return productsCache}
+function getCategories(){return categoriesCache.length?categoriesCache:DEFAULT_CATEGORIES}
+
+async function loadAllData(){
+  const [{data:products},{data:categories},{data:tiers},{data:levels}]=await Promise.all([
+    sb.from('products').select('*').order('created_at'),
+    sb.from('categories').select('*').order('sort_order'),
+    sb.from('product_price_tiers').select('*'),
+    sb.from('membership_levels').select('*').order('sort_order')
+  ]);
+  productsCache=(products||[]).map(p=>({id:p.id,name:p.name,price:Number(p.price),category:p.category,desc:p.description||'',images:p.images||[]}));
+  categoriesCache=categories||[];
+  tiersCache={};
+  (tiers||[]).forEach(t=>{if(!tiersCache[t.product_id])tiersCache[t.product_id]=[];tiersCache[t.product_id].push({id:t.id,min_qty:t.min_qty,total_price:Number(t.total_price)})});
+  Object.values(tiersCache).forEach(list=>list.sort((a,b)=>a.min_qty-b.min_qty));
+  levelsCache=levels||[];
+}
+
+// ===================== PAGES =====================
+let currentPage='products';
+function showPage(page){
+  currentPage=page;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+  ['products','categories','orders','levels','backup','settings'].forEach(p=>{const el=document.getElementById('page-'+p);if(el)el.style.display=p===page?'block':'none'});
+  if(page==='products')renderProductsTable();
+  if(page==='categories')renderCategoriesTable();
+  if(page==='orders')renderOrdersTable();
+  if(page==='levels')renderLevelsTable();
+  if(page==='settings')document.getElementById('settingsEmail').textContent=currentUser?currentUser.email:'-';
+}
+async function initAdmin(){
+  updateSyncBadge('warn','⏳ 正在加载数据...');
+  try{await loadAllData();updateSyncBadge('ok','☁️ 已连接 Supabase')}
+  catch(e){updateSyncBadge('err','❌ 数据加载失败');showToast('数据加载失败：'+e.message,'error')}
+  renderProductsTable();
+}
+function updateSyncBadge(type,msg){
+  const el=document.getElementById('cloudSyncBadge');if(!el)return;
+  const cls=type==='ok'?'ok':type==='err'?'err':'warn';
+  el.innerHTML=`<span class="status-badge ${cls}">${msg}</span>`
+}
+
+// ===================== PRODUCTS =====================
+function renderProductsTable(){
+  const products=getProducts(),cats=getCategories(),tbody=document.getElementById('productsTableBody');
+  if(products.length===0){tbody.innerHTML=`<tr><td colspan="6"><div class="empty-state"><div class="empty-state-icon">📦</div><p>暂无商品，点击右上角「添加商品」开始</p></div></td></tr>`;updateStats();return}
+  tbody.innerHTML=products.map(p=>{
+    const cat=cats.find(c=>c.id===p.category);
+    const img=p.images&&p.images[0]?p.images[0]:'';
+    const imgCount=p.images?p.images.length:0;
+    const tierBadge=tiersCache[p.id]&&tiersCache[p.id].length?` <span style="font-size:.72rem;color:#2d8a4e">📊阶梯价</span>`:'';
+    return`<tr><td><img src="https://true-north-finds.vercel.app/${img}" class="td-img" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'td-img\' style=display:flex;align-items:center;justify-content:center;font-size:1.2rem>📦</div>'"></td><td class="td-name">${p.name}${tierBadge}</td><td>${cat?cat.name:p.category}</td><td class="td-price">¥${p.price}</td><td>${imgCount} 张</td><td style="text-align:right"><div class="td-actions"><button class="btn-secondary btn-small" onclick="editProduct('${p.id}')">编辑</button><button class="btn-danger btn-small" onclick="deleteProduct('${p.id}')">删除</button></div></td></tr>`
+  }).join('');
+  updateStats()
+}
+async function updateStats(){
+  const products=getProducts(),cats=getCategories();
+  document.getElementById('statTotal').textContent=products.length;
+  document.getElementById('statCats').textContent=cats.filter(c=>c.id!=='all').length;
+  document.getElementById('statImages').textContent=products.filter(p=>p.images&&p.images.length>0).length;
+  try{
+    const{data}=await sb.from('site_stats').select('visit_count').eq('id','main').single();
+    document.getElementById('statVisits').textContent=data?data.visit_count:'-';
+  }catch(e){document.getElementById('statVisits').textContent='-'}
+}
+
+let editingProductId=null,imageUrls=[],productTiers=[];
+function openProductModal(productId){
+  editingProductId=productId||null;
+  document.getElementById('productModalTitle').textContent=productId?'编辑商品':'添加商品';
+  document.getElementById('editProductId').value=productId||'';
+  const cats=getCategories().filter(c=>c.id!=='all');
+  document.getElementById('productCategory').innerHTML=cats.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  if(productId){
+    const products=getProducts(),p=products.find(x=>x.id===productId);
+    if(p){document.getElementById('productName').value=p.name;document.getElementById('productPrice').value=p.price;document.getElementById('productCategory').value=p.category;document.getElementById('productDesc').value=p.desc||'';imageUrls=p.images?[...p.images]:['']}
+    productTiers=(tiersCache[productId]||[]).map(t=>({min_qty:t.min_qty,total_price:t.total_price}));
+  }else{
+    document.getElementById('productName').value='';document.getElementById('productPrice').value='';document.getElementById('productDesc').value='';imageUrls=[''];
+    productTiers=[];
+  }
+  renderImageUrlRows();renderTierRows();document.getElementById('productModal').classList.add('active')
+}
+function closeProductModal(){document.getElementById('productModal').classList.remove('active');editingProductId=null}
+function renderImageUrlRows(){
+  const container=document.getElementById('imageUrlsList');
+  container.innerHTML=imageUrls.map((url,i)=>{
+    const hasUrl=url&&url.trim();
+    const preview=hasUrl?`<img src="https://true-north-finds.vercel.app/${url}" class="img-preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
+    const placeholder=!hasUrl?`<div class="img-preview placeholder">🖼️</div>`:`<div class="img-preview placeholder" style="display:none">🖼️</div>`;
+    return`<div class="image-url-row">${preview}${placeholder}<input type="text" placeholder="图片 URL ${i+1}" value="${url}" oninput="updateImageUrl(${i},this.value)"><button class="btn-remove-img" onclick="removeImageUrl(${i})" title="删除">&times;</button></div>`
+  }).join('')
+}
+// 压缩图片：限制最长边，重新编码为 JPEG，大幅减小体积，加载更快
+function compressImage(file,maxDim=1280,quality=0.82){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    const reader=new FileReader();
+    reader.onload=e=>{img.src=e.target.result};
+    reader.onerror=reject;
+    img.onload=()=>{
+      let{width,height}=img;
+      if(width>maxDim||height>maxDim){
+        if(width>height){height=Math.round(height*maxDim/width);width=maxDim}
+        else{width=Math.round(width*maxDim/height);height=maxDim}
+      }
+      const canvas=document.createElement('canvas');
+      canvas.width=width;canvas.height=height;
+      canvas.getContext('2d').drawImage(img,0,0,width,height);
+      canvas.toBlob(blob=>{blob?resolve(blob):reject(new Error('图片压缩失败'))},'image/jpeg',quality);
+    };
+    img.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+async function handleImageFiles(fileList){
+  const files=Array.from(fileList);
+  if(files.length===0)return;
+  const progressEl=document.getElementById('uploadProgress');
+  progressEl.style.display='block';
+  for(let i=0;i<files.length;i++){
+    const file=files[i];
+    progressEl.textContent=`正在上传第 ${i+1}/${files.length} 张（压缩中...）`;
+    try{
+      const compressed=await compressImage(file);
+      const path=`products/${Date.now()}_${Math.random().toString(36).slice(2,8)}.jpg`;
+      progressEl.textContent=`正在上传第 ${i+1}/${files.length} 张...`;
+      const{error}=await sb.storage.from('product-images').upload(path,compressed,{contentType:'image/jpeg'});
+      if(error)throw error;
+      const{data:pub}=sb.storage.from('product-images').getPublicUrl(path);
+      if(imageUrls.length===1&&!imageUrls[0].trim())imageUrls=[pub.publicUrl];
+      else imageUrls.push(pub.publicUrl);
+      renderImageUrlRows();
+    }catch(e){
+      showToast(`第${i+1}张图片上传失败：${e.message}`,'error');
+    }
+  }
+  progressEl.style.display='none';
+  document.getElementById('imageFileInput').value='';
+}
+function addImageUrlRow(){imageUrls.push('');renderImageUrlRows()}
+function updateImageUrl(index,value){imageUrls[index]=value;renderImageUrlRows()}
+function removeImageUrl(index){if(imageUrls.length<=1){imageUrls=['']}else{imageUrls.splice(index,1)}renderImageUrlRows()}
+
+function renderTierRows(){
+  const container=document.getElementById('tiersList');
+  if(productTiers.length===0){container.innerHTML='<p style="font-size:.82rem;color:#999">暂无阶梯价，按单价计算</p>';return}
+  container.innerHTML=productTiers.map((t,i)=>`<div class="image-url-row">
+    <input type="number" placeholder="数量≥" value="${t.min_qty}" style="max-width:90px" oninput="productTiers[${i}].min_qty=parseInt(this.value)||0">
+    <span style="color:#999;font-size:.85rem">件 → 总价 ¥</span>
+    <input type="number" placeholder="总价" value="${t.total_price}" oninput="productTiers[${i}].total_price=parseFloat(this.value)||0">
+    <button class="btn-remove-img" onclick="removeTierRow(${i})" title="删除">&times;</button>
+  </div>`).join('')
+}
+function addTierRow(){productTiers.push({min_qty:2,total_price:0});renderTierRows()}
+function removeTierRow(i){productTiers.splice(i,1);renderTierRows()}
+
+async function saveProduct(){
+  const name=document.getElementById('productName').value.trim(),price=parseFloat(document.getElementById('productPrice').value),category=document.getElementById('productCategory').value,desc=document.getElementById('productDesc').value.trim(),validImages=imageUrls.filter(u=>u.trim());
+  if(!name){showToast('请输入商品名称','error');return}
+  if(!price||price<=0){showToast('请输入有效价格','error');return}
+  if(!category){showToast('请选择分类','error');return}
+  if(validImages.length===0){showToast('请至少添加一张图片 URL','error');return}
+  const id=editingProductId||('p'+Date.now());
+  try{
+    const{error}=await sb.from('products').upsert({id,name,price,category,description:desc,images:validImages});
+    if(error)throw error;
+    const validTiers=productTiers.filter(t=>t.min_qty>0&&t.total_price>0);
+    await sb.from('product_price_tiers').delete().eq('product_id',id);
+    if(validTiers.length>0){
+      const{error:tierErr}=await sb.from('product_price_tiers').insert(validTiers.map(t=>({product_id:id,min_qty:t.min_qty,total_price:t.total_price})));
+      if(tierErr)throw tierErr;
+    }
+    await loadAllData();
+    closeProductModal();renderProductsTable();showToast(editingProductId?'商品已更新':'商品已添加','success');
+  }catch(e){showToast('保存失败：'+e.message,'error')}
+}
+function testImageLoad(url){
+  return new Promise(resolve=>{
+    if(!url||!url.trim()){resolve(false);return}
+    const img=new Image();
+    const timer=setTimeout(()=>resolve(false),8000);
+    img.onload=()=>{clearTimeout(timer);resolve(true)};
+    img.onerror=()=>{clearTimeout(timer);resolve(false)};
+    img.src=url;
+  });
+}
+async function checkBrokenImages(){
+  const btn=document.getElementById('checkImagesBtn');
+  const panel=document.getElementById('brokenImagesPanel');
+  const products=getProducts();
+  btn.disabled=true;
+  const tasks=[];
+  products.forEach(p=>(p.images||[]).forEach((url,i)=>tasks.push({product:p,idx:i+1,url})));
+  const total=tasks.length;
+  let checked=0;
+  const brokenByProduct={};
+  const CONCURRENCY=8;
+  let cursor=0;
+  async function worker(){
+    while(cursor<tasks.length){
+      const task=tasks[cursor++];
+      const ok=await testImageLoad(task.url);
+      checked++;
+      btn.textContent=`检查中... ${checked}/${total}`;
+      if(!ok){
+        if(!brokenByProduct[task.product.id])brokenByProduct[task.product.id]={product:task.product,brokenIdx:[]};
+        brokenByProduct[task.product.id].brokenIdx.push(task.idx);
+      }
+    }
+  }
+  await Promise.all(Array.from({length:Math.min(CONCURRENCY,tasks.length)},worker));
+  const results=Object.values(brokenByProduct).map(r=>({...r,brokenIdx:r.brokenIdx.sort((a,b)=>a-b)}));
+  btn.disabled=false;btn.textContent='🔍 检查图片链接';
+  panel.style.display='block';
+  if(results.length===0){
+    panel.innerHTML=`<p style="color:#2d8a4e;font-weight:600">✅ 检查完成，共 ${total} 张图片，全部正常</p>`;
+    return;
+  }
+  panel.innerHTML=`<p style="font-weight:600;color:#c2410c;margin-bottom:10px">⚠️ 发现 ${results.length} 个商品有失效图片（共检查 ${total} 张）：</p>` +
+    results.map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #fed7aa">
+      <span>${r.product.name} —— 第 ${r.brokenIdx.join('、')} 张图失效</span>
+      <button class="btn-secondary btn-small" onclick="editProduct('${r.product.id}')">去修复</button>
+    </div>`).join('');
+}
+function editProduct(id){openProductModal(id)}
+async function deleteProduct(id){
+  if(!confirm('确定要删除这个商品吗？此操作不可恢复。'))return;
+  try{
+    const{error}=await sb.from('products').delete().eq('id',id);
+    if(error)throw error;
+    await loadAllData();renderProductsTable();showToast('商品已删除','success');
+  }catch(e){showToast('删除失败：'+e.message,'error')}
+}
+
+// ===================== CATEGORIES =====================
+function renderCategoriesTable(){
+  const cats=getCategories(),products=getProducts(),tbody=document.getElementById('categoriesTableBody');
+  tbody.innerHTML=cats.filter(c=>c.id!=='all').map(c=>{
+    const count=products.filter(p=>p.category===c.id).length;
+    return`<tr><td><code style="background:#f5f5f5;padding:3px 8px;border-radius:4px;font-size:.82rem">${c.id}</code></td><td><input type="text" value="${c.name}" onchange="renameCategory('${c.id}',this.value)" style="width:100%;max-width:200px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit"></td><td>${count} 件商品</td><td style="text-align:right"><button class="btn-danger btn-small" onclick="deleteCategory('${c.id}')">删除</button></td></tr>`
+  }).join('')
+}
+async function addCategory(){
+  const id=prompt('请输入分类 ID（英文，如 snacks）：');if(!id)return;
+  if(!/^[a-zA-Z0-9_-]+$/.test(id)){showToast('分类 ID 只能包含字母、数字、下划线和横线','error');return}
+  if(getCategories().find(c=>c.id===id)){showToast('该分类 ID 已存在','error');return}
+  const name=prompt('请输入分类名称：');if(!name)return;
+  try{
+    const{error}=await sb.from('categories').insert({id,name,sort_order:getCategories().length});
+    if(error)throw error;
+    await loadAllData();renderCategoriesTable();showToast('分类已添加','success');
+  }catch(e){showToast('添加失败：'+e.message,'error')}
+}
+async function renameCategory(id,newName){
+  try{
+    const{error}=await sb.from('categories').update({name:newName}).eq('id',id);
+    if(error)throw error;
+    await loadAllData();showToast('分类名称已更新','success');
+  }catch(e){showToast('更新失败：'+e.message,'error')}
+}
+async function deleteCategory(id){
+  const products=getProducts(),count=products.filter(p=>p.category===id).length;
+  if(count>0){if(!confirm(`该分类下有 ${count} 件商品，删除后这些商品将无法正常显示。确定删除吗？`))return}
+  else{if(!confirm('确定要删除这个分类吗？'))return}
+  try{
+    const{error}=await sb.from('categories').delete().eq('id',id);
+    if(error)throw error;
+    await loadAllData();renderCategoriesTable();showToast('分类已删除','success');
+  }catch(e){showToast('删除失败：'+e.message,'error')}
+}
+
+// ===================== ORDERS =====================
+const ORDER_STATUS_LABELS={pending:'待处理',paid:'已付款',shipped:'已发货',completed:'已完成',cancelled:'已取消'};
+async function renderOrdersTable(){
+  const tbody=document.getElementById('ordersTableBody');
+  tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:30px;color:#999">加载中...</td></tr>';
+  const{data:orders,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});
+  if(error){tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:30px;color:#999">加载失败：${error.message}</td></tr>`;return}
+  ordersCache=orders||[];
+  if(ordersCache.length===0){tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state"><div class="empty-state-icon">🧾</div><p>暂无订单</p></div></td></tr>`;return}
+  const custIds=[...new Set(ordersCache.map(o=>o.customer_id))];
+  const{data:custs}=await sb.from('customers').select('*').in('id',custIds);
+  const custMap={};(custs||[]).forEach(c=>custMap[c.id]=c);
+  tbody.innerHTML=ordersCache.map(o=>{
+    const cust=custMap[o.customer_id];
+    const itemsText=(o.items||[]).map(it=>`${it.name} x${it.qty}`).join('、');
+    const statusOptions=Object.entries(ORDER_STATUS_LABELS).map(([k,v])=>`<option value="${k}" ${o.status===k?'selected':''}>${v}</option>`).join('');
+    return`<tr>
+      <td style="font-size:.8rem">${new Date(o.created_at).toLocaleString('zh-CN')}</td>
+      <td>${cust?cust.phone:'-'}</td>
+      <td style="font-size:.82rem;max-width:220px">${itemsText}</td>
+      <td class="td-price">¥${o.final_amount}</td>
+      <td><select onchange="updateOrderStatus('${o.id}',this.value)" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.82rem">${statusOptions}</select></td>
+      <td style="font-size:.8rem">${o.tracking_number?o.tracking_number:'-'} <a href="admin.html#" onclick="editTrackingNumber('${o.id}');return false" style="font-size:.75rem;color:var(--primary)">✏️</a></td>
+      <td style="text-align:right"><button class="btn-secondary btn-small" onclick="viewOrderDetail('${o.id}')">详情</button></td>
+    </tr>`
+  }).join('')
+}
+async function updateOrderStatus(orderId,status){
+  try{
+    const payload={status};
+    if(status==='shipped'){
+      const existing=ordersCache.find(o=>o.id===orderId);
+      const tn=prompt('请输入物流跟踪号码：',existing?existing.tracking_number||'':'');
+      if(tn===null){renderOrdersTable();return}
+      if(!tn.trim()){showToast('物流单号不能为空','error');renderOrdersTable();return}
+      payload.tracking_number=tn.trim();
+    }
+    const{error}=await sb.from('orders').update(payload).eq('id',orderId);
+    if(error)throw error;
+    showToast('订单状态已更新','success');
+    renderOrdersTable();
+  }catch(e){showToast('更新失败：'+e.message,'error')}
+}
+async function editTrackingNumber(orderId){
+  const existing=ordersCache.find(o=>o.id===orderId);
+  const tn=prompt('物流跟踪号码：',existing?existing.tracking_number||'':'');
+  if(tn===null)return;
+  try{
+    const{error}=await sb.from('orders').update({tracking_number:tn.trim()}).eq('id',orderId);
+    if(error)throw error;
+    showToast('物流单号已更新','success');
+    renderOrdersTable();
+  }catch(e){showToast('更新失败：'+e.message,'error')}
+}
+async function viewOrderDetail(orderId){
+  const o=ordersCache.find(x=>x.id===orderId);if(!o)return;
+  document.getElementById('orderDetailBody').innerHTML='<p style="text-align:center;color:#999;padding:20px">加载中...</p>';
+  document.getElementById('orderDetailModal').classList.add('active');
+  const{data:addr}=await sb.from('customer_addresses').select('*').eq('id',o.address_id).single();
+  const{data:cust}=await sb.from('customers').select('*').eq('id',o.customer_id).single();
+  const itemsHtml=(o.items||[]).map(it=>`<div style="display:flex;justify-content:space-between;font-size:.88rem;padding:4px 0"><span>${it.name} x${it.qty}</span><span>¥${it.line_total}</span></div>`).join('');
+
+  let idCardHtml='<p style="color:#999;font-size:.85rem">未上传身份证</p>';
+  if(addr&&addr.id_card_front_path&&addr.id_card_back_path){
+    const{data:frontUrl}=await sb.storage.from('id-cards').createSignedUrl(addr.id_card_front_path,3600);
+    const{data:backUrl}=await sb.storage.from('id-cards').createSignedUrl(addr.id_card_back_path,3600);
+    idCardHtml=`<div style="display:flex;gap:10px;flex-wrap:wrap">
+      ${frontUrl?`<div><img src="https://true-north-finds.vercel.app/${frontUrl.signedUrl}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="https://true-north-finds.vercel.app/${frontUrl.signedUrl}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载正面</a></div>`:''}
+      ${backUrl?`<div><img src="https://true-north-finds.vercel.app/${backUrl.signedUrl}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="https://true-north-finds.vercel.app/${backUrl.signedUrl}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载反面</a></div>`:''}
+    </div><p style="font-size:.72rem;color:#999;margin-top:6px">图片链接1小时内有效，如需长期保存请下载</p>`;
+  }
+
+  document.getElementById('orderDetailBody').innerHTML=`
+    <div style="margin-bottom:14px">${itemsHtml}</div>
+    <div style="border-top:1px solid var(--border);padding-top:10px;font-size:.88rem;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span>商品金额</span><span>¥${o.goods_amount}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span>会员折扣</span><span>-¥${o.member_discount}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span>积分抵扣</span><span>-¥${o.points_discount}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:2px 0"><span>运费</span><span>¥${o.shipping_fee}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;padding-top:6px;border-top:1px solid var(--border);margin-top:4px"><span>合计</span><span>¥${o.final_amount}</span></div>
+    </div>
+    ${o.tracking_number?`<p style="font-size:.85rem;margin-bottom:14px">🚚 物流单号：${o.tracking_number}</p>`:''}
+    <div style="margin-bottom:14px">
+      <h4 style="font-size:.9rem;margin-bottom:6px">客户信息</h4>
+      <p style="font-size:.85rem">邮箱：${cust?cust.email||'-':'-'}　手机：${cust?cust.phone||'-':'-'}</p>
+    </div>
+    <div style="margin-bottom:14px">
+      <h4 style="font-size:.9rem;margin-bottom:6px">收货地址</h4>
+      <p style="font-size:.85rem">${addr?addr.receiver_name:'-'} ${addr?addr.phone:''}</p>
+      <p style="font-size:.85rem;color:var(--text-light)">${addr?addr.address:'-'}</p>
+    </div>
+    <div>
+      <h4 style="font-size:.9rem;margin-bottom:6px">身份证照片</h4>
+      ${idCardHtml}
+    </div>
+  `;
+}
+
+// ===================== MEMBERSHIP LEVELS =====================
+function renderLevelsTable(){
+  const tbody=document.getElementById('levelsTableBody');
+  if(levelsCache.length===0){tbody.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:30px;color:#999">暂无等级</td></tr>`;return}
+  tbody.innerHTML=levelsCache.map(l=>`<tr>
+    <td><input type="text" value="${l.name}" onchange="updateLevel('${l.id}','name',this.value)" style="width:100%;max-width:160px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit"></td>
+    <td><input type="number" value="${l.min_spend}" onchange="updateLevel('${l.id}','min_spend',this.value)" style="width:120px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit"></td>
+    <td><input type="number" value="${l.discount_percent}" onchange="updateLevel('${l.id}','discount_percent',this.value)" style="width:100px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit"></td>
+    <td style="text-align:right"><button class="btn-danger btn-small" onclick="deleteLevel('${l.id}')">删除</button></td>
+  </tr>`).join('')
+}
+async function addLevel(){
+  const name=prompt('等级名称（如：铂金会员）：');if(!name)return;
+  const minSpend=prompt('累计消费达到多少元自动升到此等级？','0');if(minSpend===null)return;
+  const discount=prompt('折扣百分比（例如填 8 代表订单打92折，优惠8%）：','0');if(discount===null)return;
+  try{
+    const{error}=await sb.from('membership_levels').insert({name,min_spend:parseFloat(minSpend)||0,discount_percent:parseFloat(discount)||0,sort_order:levelsCache.length});
+    if(error)throw error;
+    await loadAllData();renderLevelsTable();showToast('等级已添加','success');
+  }catch(e){showToast('添加失败：'+e.message,'error')}
+}
+async function updateLevel(id,field,value){
+  const payload={};payload[field]=field==='name'?value:(parseFloat(value)||0);
+  try{
+    const{error}=await sb.from('membership_levels').update(payload).eq('id',id);
+    if(error)throw error;
+    await loadAllData();showToast('等级已更新','success');
+  }catch(e){showToast('更新失败：'+e.message,'error')}
+}
+async function deleteLevel(id){
+  if(!confirm('确定要删除这个会员等级吗？已经是这个等级的客户会保留等级记录直到下次升降级重新计算。'))return;
+  try{
+    const{error}=await sb.from('membership_levels').delete().eq('id',id);
+    if(error)throw error;
+    await loadAllData();renderLevelsTable();showToast('等级已删除','success');
+  }catch(e){showToast('删除失败：'+e.message,'error')}
+}
+
+// ===================== BACKUP =====================
+function exportBackup(){
+  const data={products:getProducts(),categories:getCategories(),exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`truenorthfinds_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);
+  showToast('备份文件已下载','success');
+}
+async function importBackup(){
+  const text=document.getElementById('importTextarea').value.trim();
+  if(!text){showToast('请先粘贴 JSON 数据','error');return}
+  try{
+    const data=JSON.parse(text);
+    if(data.categories&&data.categories.length){
+      const{error:cErr}=await sb.from('categories').upsert(data.categories.map((c,i)=>({id:c.id,name:c.name,sort_order:i})));
+      if(cErr)throw cErr;
+    }
+    if(data.products&&data.products.length){
+      const{error:pErr}=await sb.from('products').upsert(data.products.map(p=>({id:p.id,name:p.name,price:p.price,category:p.category,description:p.desc||p.description||'',images:p.images||[]})));
+      if(pErr)throw pErr;
+    }
+    document.getElementById('importTextarea').value='';showToast('数据导入成功！','success');
+    await loadAllData();renderProductsTable();renderCategoriesTable();
+  }catch(e){showToast('导入失败：'+e.message,'error')}
+}
+function readImportFile(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{document.getElementById('importTextarea').value=e.target.result;showToast('文件已读取，请点击「导入数据」','success')};
+  reader.readAsText(file);input.value='';
+}
+async function clearAllData(){
+  if(!confirm('⚠️ 确定要清空所有商品和分类数据吗？此操作不可恢复！'))return;
+  if(!confirm('再次确认：所有数据将被删除，确定吗？'))return;
+  try{
+    await sb.from('product_price_tiers').delete().neq('product_id','');
+    await sb.from('products').delete().neq('id','');
+    await sb.from('categories').delete().neq('id','all');
+    await loadAllData();
+    showToast('所有数据已清空','success');renderProductsTable();renderCategoriesTable();
+  }catch(e){showToast('清空失败：'+e.message,'error')}
+}
+
+// ===================== TOAST =====================
+function showToast(msg,type){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+(type||'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)
+}
+</script>
+</body>
+</html>

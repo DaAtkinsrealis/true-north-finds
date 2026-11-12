@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True North Finds · 加拿大代购</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#121014">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#E2434A;--primary-dark:#B8262F;--accent:#D9A84E;--bg:#121014;--card:#1C191E;--card-2:#242027;--text:#F4EFE8;--text-light:#9C958F;--border:#322D33;--input-bg:#17151A;--success:#3FA86B;--shadow:0 2px 14px rgba(0,0,0,.35);--shadow-hover:0 16px 44px rgba(0,0,0,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+input[type=text],input[type=email],input[type=password],input[type=tel],input[type=number],textarea,select{background:var(--input-bg);color:var(--text);font-family:inherit}
+input[type=text]:focus,input[type=email]:focus,input[type=password]:focus,input[type=tel]:focus,input[type=number]:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)!important}
+input::placeholder,textarea::placeholder{color:var(--text-light)}
+input[type=file]{color:var(--text-light);font-size:.85rem}
+body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.cloud-status{position:fixed;top:70px;right:16px;z-index:999;padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:all .3s}
+.cloud-status.online{background:#15291e;color:#5cc98a;border:1px solid #234530}
+.cloud-status.offline{background:#2e2410;color:#e0a855;border:1px solid #473518}
+header{background:var(--card);border-bottom:1px solid var(--border);color:var(--text);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 24px}
+.logo{font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.logo-icon{font-size:1.5rem}
+.header-tagline{flex:1;text-align:center;font-size:.78rem;color:var(--text-light);padding:0 20px;display:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(min-width:960px){.header-tagline{display:block}}
+.header-actions{display:flex;gap:12px;align-items:center}
+.cart-btn,.admin-link{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:24px;cursor:pointer;font-size:.85rem;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.cart-btn:hover,.admin-link:hover{background:#2c2731;border-color:var(--accent)}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#1a1408;width:20px;height:20px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.hero{background:radial-gradient(ellipse 120% 100% at 50% -10%,#241a1c 0%,var(--bg) 60%);padding:90px 24px 70px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🍁';position:absolute;font-size:350px;opacity:.05;top:-60px;right:-40px;pointer-events:none;filter:saturate(1.4)}
+.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;margin-bottom:14px;color:var(--text);letter-spacing:-.5px}
+.hero p{font-size:1.1rem;color:var(--text-light);max-width:580px;margin:0 auto 32px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 32px;border-radius:30px;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(196,30,58,.3)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(196,30,58,.4)}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.section{max-width:1200px;margin:0 auto;padding:70px 24px}
+#products{max-width:1920px;padding-left:32px;padding-right:32px}
+#products .browse-bar{max-width:1200px;margin-left:auto;margin-right:auto}
+.section-title{text-align:center;margin-bottom:28px}
+.section-title h2{font-size:1.7rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.section-title p{color:var(--text-light);font-size:.95rem}
+#products .section-title{margin-bottom:16px}
+#process{padding:10px 24px 2px}
+#process .section-title{margin-bottom:8px}
+#process .section-title h2{font-size:.85rem;margin-bottom:0}
+#process .section-title p,.payment-section .section-title p{display:none}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.process-card{background:var(--card);padding:7px 10px;border-radius:10px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;text-align:left;text-align:center;box-shadow:var(--shadow);transition:all .35s;position:relative;border:1px solid var(--border)}
+.process-card:hover{transform:none;box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.process-num{position:absolute;top:-7px;left:8px;background:var(--primary);color:#fff;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.55rem;box-shadow:0 2px 8px rgba(226,67,74,.35)}
+.process-icon{font-size:1.1rem;margin:0;line-height:1;grid-row:1/3}
+.process-card h3{font-size:.74rem;margin:0;font-weight:600;grid-column:2;line-height:1.3}
+.process-card p{font-size:.62rem;line-height:1.35;color:var(--text-light);grid-column:2;margin:0}
+.browse-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.search-wrap{position:relative;flex:0 1 220px}
+.search-wrap input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.85rem;background:var(--input-bg);color:var(--text);box-sizing:border-box}
+.search-wrap input:focus{outline:none;border-color:var(--accent)}
+.search-wrap input::placeholder{color:var(--text-light)}
+.search-wrap::before{content:'🔍';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.78rem;opacity:.6}
+.product-filters{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.filter-btn{padding:6px 14px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text-light);cursor:pointer;font-size:.8rem;transition:all .25s;font-family:inherit;white-space:nowrap}
+.filter-btn:hover{border-color:var(--accent);color:var(--text)}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.products-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.product-card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all .25s;display:flex;flex-direction:column;cursor:pointer;border:1px solid var(--border)}
+.product-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.product-img-wrap{position:relative;width:100%;padding-top:100%;overflow:hidden;background:linear-gradient(135deg,#242027,#1a1720)}
+.product-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product-card:hover .product-img-wrap img{transform:scale(1.04)}
+.img-dots{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:4px}
+.img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .3s}
+.img-dot.active{background:#fff;width:13px;border-radius:3px}
+.img-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(18,16,20,.6);border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:.75rem;color:#fff;display:flex;align-items:center;justify-content:center;opacity:.7;transition:opacity .2s}
+.img-nav:active,.product-card:hover .img-nav{opacity:1}
+.img-nav:hover{background:var(--primary)}
+.img-nav.prev{left:6px}
+.img-nav.next{right:6px}
+.product-info{padding:8px 9px 9px;flex:1;display:flex;flex-direction:column}
+.product-tag{display:inline-block;background:var(--card-2);color:var(--accent);padding:2px 7px;border-radius:7px;font-size:.62rem;margin-bottom:5px;width:fit-content;font-weight:500}
+.product-info h3{font-size:.8rem;font-weight:500;margin-bottom:6px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.1em}
+.product-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.product-price{font-size:.98rem;font-weight:700;color:var(--primary)}
+.product-price .unit{display:none}
+.add-cart-btn{width:24px;height:24px;background:var(--primary);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:1rem;line-height:1;font-weight:500;transition:all .25s;font-family:inherit;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.add-cart-btn:hover{background:var(--primary-dark);transform:scale(1.1)}
+.add-cart-btn.added{background:var(--success)}
+@media(min-width:1024px){.products-grid{gap:16px}.product-info{padding:10px 12px 12px}.product-info h3{font-size:.85rem}.product-price{font-size:1.05rem}}
+.section.payment-section{background:var(--bg);padding:8px 24px 10px}
+.payment-section .section-title{margin-bottom:6px}
+.payment-section .section-title h2{font-size:.85rem;margin-bottom:0}
+.payment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:420px;margin:0 auto}
+.payment-card{background:var(--card);padding:6px 10px;border-radius:10px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;text-align:left;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border);transition:all .3s}
+.payment-card:hover{border-color:var(--accent)}
+.payment-icon{font-size:1rem;margin:0;line-height:1;grid-row:1/3}
+.payment-card h3{font-size:.74rem;margin:0;font-weight:600;grid-column:2;line-height:1.3}
+.payment-card p{font-size:.62rem;color:var(--text-light);grid-column:2;margin:0}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.active{display:flex}
+.detail-modal{background:var(--card);border-radius:20px;width:100%;max-width:700px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.5);border:1px solid var(--border)}
+.detail-modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.detail-modal-header h3{font-size:1.1rem}
+.modal-close{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-light);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--card-2);color:var(--text)}
+.detail-modal-body{overflow-y:auto;flex:1}
+.detail-gallery{position:relative;width:100%;height:380px;background:linear-gradient(135deg,#242027,#1a1720)}
+.detail-gallery img{width:100%;height:100%;object-fit:cover}
+.detail-thumbs{display:flex;gap:8px;padding:12px 20px;overflow-x:auto;background:var(--input-bg)}
+.detail-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0;opacity:.6}
+.detail-thumb:hover,.detail-thumb.active{border-color:var(--primary);opacity:1}
+.detail-info{padding:20px}
+.detail-info .tag{display:inline-block;background:var(--card-2);color:var(--accent);padding:3px 10px;border-radius:10px;font-size:.72rem;margin-bottom:10px;font-weight:500}
+.detail-info h2{font-size:1.3rem;margin-bottom:8px}
+.detail-info .detail-price{font-size:1.5rem;font-weight:700;color:var(--primary);margin-bottom:12px}
+.detail-info .detail-desc{color:var(--text-light);font-size:.9rem;line-height:1.8;margin-bottom:20px}
+.detail-actions{display:flex;gap:12px}
+.detail-actions .btn{flex:1;text-align:center}
+.cart-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.cart-modal-overlay.active{display:flex}
+.cart-modal{background:var(--card);border-radius:20px;width:100%;max-width:480px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid var(--border)}
+.cart-modal-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-modal-header h3{font-size:1.15rem}
+.cart-modal-body{padding:16px 24px;overflow-y:auto;flex:1}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cart-item-img{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#242027,#1a1720);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:.9rem;margin-bottom:3px;font-weight:600}
+.cart-item-info .price{color:var(--primary);font-weight:600;font-size:.9rem}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.cart-empty{text-align:center;padding:40px;color:var(--text-light)}
+.cart-empty-icon{font-size:3rem;margin-bottom:12px}
+.cart-modal-footer{padding:18px 24px;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:700;margin-bottom:14px}
+.checkout-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit}
+.checkout-btn:hover{background:var(--primary-dark)}
+.contact-section{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:#fff;padding:8px 24px;text-align:center}
+.contact-section h2{font-size:.85rem;margin-bottom:0}
+.contact-section p{opacity:.9;margin-bottom:0;font-size:.66rem}
+.contact-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.contact-link{background:rgba(255,255,255,.12);color:#fff;padding:12px 24px;border-radius:30px;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.2);font-size:.9rem}
+.contact-link:hover{background:rgba(255,255,255,.22)}
+footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82rem;border-top:1px solid var(--border);background:var(--card)}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card-2);color:var(--text);border:1px solid var(--border);padding:14px 28px;border-radius:30px;font-size:.88rem;z-index:3000;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.empty-products{text-align:center;padding:60px 20px;color:var(--text-light)}
+.empty-products-icon{font-size:3rem;margin-bottom:12px}
+@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.detail-gallery{height:260px}.header-inner{padding:12px 16px;gap:8px}.logo{font-size:1.02rem}.admin-link span,.cart-btn span:not(.cart-count){display:none}.cart-btn,.admin-link{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="cloud-status offline" id="cloudStatus" style="display:none"><span id="cloudStatusDot">🟡</span><span id="cloudStatusText">本地模式</span></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-icon">🍁</span><span>True North Finds</span></div>
+    <p class="header-tagline">专注加拿大代购 · 一站式代购·质检·打包·发货，全程透明可追踪</p>
+    <div class="header-actions">
+      <a href="admin.html" class="admin-link">⚙️ <span>管理后台</span></a>
+      <button class="cart-btn" id="accountBtn" onclick="openAccount()">👤 <span id="accountBtnText">登录</span></button>
+      <button class="cart-btn" onclick="toggleCart()">🛒 <span>购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="products" style="padding-top:36px">
+  <div class="section-title"><h2>精选商品</h2><p>热门代购好货</p></div>
+  <div class="browse-bar">
+    <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜索商品..." oninput="searchProducts(this.value)"></div>
+    <div class="product-filters" id="filters"></div>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section class="section" id="process">
+  <div class="section-title"><h2>代购流程</h2><p>四步，从选到收</p></div>
+  <div class="process-grid">
+    <div class="process-card"><div class="process-num">01</div><div class="process-icon">🛍️</div><h3>选商品</h3><p>浏览网站或发送你心仪的加拿大/海外商品链接</p></div>
+    <div class="process-card"><div class="process-num">02</div><div class="process-icon">💳</div><h3>下单付款</h3><p>加入购物袋，用支付宝/微信扫码或国际卡付款</p></div>
+    <div class="process-card"><div class="process-num">03</div><div class="process-icon">📦</div><h3>代购采购</h3><p>于加拿大就地采购，质检后打包发货</p></div>
+    <div class="process-card"><div class="process-num">04</div><div class="process-icon">🚚</div><h3>收到好货</h3><p>通过追踪快递送达，全程可追踪</p></div>
+  </div>
+</section>
+
+<section class="section payment-section">
+  <div class="section-title"><h2>支付方式</h2><p>多渠道收款，任选便利</p></div>
+  <div class="payment-grid">
+    <div class="payment-card"><div class="payment-icon">🔵</div><h3>支付宝</h3><p>扫码付款，即时到账</p></div>
+    <div class="payment-card"><div class="payment-icon">🟢</div><h3>微信支付</h3><p>微信扫码，便捷安全</p></div>
+  </div>
+  <p style="text-align:center;color:var(--text-light);margin-top:6px;font-size:.64rem">所有价格含代购费，以人民币（RMB）为单位显示</p>
+  <p style="text-align:center;color:var(--text-light);margin-top:2px;font-size:.62rem">积分规则：每消费¥1可获得10积分，积分每满10000分可在下单时抵扣¥10；会员等级根据累计消费自动升级，等级越高折扣越大</p>
+</section>
+
+
+<section class="contact-section" id="contact">
+  <h2>联系我们</h2>
+  <p>有任何问题或想代购特定商品？随时联系我</p>
+</section>
+
+<footer>
+  <p>🍁 True North Finds · 加拿大代购 · 海外好货直达</p>
+  <p style="margin-top:4px">本网站为静态展示页面，实际交易请通过微信/邮件联系确认</p>
+</footer>
+
+<div class="modal-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-modal">
+    <div class="detail-modal-header"><h3>商品详情</h3><button class="modal-close" onclick="closeDetail()">&times;</button></div>
+    <div class="detail-modal-body" id="detailBody"></div>
+  </div>
+</div>
+
+<div class="cart-modal-overlay" id="cartModal" onclick="if(event.target===this)toggleCart()">
+  <div class="cart-modal">
+    <div class="cart-modal-header"><h3>🛒 购物袋</h3><button class="modal-close" onclick="toggleCart()">&times;</button></div>
+    <div class="cart-modal-body" id="cartBody"><div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>购物袋是空的</p></div></div>
+    <div class="cart-modal-footer" id="cartFooter" style="display:none">
+      <div class="cart-total"><span>合计</span><span id="cartTotal">¥0</span></div>
+      <button class="checkout-btn" onclick="checkout()">去结算 →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 登录/注册 -->
+<div class="cart-modal-overlay" id="authModal" onclick="if(event.target===this)closeModal('authModal')">
+  <div class="cart-modal" style="max-width:380px">
+    <div class="cart-modal-header"><h3 id="authModalTitle">登录</h3><button class="modal-close" onclick="closeModal('authModal')">&times;</button></div>
+    <div class="cart-modal-body">
+      <div style="display:flex;gap:8px;margin-bottom:14px;background:var(--bg);border-radius:10px;padding:4px">
+        <button id="channelEmailBtn" onclick="switchAuthChannel('email')" style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--card-2);color:var(--text);font-family:inherit;font-size:.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)">邮箱</button>
+        <button id="channelPhoneBtn" onclick="switchAuthChannel('phone')" style="flex:1;padding:8px;border:none;border-radius:8px;background:transparent;font-family:inherit;font-size:.85rem;cursor:pointer;color:var(--text-light)">手机验证码</button>
+      </div>
+
+      <div id="authEmailBlock" style="display:flex;flex-direction:column;gap:12px">
+        <div id="authExtraFields" style="display:none;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:10px">
+            <input type="text" id="authLastName" placeholder="姓" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="authFirstName" placeholder="名" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          </div>
+          <input type="tel" id="authPhone" placeholder="手机号" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        </div>
+        <input type="email" id="authEmail" placeholder="邮箱" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <input type="password" id="authPassword" placeholder="密码（至少6位）" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <div id="authError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="authSubmitBtn" onclick="submitAuth()" style="width:100%">登录</button>
+        <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
+          <span id="authSwitchText">还没有账号？</span> <a href="index.html#" onclick="toggleAuthMode();return false" style="color:var(--primary)" id="authSwitchLink">立即注册</a>
+        </p>
+        <p id="authForgotWrap" style="text-align:center;font-size:.85rem"><a href="index.html#" onclick="forgotPassword();return false" style="color:var(--text-light)">忘记密码？</a></p>
+      </div>
+
+      <div id="authPhoneBlock" style="display:none;flex-direction:column;gap:12px">
+        <div id="phoneExtraFields" style="display:none;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:10px">
+            <input type="text" id="phoneLastName" placeholder="姓" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="phoneFirstName" placeholder="名" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <input type="tel" id="phoneNum" placeholder="手机号" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          <button id="sendOtpBtn" onclick="sendPhoneOtp()" style="flex:0 0 auto;padding:0 14px;border:1px solid var(--primary);color:var(--primary);background:transparent;border-radius:10px;font-family:inherit;font-size:.82rem;cursor:pointer;white-space:nowrap">发送验证码</button>
+        </div>
+        <input type="text" id="phoneOtpCode" placeholder="6位验证码" maxlength="6" style="display:none;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <div id="phoneAuthError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="verifyOtpBtn" onclick="verifyPhoneOtp()" style="width:100%;display:none">验证并登录</button>
+        <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
+          <span id="phoneSwitchText">还没有账号？</span> <a href="index.html#" onclick="toggleAuthMode();return false" style="color:var(--primary)" id="phoneSwitchLink">立即注册</a>
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- 账户中心 -->
+<div class="cart-modal-overlay" id="accountModal" onclick="if(event.target===this)closeModal('accountModal')">
+  <div class="cart-modal" style="max-width:480px">
+    <div class="cart-modal-header"><h3>👤 我的账户</h3><button class="modal-close" onclick="closeModal('accountModal')">&times;</button></div>
+    <div class="cart-modal-body" id="accountBody"></div>
+  </div>
+</div>
+
+<!-- 新增/编辑地址（含身份证上传）-->
+<div class="cart-modal-overlay" id="addressModal" onclick="if(event.target===this)closeModal('addressModal')">
+  <div class="cart-modal" style="max-width:420px">
+    <div class="cart-modal-header"><h3>收货地址</h3><button class="modal-close" onclick="closeModal('addressModal')">&times;</button></div>
+    <div class="cart-modal-body">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <input type="text" id="addrName" placeholder="收件人姓名" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <input type="tel" id="addrPhone" placeholder="联系电话" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <textarea id="addrAddress" placeholder="详细收货地址" rows="3" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;resize:vertical"></textarea>
+        <div>
+          <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证正面照片</label>
+          <input type="file" id="addrIdFront" accept="image/*">
+        </div>
+        <div>
+          <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证反面照片</label>
+          <input type="file" id="addrIdBack" accept="image/*">
+        </div>
+        <p id="addrIdNote" style="font-size:.78rem;color:var(--success);margin:0"></p>
+        <p style="font-size:.78rem;color:var(--text-light)">身份证照片仅用于国际物流清关/实名核验，加密存储，仅商家可见。</p>
+        <div id="addrError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="addrSubmitBtn" onclick="submitAddress()" style="width:100%">保存地址</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 结算确认 -->
+<div class="cart-modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeModal('checkoutModal')">
+  <div class="cart-modal" style="max-width:460px">
+    <div class="cart-modal-header"><h3>确认订单</h3><button class="modal-close" onclick="closeModal('checkoutModal')">&times;</button></div>
+    <div class="cart-modal-body" id="checkoutBody"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://cyaegfnkjwwdsjkfnlfl.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5YWVnZm5rand3ZHNqa2ZubGZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NDQ3ODksImV4cCI6MjEwMTEyMDc4OX0._W7WMcSW7tOCI6NmeegHWcR6CDZ0WMIJMyCMZvLcwU0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+// 收款码图片 URL（联系客服/商家提供后填在这里，留空则显示"联系客服付款"提示）
+const PAYMENT_QR={alipay:'alipay-qr.jpg',wechat:'wechat-qr.jpg'};
+</script>
+<script>
+const DEFAULT_PRODUCTS=[
+{id:'p1',name:'Maple Brownie 枫糖布朗尼',price:128,desc:'加拿大原产枫糖制作，浓郁香甜，独立包装，适合送礼或自享。每盒12块，保质期6个月。',category:'food',images:['https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop']},
+{id:'p2',name:'Canada Goose 远征羽绒服',price:6800,desc:'经典 Expedition 系列，625蓬松度白鸭绒，可抵御-30°C严寒。加拿大专柜直采，含防伪标签。',category:'fashion',images:['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=400&fit=crop','https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=400&fit=crop']},
+{id:'p3',name:'UGG 经典雪地靴',price:980,desc:'澳洲美利奴羊毛内里，防滑橡胶大底。加拿大专柜采购，多色可选，尺码齐全。',category:'fashion',images:['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=400&fit=crop']},
+{id:'p4',name:'加拿大精酿啤酒组合',price:268,desc:'6瓶装精选本地精酿啤酒，包含 IPA、Stout、Pale Ale 各2瓶。冰袋保温发货。',category:'food',images:['https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&h=400&fit=crop']},
+{id:'p5',name:'The Ordinary 精华套装',price:198,desc:'加拿大本土护肤品牌，成分党最爱。含烟酰胺、透明质酸、维C精华各一瓶。',category:'beauty',images:['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=400&fit=crop']},
+{id:'p6',name:'枫糖浆礼盒 250ml×3',price:188,desc:'100%纯枫糖浆，加拿大魁北克特产。A级琥珀色，口感醇厚，礼盒包装。',category:'food',images:['https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=400&fit=crop','https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=600&h=400&fit=crop']}
+];
+const DEFAULT_CATEGORIES=[{id:'all',name:'全部'},{id:'food',name:'食品'},{id:'fashion',name:'服饰'},{id:'beauty',name:'美妆'},{id:'other',name:'其他'}];
+
+// ⚠️ 配置区：填入 jsonbin.io 的「公开数据 URL」后，所有设备（电脑/手机）都会自动从这里读取商品数据
+// 在管理后台「🚀 发布网站」页面创建云端数据库后，把生成的地址粘贴到下面引号里即可
+const CLOUD_DATA_URL='https://api.jsonbin.io/v3/b/6a6e386df5f4af5e29ded56d/latest';
+
+let siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES};
+let isCloudMode=false;
+let tiersByProduct={}; // productId -> [{min_qty,total_price}, ...] sorted desc by min_qty
+
+async function loadData(){
+  try{
+    const [{data:products,error:pErr},{data:categories,error:cErr},{data:tiers,error:tErr}]=await Promise.all([
+      sb.from('products').select('*').order('created_at'),
+      sb.from('categories').select('*').order('sort_order'),
+      sb.from('product_price_tiers').select('*')
+    ]);
+    if(pErr||cErr||tErr)throw(pErr||cErr||tErr);
+    siteData={
+      products:(products||[]).map(p=>({id:p.id,name:p.name,price:Number(p.price),category:p.category,desc:p.description||'',images:p.images||[]})),
+      categories:(categories&&categories.length)?categories.map(c=>({id:c.id,name:c.name})):DEFAULT_CATEGORIES
+    };
+    tiersByProduct={};
+    (tiers||[]).forEach(t=>{
+      if(!tiersByProduct[t.product_id])tiersByProduct[t.product_id]=[];
+      tiersByProduct[t.product_id].push({min_qty:t.min_qty,total_price:Number(t.total_price)});
+    });
+    Object.values(tiersByProduct).forEach(list=>list.sort((a,b)=>b.min_qty-a.min_qty));
+    isCloudMode=true;updateCloudStatus(true);renderAll();
+    initAuthState();
+  }catch(e){
+    console.log('Supabase load failed, falling back to local:',e);
+    const localProducts=localStorage.getItem('tnf_products');
+    const localCats=localStorage.getItem('tnf_categories');
+    if(localProducts){siteData={products:JSON.parse(localProducts),categories:localCats?JSON.parse(localCats):DEFAULT_CATEGORIES}}
+    else{siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES}}
+    isCloudMode=false;updateCloudStatus(false);renderAll();
+    initAuthState();
+  }
+}
+
+// 计算某商品在给定数量下的"总价"（应用阶梯价，找不到阶梯价就用 单价*数量）
+function computeLineTotal(product,qty){
+  const tiers=tiersByProduct[product.id];
+  if(tiers){
+    const match=tiers.find(t=>qty>=t.min_qty);
+    if(match)return match.total_price;
+  }
+  return product.price*qty;
+}
+
+function updateCloudStatus(online){
+  const badge=document.getElementById('cloudStatus');
+  if(!badge)return;
+  badge.style.display='flex';
+  if(online){badge.className='cloud-status online';document.getElementById('cloudStatusDot').textContent='🟢';document.getElementById('cloudStatusText').textContent='云端同步'}
+  else{badge.className='cloud-status offline';document.getElementById('cloudStatusDot').textContent='🟡';document.getElementById('cloudStatusText').textContent='本地模式'}
+}
+
+function getProducts(){return siteData.products}
+function getCategories(){return siteData.categories}
+
+function renderAll(){renderFilters();renderProducts();updateCartUI()}
+
+let cart={};
+function addToCart(id,btn){
+  cart[id]=(cart[id]||0)+1;updateCartUI();showToast('已加入购物袋！');
+  if(btn){btn.textContent='✓';btn.classList.add('added');setTimeout(()=>{btn.textContent='+';btn.classList.remove('added')},1200)}
+}
+function removeFromCart(id){delete cart[id];updateCartUI()}
+function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];updateCartUI()}
+function updateCartUI(){
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  const badge=document.getElementById('cartCount');
+  badge.textContent=count;badge.style.display=count>0?'flex':'none';
+  const body=document.getElementById('cartBody');
+  const footer=document.getElementById('cartFooter');
+  const products=getProducts();
+  if(count===0){body.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>购物袋是空的</p></div>';footer.style.display='none';return}
+  let total=0;
+  body.innerHTML=Object.entries(cart).map(([id,qty])=>{
+    const p=products.find(x=>x.id===id);if(!p)return'';
+    const lineTotal=computeLineTotal(p,qty);
+    total+=lineTotal;
+    const tiers=tiersByProduct[p.id];
+    const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">已按优惠价计算</div>`:'';
+    const img=p.images&&p.images[0]?`<img src="https://true-north-finds.vercel.app/${p.images[0]}" alt="">`:'📦';
+    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${p.name}</h4><div class="price">¥${lineTotal}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty}件)</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
+  }).join('');
+  document.getElementById('cartTotal').textContent='¥'+total;footer.style.display='block'
+}
+function toggleCart(){document.getElementById('cartModal').classList.toggle('active')}
+
+// ===================== 登录 / 注册 =====================
+let currentCustomer=null,currentLevel=null,authMode='login',authChannel='email',otpSent=false;
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+function switchAuthChannel(channel){
+  authChannel=channel;
+  document.getElementById('authEmailBlock').style.display=channel==='email'?'flex':'none';
+  document.getElementById('authPhoneBlock').style.display=channel==='phone'?'flex':'none';
+  document.getElementById('channelEmailBtn').style.background=channel==='email'?'var(--card-2)':'transparent';
+  document.getElementById('channelEmailBtn').style.color=channel==='email'?'var(--text)':'var(--text-light)';
+  document.getElementById('channelEmailBtn').style.boxShadow=channel==='email'?'0 1px 3px rgba(0,0,0,.25)':'none';
+  document.getElementById('channelPhoneBtn').style.background=channel==='phone'?'var(--card-2)':'transparent';
+  document.getElementById('channelPhoneBtn').style.color=channel==='phone'?'var(--text)':'var(--text-light)';
+  document.getElementById('channelPhoneBtn').style.boxShadow=channel==='phone'?'0 1px 3px rgba(0,0,0,.25)':'none';
+}
+function toggleAuthMode(){
+  authMode=authMode==='login'?'register':'login';
+  document.getElementById('authModalTitle').textContent=authMode==='login'?'登录':'注册';
+  document.getElementById('authSubmitBtn').textContent=authMode==='login'?'登录':'注册';
+  document.getElementById('authSwitchText').textContent=authMode==='login'?'还没有账号？':'已经有账号？';
+  document.getElementById('authSwitchLink').textContent=authMode==='login'?'立即注册':'去登录';
+  document.getElementById('authExtraFields').style.display=authMode==='register'?'flex':'none';
+  document.getElementById('authForgotWrap').style.display=authMode==='login'?'block':'none';
+  document.getElementById('authError').style.display='none';
+  document.getElementById('phoneExtraFields').style.display=authMode==='register'?'flex':'none';
+  document.getElementById('phoneSwitchText').textContent=authMode==='login'?'还没有账号？':'已经有账号？';
+  document.getElementById('phoneSwitchLink').textContent=authMode==='login'?'立即注册':'去登录';
+  document.getElementById('verifyOtpBtn').textContent=authMode==='login'?'验证并登录':'验证并注册';
+  resetOtpState();
+}
+function resetOtpState(){
+  otpSent=false;
+  document.getElementById('phoneOtpCode').style.display='none';
+  document.getElementById('phoneOtpCode').value='';
+  document.getElementById('verifyOtpBtn').style.display='none';
+  document.getElementById('sendOtpBtn').disabled=false;
+  document.getElementById('sendOtpBtn').textContent='发送验证码';
+  document.getElementById('phoneAuthError').style.display='none';
+}
+function normalizePhone(raw){
+  const digits=raw.replace(/\D/g,'');
+  if(raw.trim().startsWith('+'))return'+'+digits;
+  if(digits.length===11)return'+86'+digits; // 默认按中国大陆手机号处理
+  return'+'+digits;
+}
+async function sendPhoneOtp(){
+  const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
+  const phoneRaw=document.getElementById('phoneNum').value.trim();
+  if(!phoneRaw){errEl.textContent='请输入手机号';errEl.style.display='block';return}
+  if(authMode==='register'){
+    const ln=document.getElementById('phoneLastName').value.trim();
+    const fn=document.getElementById('phoneFirstName').value.trim();
+    if(!ln||!fn){errEl.textContent='请填写姓和名';errEl.style.display='block';return}
+  }
+  const phone=normalizePhone(phoneRaw);
+  const btn=document.getElementById('sendOtpBtn');btn.disabled=true;btn.textContent='发送中...';
+  try{
+    const options={shouldCreateUser:authMode==='register'};
+    if(authMode==='register'){
+      options.data={first_name:document.getElementById('phoneFirstName').value.trim(),last_name:document.getElementById('phoneLastName').value.trim()};
+    }
+    const{error}=await sb.auth.signInWithOtp({phone,options});
+    if(error)throw error;
+    otpSent=true;
+    document.getElementById('phoneOtpCode').style.display='block';
+    document.getElementById('verifyOtpBtn').style.display='block';
+    showToast('验证码已发送，请查收短信');
+    startOtpCountdown();
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+    btn.disabled=false;btn.textContent='发送验证码';
+  }
+}
+function startOtpCountdown(){
+  let sec=60;const btn=document.getElementById('sendOtpBtn');
+  btn.disabled=true;
+  const timer=setInterval(()=>{
+    sec--;
+    if(sec<=0){clearInterval(timer);btn.disabled=false;btn.textContent='重新发送'}
+    else{btn.textContent=`${sec}秒后可重发`}
+  },1000);
+}
+async function verifyPhoneOtp(){
+  const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
+  const phone=normalizePhone(document.getElementById('phoneNum').value.trim());
+  const code=document.getElementById('phoneOtpCode').value.trim();
+  if(!code){errEl.textContent='请输入验证码';errEl.style.display='block';return}
+  const btn=document.getElementById('verifyOtpBtn');btn.disabled=true;btn.textContent='验证中...';
+  try{
+    const{error}=await sb.auth.verifyOtp({phone,token:code,type:'sms'});
+    if(error)throw error;
+    closeModal('authModal');
+    document.getElementById('phoneNum').value='';document.getElementById('phoneOtpCode').value='';
+    document.getElementById('phoneLastName').value='';document.getElementById('phoneFirstName').value='';
+    resetOtpState();
+    await initAuthState();
+    showToast(authMode==='register'?getWelcomeMessage('注册成功！欢迎'):getWelcomeMessage('欢迎回来'),4000);
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+  }
+  btn.disabled=false;btn.textContent=authMode==='login'?'验证并登录':'验证并注册';
+}
+function openAuth(){authMode='login';switchAuthChannel('email');toggleAuthMode();toggleAuthMode();openModal('authModal')}
+async function submitAuth(){
+  const email=document.getElementById('authEmail').value.trim();
+  const password=document.getElementById('authPassword').value;
+  const errEl=document.getElementById('authError');errEl.style.display='none';
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){errEl.textContent='请输入正确的邮箱';errEl.style.display='block';return}
+  if(password.length<6){errEl.textContent='密码至少6位';errEl.style.display='block';return}
+  const btn=document.getElementById('authSubmitBtn');const originalBtnText=btn.textContent;btn.disabled=true;btn.textContent='处理中...';
+  try{
+    if(authMode==='register'){
+      const lastName=document.getElementById('authLastName').value.trim();
+      const firstName=document.getElementById('authFirstName').value.trim();
+      const phone=document.getElementById('authPhone').value.trim();
+      if(!lastName||!firstName){errEl.textContent='请填写姓和名';errEl.style.display='block';return}
+      if(!phone){errEl.textContent='请填写手机号';errEl.style.display='block';return}
+      // 姓名/手机号先存进账号的 metadata，等真正登录（session建立）后再落到 customers 表，避免邮箱未验证时因权限问题静默失败
+      const{data,error}=await sb.auth.signUp({email,password,options:{data:{first_name:firstName,last_name:lastName,phone}}});
+      if(error)throw error;
+      closeModal('authModal');
+      clearAuthForm();
+      if(data.session){
+        await initAuthState();
+        showToast(getWelcomeMessage('注册成功！欢迎'),4000);
+      }else{
+        showToast('注册成功！请查收邮箱，点击确认链接后即可登录',5000);
+      }
+    }else{
+      const{error}=await sb.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      closeModal('authModal');
+      clearAuthForm();
+      await initAuthState();
+      showToast(getWelcomeMessage('欢迎回来'),4000);
+    }
+  }catch(e){
+    errEl.textContent=translateError(e);
+    errEl.style.display='block';
+  }
+  btn.disabled=false;btn.textContent=originalBtnText;
+}
+function clearAuthForm(){
+  document.getElementById('authEmail').value='';document.getElementById('authPassword').value='';
+  document.getElementById('authLastName').value='';document.getElementById('authFirstName').value='';document.getElementById('authPhone').value='';
+}
+async function forgotPassword(){
+  const email=document.getElementById('authEmail').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showToast('请先在邮箱框里输入你的邮箱');return}
+  try{
+    const{error}=await sb.auth.resetPasswordForEmail(email);
+    if(error)throw error;
+    showToast('密码重置邮件已发送，请查收邮箱');
+  }catch(e){showToast('发送失败：'+translateError(e))}
+}
+async function logout(){await sb.auth.signOut();currentCustomer=null;currentLevel=null;updateAccountBtn();closeModal('accountModal');showToast('已退出登录')}
+async function initAuthState(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session){
+    // 用登录后拿到的 session 补建/更新客户资料行（RLS 要求必须是本人已登录状态才能写入）
+    const meta=session.user.user_metadata||{};
+    await sb.from('customers').upsert({
+      id:session.user.id,email:session.user.email||null,
+      phone:session.user.phone?('+'+session.user.phone):(meta.phone||null),
+      first_name:meta.first_name||null,last_name:meta.last_name||null
+    },{onConflict:'id'});
+    const{data:cust}=await sb.from('customers').select('*').eq('id',session.user.id).single();
+    currentCustomer=cust;
+    if(cust&&cust.level_id){
+      const{data:lvl}=await sb.from('membership_levels').select('*').eq('id',cust.level_id).single();
+      currentLevel=lvl;
+    }
+  }else{currentCustomer=null;currentLevel=null}
+  updateAccountBtn();
+}
+function getDisplayName(){
+  if(!currentCustomer)return'';
+  const name=((currentCustomer.last_name||'')+(currentCustomer.first_name||'')).trim();
+  if(name)return name;
+  if(currentCustomer.email)return currentCustomer.email.split('@')[0];
+  if(currentCustomer.phone)return currentCustomer.phone.slice(-4);
+  return'我的账户';
+}
+function getWelcomeMessage(prefix){
+  const lvl=currentLevel?currentLevel.name:'普通会员';
+  const pts=currentCustomer?(currentCustomer.points||0):0;
+  return`${prefix}，${getDisplayName()}！${lvl} · ${pts}积分`;
+}
+function updateAccountBtn(){
+  document.getElementById('accountBtnText').textContent=currentCustomer?('👋 '+getDisplayName()):'登录'
+}
+function openAccount(){
+  if(!currentCustomer){openAuth();return}
+  renderAccountBody();openModal('accountModal');
+}
+async function renderAccountBody(){
+  const body=document.getElementById('accountBody');
+  body.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px">加载中...</p>';
+  const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  const{data:orders}=await sb.from('orders').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  accountAddressesCache=addresses||[];
+  const addrHtml=(addresses&&addresses.length)?addresses.map(a=>`
+    <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-weight:600;font-size:.9rem">${a.receiver_name} ${a.phone}</div>
+          <div style="font-size:.85rem;color:var(--text-light);margin-top:4px">${a.address}</div>
+          <div style="font-size:.75rem;color:var(--success);margin-top:4px">${a.id_card_front_path&&a.id_card_back_path?'✓ 身份证已上传':'⚠️ 未上传身份证'}</div>
+        </div>
+        <button onclick="editAddressById('${a.id}')" style="border:none;background:none;color:var(--primary);font-size:.8rem;cursor:pointer;white-space:nowrap">✏️ 编辑</button>
+      </div>
+    </div>`).join(''):'<p style="color:var(--text-light);font-size:.9rem">还没有保存的地址</p>';
+  const productsForLookup=getProducts();
+  const ordersHtml=(orders&&orders.length)?orders.map(o=>{
+    const itemsHtml=(o.items||[]).map(it=>{
+      const p=productsForLookup.find(x=>x.id===it.product_id);
+      const img=p&&p.images&&p.images[0]?p.images[0]:'';
+      return `<div style="display:flex;gap:10px;align-items:center;padding:6px 0">
+        <div style="width:44px;height:44px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem">${img?`<img src="https://true-north-finds.vercel.app/${img}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div>
+        <div style="flex:1;min-width:0"><div style="font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:.75rem;color:var(--text-light)">x${it.qty}</div></div>
+        <div style="font-size:.85rem;font-weight:600">¥${it.line_total}</div>
+      </div>`;
+    }).join('');
+    return`
+    <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px;border-bottom:1px solid var(--border)">
+        <span style="font-size:.78rem;color:var(--text-light)">${new Date(o.created_at).toLocaleDateString('zh-CN')} · 订单号${o.id.slice(0,8)}</span>
+        <span style="font-size:.8rem">${orderStatusLabel(o)}</span>
+      </div>
+      ${itemsHtml}
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
+        <span style="font-size:.8rem;color:var(--text-light)">实付</span>
+        <span style="font-weight:700;color:var(--primary)">¥${o.final_amount}</span>
+      </div>
+      ${o.status==='pending'?`<button class="btn btn-outline" style="width:100%;margin-top:8px;padding:8px" onclick="closeModal('accountModal');reopenPayment('${o.id}',${o.final_amount})">查看付款码</button>`:''}
+    </div>`;
+  }).join(''):'<p style="color:var(--text-light);font-size:.9rem">还没有买过东西</p>';
+  body.innerHTML=`
+    <div style="background:var(--bg);border-radius:14px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:1.05rem">${currentLevel?currentLevel.name:'普通会员'}</div>
+          <div style="font-size:.8rem;color:var(--text-light)">累计消费 ¥${currentCustomer.total_spend||0}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--primary);font-size:1.2rem">${currentCustomer.points||0}</div>
+          <div style="font-size:.75rem;color:var(--text-light)">积分</div>
+        </div>
+      </div>
+    </div>
+    <h4 style="margin-bottom:10px;font-size:.95rem">已买到的宝贝</h4>
+    ${ordersHtml}
+    <h4 style="margin:16px 0 10px;font-size:.95rem">收货地址</h4>
+    ${addrHtml}
+    <button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="openAddressModal()">+ 新增地址</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px;color:var(--primary);border-color:var(--primary)" onclick="logout()">退出登录</button>
+  `;
+}
+function orderStatusLabel(o){
+  if(o.status==='pending')return'⏳ 订单已提交，等待付款确认';
+  if(o.status==='paid')return'📦 您的付款已经收到，正在打包中...';
+  if(o.status==='shipped')return`🚚 包裹已发出，物流跟踪号码：${o.tracking_number||'（待补充）'}`;
+  if(o.status==='completed')return'✅ 包裹已投递';
+  if(o.status==='cancelled')return'❌ 订单已取消';
+  return o.status;
+}
+function reopenPayment(orderId,amount){drawPaymentStep(orderId,amount);openModal('checkoutModal')}
+
+// ===================== 地址 + 身份证 =====================
+let addressModalContext='account',accountAddressesCache=[];
+function editAddressById(id){const a=accountAddressesCache.find(x=>x.id===id);if(a)openAddressModal('account',a)}
+let editingAddressId=null;
+function openAddressModal(context,addr){
+  addressModalContext=context||'account';
+  editingAddressId=addr?addr.id:null;
+  document.getElementById('addrName').value=addr?addr.receiver_name:'';
+  document.getElementById('addrPhone').value=addr?addr.phone:'';
+  document.getElementById('addrAddress').value=addr?addr.address:'';
+  document.getElementById('addrIdFront').value='';document.getElementById('addrIdBack').value='';
+  document.getElementById('addrError').style.display='none';
+  const idNote=document.getElementById('addrIdNote');
+  if(idNote)idNote.textContent=addr&&addr.id_card_front_path&&addr.id_card_back_path?'（已上传，如需更换请重新选择文件）':'';
+  openModal('addressModal');
+}
+function translateError(e){
+  const msg=(e&&(e.message||e.error_description||e.msg))||String(e||'');
+  const m=msg.toLowerCase();
+  if(m.includes('signups not allowed')||m.includes('signup is disabled')||m.includes('otp for this phone'))return'该手机号还未注册，请先切换到"注册"';
+  if(m.includes('sms')&&(m.includes('rate limit')||m.includes('security purposes')))return'请求过于频繁，请稍后再试';
+  if(m.includes('token has expired')||m.includes('invalid otp')||m.includes('otp_expired'))return'验证码错误或已过期，请重新获取';
+  if(m.includes('phone')&&(m.includes('already registered')||m.includes('already exists')))return'该手机号已注册，请直接登录';
+  if(m.includes('row-level security')||m.includes('violates row-level'))return'登录状态已过期，请重新登录后再试';
+  if(m.includes('jwt')||m.includes('not authenticated')||m.includes('invalid token'))return'登录状态已过期，请重新登录后再试';
+  if(m.includes('already registered')||m.includes('already been registered'))return'该邮箱已注册，请直接登录';
+  if(m.includes('invalid login'))return'邮箱或密码错误';
+  if(m.includes('email not confirmed'))return'请先点击邮箱里的确认链接完成验证';
+  if(m.includes('sending')||m.includes('smtp')||m.includes('email'))return'邮件发送失败，可能是邮件服务临时故障，请稍后再试';
+  if(m.includes('network'))return'网络连接失败，请检查网络后重试';
+  if(m.includes('duplicate key'))return'数据已存在，请勿重复提交';
+  return msg||'操作失败，请重试';
+}
+async function submitAddress(){
+  const name=document.getElementById('addrName').value.trim();
+  const phone=document.getElementById('addrPhone').value.trim();
+  const address=document.getElementById('addrAddress').value.trim();
+  const frontFile=document.getElementById('addrIdFront').files[0];
+  const backFile=document.getElementById('addrIdBack').files[0];
+  const errEl=document.getElementById('addrError');errEl.style.display='none';
+  if(!name||!phone||!address){errEl.textContent='请填写完整的收件人信息';errEl.style.display='block';return}
+  const btn=document.getElementById('addrSubmitBtn');btn.disabled=true;btn.textContent='保存中...';
+  try{
+    const{data:{user}}=await sb.auth.getUser();
+    if(!user){errEl.textContent='登录状态已过期，请重新登录后再试';errEl.style.display='block';btn.disabled=false;btn.textContent='保存地址';closeModal('addressModal');openAuth();return}
+    let frontPath=null,backPath=null;
+    if(frontFile){
+      frontPath=`${user.id}/front_${Date.now()}_${frontFile.name}`;
+      const{error}=await sb.storage.from('id-cards').upload(frontPath,frontFile);
+      if(error)throw error;
+    }
+    if(backFile){
+      backPath=`${user.id}/back_${Date.now()}_${backFile.name}`;
+      const{error}=await sb.storage.from('id-cards').upload(backPath,backFile);
+      if(error)throw error;
+    }
+    if(editingAddressId){
+      const updatePayload={receiver_name:name,phone,address};
+      if(frontPath)updatePayload.id_card_front_path=frontPath;
+      if(backPath)updatePayload.id_card_back_path=backPath;
+      const{error:updErr}=await sb.from('customer_addresses').update(updatePayload).eq('id',editingAddressId).eq('customer_id',user.id);
+      if(updErr)throw updErr;
+    }else{
+      const{error:insErr}=await sb.from('customer_addresses').insert({
+        customer_id:user.id,receiver_name:name,phone,address,
+        id_card_front_path:frontPath,id_card_back_path:backPath
+      });
+      if(insErr)throw insErr;
+    }
+    closeModal('addressModal');showToast('地址已保存');
+    if(addressModalContext==='checkout'){
+      const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',user.id).order('created_at',{ascending:false});
+      if(addresses&&addresses.length){await renderCheckout(addresses);openModal('checkoutModal')}
+    }else{
+      renderAccountBody();
+    }
+  }catch(e){errEl.textContent=translateError(e);errEl.style.display='block'}
+  finally{btn.disabled=false;btn.textContent='保存地址'}
+}
+
+// ===================== 结算 / 下单 =====================
+async function checkout(){
+  if(Object.keys(cart).length===0)return;
+  if(!currentCustomer){toggleCart();openAuth();return}
+  const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  if(!addresses||addresses.length===0){toggleCart();showToast('请先添加收货地址');openAddressModal('checkout');return}
+  toggleCart();
+  await renderCheckout(addresses);
+  openModal('checkoutModal');
+}
+let checkoutAddresses=[],checkoutSelectedAddr=null,checkoutUsePoints=0;
+async function renderCheckout(addresses){
+  checkoutAddresses=addresses;
+  checkoutSelectedAddr=addresses[0].id;
+  checkoutUsePoints=0;
+  drawCheckout();
+}
+function drawCheckout(){
+  const products=getProducts();
+  let goodsAmount=0,healthQty=0;
+  const itemsHtml=Object.entries(cart).map(([id,qty])=>{
+    const p=products.find(x=>x.id===id);if(!p)return'';
+    const lineTotal=computeLineTotal(p,qty);
+    goodsAmount+=lineTotal;
+    if(p.category==='health')healthQty+=qty;
+    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${p.name} x${qty}</span><span>¥${lineTotal}</span></div>`;
+  }).join('');
+  const shipping=healthQty===1?50:0;
+  const discountPercent=currentLevel?Number(currentLevel.discount_percent):0;
+  const memberDiscount=discountPercent>0?Math.round(goodsAmount*discountPercent/100*100)/100:0;
+  const canRedeem=(currentCustomer.points||0)>=10000;
+  const pointsDiscount=(checkoutUsePoints/10000)*10;
+  let final=goodsAmount-memberDiscount-pointsDiscount+shipping;if(final<0)final=0;
+
+  const addrOptions=checkoutAddresses.map(a=>`<option value="${a.id}" ${a.id===checkoutSelectedAddr?'selected':''}>${a.receiver_name} ${a.phone} - ${a.address.slice(0,20)}${a.address.length>20?'...':''}</option>`).join('');
+
+  document.getElementById('checkoutBody').innerHTML=`
+    <div style="background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:.85rem;color:var(--text-light)">我的积分</span>
+      <span style="font-weight:700;color:var(--primary)">${currentCustomer.points||0} 分</span>
+    </div>
+    <div style="margin-bottom:14px">${itemsHtml}</div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">收货地址</label>
+      <select id="checkoutAddrSelect" onchange="checkoutSelectedAddr=this.value" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-family:inherit">${addrOptions}</select>
+    </div>
+    ${canRedeem?`
+    <label style="display:flex;align-items:center;gap:10px;background:#2e2410;border:1px solid #473518;border-radius:10px;padding:12px;margin-bottom:12px;cursor:pointer">
+      <input type="checkbox" ${checkoutUsePoints>=10000?'checked':''} onchange="checkoutUsePoints=this.checked?10000:0;drawCheckout()" style="width:18px;height:18px">
+      <span style="font-size:.85rem">你有 <strong>${currentCustomer.points}</strong> 积分，可使用 <strong>10000</strong> 分抵扣 <strong>¥10</strong> 本次订单金额</span>
+    </label>`:''}
+    <div style="border-top:1px solid var(--border);padding-top:12px;font-size:.88rem">
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>商品金额</span><span>¥${goodsAmount}</span></div>
+      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>会员折扣（${currentLevel.name} ${discountPercent}%）</span><span>-¥${memberDiscount}</span></div>`:''}
+      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>积分抵扣</span><span>-¥${pointsDiscount}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>运费${healthQty>=2?'（保健品满2件包邮）':healthQty===1?'（保健品仅1件）':''}</span><span>${shipping>0?'¥'+shipping:'免运费'}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>合计</span><span style="color:var(--primary)">¥${final}</span></div>
+    </div>
+    <div id="checkoutError" style="color:var(--primary);font-size:.85rem;display:none;margin-top:8px"></div>
+    <button class="checkout-btn" style="margin-top:14px" id="checkoutSubmitBtn" onclick="submitOrder()">提交订单</button>
+  `;
+}
+async function submitOrder(){
+  const btn=document.getElementById('checkoutSubmitBtn');btn.disabled=true;btn.textContent='提交中...';
+  const errEl=document.getElementById('checkoutError');errEl.style.display='none';
+  try{
+    const items=Object.entries(cart).map(([id,qty])=>({product_id:id,qty}));
+    const{data:orderId,error}=await sb.rpc('create_order',{p_items:items,p_address_id:checkoutSelectedAddr,p_use_points:checkoutUsePoints});
+    if(error)throw error;
+    const{data:order}=await sb.from('orders').select('*').eq('id',orderId).single();
+    cart={};updateCartUI();
+    await initAuthState();
+    drawPaymentStep(orderId,order?order.final_amount:null);
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+    btn.disabled=false;btn.textContent='提交订单';
+  }
+}
+function drawPaymentStep(orderId,amount){
+  const hasQr=PAYMENT_QR.alipay||PAYMENT_QR.wechat;
+  document.getElementById('checkoutBody').innerHTML=`
+    <div style="text-align:center;padding:10px 0 16px">
+      <div style="font-size:2.4rem">✅</div>
+      <h3 style="margin:10px 0 4px">订单已提交</h3>
+      <p style="color:var(--text-light);font-size:.85rem">订单号：${orderId.slice(0,8)}</p>
+    </div>
+    ${hasQr?`
+    <div style="background:var(--bg);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px">
+      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:4px">应付金额（扫码后请手动输入此金额）</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px">
+        <span id="payAmountText" style="font-weight:800;font-size:2.2rem;color:var(--primary)">¥${amount}</span>
+        <button onclick="copyAmount(${amount})" style="border:1px solid var(--border);background:var(--card-2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;cursor:pointer;font-family:inherit">📋 复制</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+      ${PAYMENT_QR.alipay?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.alipay}" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">🔵 支付宝扫码</p></div>`:''}
+      ${PAYMENT_QR.wechat?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.wechat}" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">🟢 微信扫码</p></div>`:''}
+    </div>
+    <p style="font-size:.8rem;color:var(--text-light);text-align:center">付款时请备注订单号后6位「${orderId.slice(-6)}」，方便我们核对</p>
+    `:`
+    <p style="font-weight:800;font-size:2rem;color:var(--primary);text-align:center;margin-bottom:10px">¥${amount}</p>
+    <p style="font-size:.85rem;color:var(--text-light);text-align:center;background:var(--bg);padding:14px;border-radius:10px">请通过微信或邮件联系我们确认付款方式，我们会尽快为您安排采购发货</p>
+    `}
+    <button class="checkout-btn" style="margin-top:16px" onclick="closeModal('checkoutModal')">完成</button>
+  `;
+}
+function copyAmount(amount){
+  navigator.clipboard.writeText(String(amount)).then(()=>showToast('金额已复制：¥'+amount)).catch(()=>showToast('复制失败，请手动输入 ¥'+amount));
+}
+
+let currentFilter='all',productImageIndex={},searchQuery='';
+function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
+function renderFilters(){
+  const cats=getCategories();
+  document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${c.name}</button>`).join('')
+}
+function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
+function renderProducts(){
+  const products=getProducts();
+  const grid=document.getElementById('productsGrid');
+  let filtered=currentFilter==='all'?products:products.filter(p=>p.category===currentFilter);
+  if(searchQuery){filtered=filtered.filter(p=>(p.name||'').toLowerCase().includes(searchQuery)||(p.desc||'').toLowerCase().includes(searchQuery))}
+  if(filtered.length===0){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">📦</div><p>${searchQuery?'没有找到相关商品':'暂无商品，请前往后台添加'}</p></div>`;return}
+  grid.innerHTML=filtered.map(p=>{
+    const img=p.images&&p.images[0]?p.images[0]:'';
+    const hasMultiple=p.images&&p.images.length>1;
+    const catName=getCategoryName(p.category);
+    const idx=productImageIndex[p.id]||0;
+    const currentImg=p.images&&p.images[idx]?p.images[idx]:img;
+    const dotsHtml=hasMultiple?`<div class="img-dots">${p.images.map((_,i)=>`<div class="img-dot ${i===idx?'active':''}"></div>`).join('')}</div>`:'';
+    const navHtml=hasMultiple?`<button class="img-nav prev" onclick="event.stopPropagation();cycleImage('${p.id}',-1)">‹</button><button class="img-nav next" onclick="event.stopPropagation();cycleImage('${p.id}',1)">›</button>`:'';
+    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="https://true-north-finds.vercel.app/${currentImg}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${p.name}</h3><div class="product-price-row"><div class="product-price">¥${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="加入购物袋">+</button></div></div></div>`
+  }).join('')
+}
+function cycleImage(productId,dir){
+  const products=getProducts();
+  const p=products.find(x=>x.id===productId);
+  if(!p||!p.images||p.images.length<=1)return;
+  let idx=productImageIndex[productId]||0;
+  idx=(idx+dir+p.images.length)%p.images.length;
+  productImageIndex[productId]=idx;renderProducts()
+}
+function getCategoryName(catId){const cats=getCategories();const c=cats.find(x=>x.id===catId);return c?c.name:catId}
+
+let currentDetailProduct=null,detailImageIndex=0;
+function openDetail(id){
+  const products=getProducts();
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  currentDetailProduct=p;detailImageIndex=0;
+  const catName=getCategoryName(p.category);
+  const images=p.images&&p.images.length>0?p.images:[''];
+  const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
+  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="https://true-north-finds.vercel.app/${img}" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="https://true-north-finds.vercel.app/${images[0]}" id="detailMainImg" alt="${p.name}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${p.name}</h2><div class="detail-price">¥${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">含代购费</span></div><p class="detail-desc">${p.desc}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">加入购物袋</button><button class="btn btn-outline" onclick="closeDetail()">继续浏览</button></div></div>`;
+  document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
+}
+function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
+function closeDetail(){document.getElementById('detailModal').classList.remove('active');document.body.style.overflow=''}
+function showToast(msg,duration){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),duration||2000)}
+
+// 访问次数统计（静默执行，失败不影响页面）
+(async()=>{try{await sb.rpc('increment_visit_count')}catch(e){}})();
+
+// 邮箱确认链接跳回本站时，提示"注册成功"并要求重新登录（而不是自动帮TA登进去）
+(function handleEmailConfirmRedirect(){
+  const url=window.location.hash+window.location.search;
+  if(url.includes('type=signup')){
+    history.replaceState(null,'',window.location.pathname);
+    sb.auth.signOut().finally(()=>{
+      updateAccountBtn();
+      showToast('注册成功！请重新登录',4000);
+    });
+  }
+})();
+
+loadData();
+</script>
+</body>
+</html>
