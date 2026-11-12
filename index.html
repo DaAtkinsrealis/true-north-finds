@@ -338,7 +338,11 @@ const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 const PAYMENT_QR={alipay:'alipay-qr.jpg',wechat:'wechat-qr.jpg'};
 </script>
 <script>
+// 图片地址解析：商品图可能是完整 URL（Unsplash 等），也可能是站内相对路径，两种都原样使用。
+// 注意：不要再给图片地址拼 vercel.app 前缀——完整 URL 一旦被加前缀就会变成双重地址而破图（2026-11-12 修）。
+function resolveImg(u){if(!u)return '';return String(u).trim();}
 const DEFAULT_PRODUCTS=[
+
 {id:'p1',name:'Maple Brownie 枫糖布朗尼',price:128,desc:'加拿大原产枫糖制作，浓郁香甜，独立包装，适合送礼或自享。每盒12块，保质期6个月。',category:'food',images:['https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop']},
 {id:'p2',name:'Canada Goose 远征羽绒服',price:6800,desc:'经典 Expedition 系列，625蓬松度白鸭绒，可抵御-30°C严寒。加拿大专柜直采，含防伪标签。',category:'fashion',images:['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=400&fit=crop','https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=400&fit=crop']},
 {id:'p3',name:'UGG 经典雪地靴',price:980,desc:'澳洲美利奴羊毛内里，防滑橡胶大底。加拿大专柜采购，多色可选，尺码齐全。',category:'fashion',images:['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=400&fit=crop']},
@@ -432,7 +436,7 @@ function updateCartUI(){
     total+=lineTotal;
     const tiers=tiersByProduct[p.id];
     const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">已按优惠价计算</div>`:'';
-    const img=p.images&&p.images[0]?`<img src="https://true-north-finds.vercel.app/${p.images[0]}" alt="">`:'📦';
+    const img=p.images&&p.images[0]?`<img src="${resolveImg(p.images[0])}" alt="">`:'📦';
     return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${p.name}</h4><div class="price">¥${lineTotal}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty}件)</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
   }).join('');
   document.getElementById('cartTotal').textContent='¥'+total;footer.style.display='block'
@@ -657,7 +661,7 @@ async function renderAccountBody(){
       const p=productsForLookup.find(x=>x.id===it.product_id);
       const img=p&&p.images&&p.images[0]?p.images[0]:'';
       return `<div style="display:flex;gap:10px;align-items:center;padding:6px 0">
-        <div style="width:44px;height:44px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem">${img?`<img src="https://true-north-finds.vercel.app/${img}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div>
+        <div style="width:44px;height:44px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem">${img?`<img src="${resolveImg(img)}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div>
         <div style="flex:1;min-width:0"><div style="font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:.75rem;color:var(--text-light)">x${it.qty}</div></div>
         <div style="font-size:.85rem;font-weight:600">¥${it.line_total}</div>
       </div>`;
@@ -918,7 +922,7 @@ function renderProducts(){
     const currentImg=p.images&&p.images[idx]?p.images[idx]:img;
     const dotsHtml=hasMultiple?`<div class="img-dots">${p.images.map((_,i)=>`<div class="img-dot ${i===idx?'active':''}"></div>`).join('')}</div>`:'';
     const navHtml=hasMultiple?`<button class="img-nav prev" onclick="event.stopPropagation();cycleImage('${p.id}',-1)">‹</button><button class="img-nav next" onclick="event.stopPropagation();cycleImage('${p.id}',1)">›</button>`:'';
-    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="https://true-north-finds.vercel.app/${currentImg}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${p.name}</h3><div class="product-price-row"><div class="product-price">¥${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="加入购物袋">+</button></div></div></div>`
+    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${p.name}</h3><div class="product-price-row"><div class="product-price">¥${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="加入购物袋">+</button></div></div></div>`
   }).join('')
 }
 function cycleImage(productId,dir){
@@ -940,8 +944,8 @@ function openDetail(id){
   const catName=getCategoryName(p.category);
   const images=p.images&&p.images.length>0?p.images:[''];
   const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
-  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="https://true-north-finds.vercel.app/${img}" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
-  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="https://true-north-finds.vercel.app/${images[0]}" id="detailMainImg" alt="${p.name}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${p.name}</h2><div class="detail-price">¥${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">含代购费</span></div><p class="detail-desc">${p.desc}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">加入购物袋</button><button class="btn btn-outline" onclick="closeDetail()">继续浏览</button></div></div>`;
+  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${p.name}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${p.name}</h2><div class="detail-price">¥${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">含代购费</span></div><p class="detail-desc">${p.desc}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">加入购物袋</button><button class="btn btn-outline" onclick="closeDetail()">继续浏览</button></div></div>`;
   document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
 }
 function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}

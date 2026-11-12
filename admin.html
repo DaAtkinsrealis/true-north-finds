@@ -294,7 +294,10 @@ const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 </script>
 <script>
-// ===================== AUTH =====================
+// ===================== AUTH =====================// 图片地址解析：商品图可能是完整 URL（Unsplash 等），也可能是站内相对路径，两种都原样使用。
+// 注意：不要再给图片地址拼 vercel.app 前缀——完整 URL 一旦被加前缀就会变成双重地址而破图（2026-11-12 修）。
+function resolveImg(u){if(!u)return '';return String(u).trim();}
+
 let currentUser=null;
 async function doLogin(){
   const email=document.getElementById('loginEmail').value.trim();
@@ -397,7 +400,7 @@ function renderProductsTable(){
     const img=p.images&&p.images[0]?p.images[0]:'';
     const imgCount=p.images?p.images.length:0;
     const tierBadge=tiersCache[p.id]&&tiersCache[p.id].length?` <span style="font-size:.72rem;color:#2d8a4e">📊阶梯价</span>`:'';
-    return`<tr><td><img src="https://true-north-finds.vercel.app/${img}" class="td-img" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'td-img\' style=display:flex;align-items:center;justify-content:center;font-size:1.2rem>📦</div>'"></td><td class="td-name">${p.name}${tierBadge}</td><td>${cat?cat.name:p.category}</td><td class="td-price">¥${p.price}</td><td>${imgCount} 张</td><td style="text-align:right"><div class="td-actions"><button class="btn-secondary btn-small" onclick="editProduct('${p.id}')">编辑</button><button class="btn-danger btn-small" onclick="deleteProduct('${p.id}')">删除</button></div></td></tr>`
+    return`<tr><td><img src="${resolveImg(img)}" class="td-img" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'td-img\' style=display:flex;align-items:center;justify-content:center;font-size:1.2rem>📦</div>'"></td><td class="td-name">${p.name}${tierBadge}</td><td>${cat?cat.name:p.category}</td><td class="td-price">¥${p.price}</td><td>${imgCount} 张</td><td style="text-align:right"><div class="td-actions"><button class="btn-secondary btn-small" onclick="editProduct('${p.id}')">编辑</button><button class="btn-danger btn-small" onclick="deleteProduct('${p.id}')">删除</button></div></td></tr>`
   }).join('');
   updateStats()
 }
@@ -434,7 +437,7 @@ function renderImageUrlRows(){
   const container=document.getElementById('imageUrlsList');
   container.innerHTML=imageUrls.map((url,i)=>{
     const hasUrl=url&&url.trim();
-    const preview=hasUrl?`<img src="https://true-north-finds.vercel.app/${url}" class="img-preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
+    const preview=hasUrl?`<img src="${resolveImg(url)}" class="img-preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
     const placeholder=!hasUrl?`<div class="img-preview placeholder">🖼️</div>`:`<div class="img-preview placeholder" style="display:none">🖼️</div>`;
     return`<div class="image-url-row">${preview}${placeholder}<input type="text" placeholder="图片 URL ${i+1}" value="${url}" oninput="updateImageUrl(${i},this.value)"><button class="btn-remove-img" onclick="removeImageUrl(${i})" title="删除">&times;</button></div>`
   }).join('')
@@ -685,8 +688,8 @@ async function viewOrderDetail(orderId){
     const{data:frontUrl}=await sb.storage.from('id-cards').createSignedUrl(addr.id_card_front_path,3600);
     const{data:backUrl}=await sb.storage.from('id-cards').createSignedUrl(addr.id_card_back_path,3600);
     idCardHtml=`<div style="display:flex;gap:10px;flex-wrap:wrap">
-      ${frontUrl?`<div><img src="https://true-north-finds.vercel.app/${frontUrl.signedUrl}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="https://true-north-finds.vercel.app/${frontUrl.signedUrl}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载正面</a></div>`:''}
-      ${backUrl?`<div><img src="https://true-north-finds.vercel.app/${backUrl.signedUrl}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="https://true-north-finds.vercel.app/${backUrl.signedUrl}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载反面</a></div>`:''}
+      ${frontUrl?`<div><img src="${resolveImg(frontUrl.signedUrl)}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="${resolveImg(frontUrl.signedUrl)}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载正面</a></div>`:''}
+      ${backUrl?`<div><img src="${resolveImg(backUrl.signedUrl)}" style="width:160px;border-radius:8px;border:1px solid var(--border);display:block"><a href="${resolveImg(backUrl.signedUrl)}" download target="_blank" style="font-size:.78rem;color:var(--primary)">⬇ 下载反面</a></div>`:''}
     </div><p style="font-size:.72rem;color:#999;margin-top:6px">图片链接1小时内有效，如需长期保存请下载</p>`;
   }
 
