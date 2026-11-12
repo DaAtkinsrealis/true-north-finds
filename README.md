@@ -6,7 +6,8 @@ Static front-end: `index.html` (storefront) + `admin.html` (admin page).
 Data lives outside this repo: Supabase project for products/orders/auth,
 jsonbin.io for configuration. Product images are hosted on Unsplash.
 
-Deploy: push to `main` — Vercel auto-deploys.
+Deploy: push to `main` — Vercel auto-deploys. Connected to Vercel
+2026-11-11; production branch is `main` (repo default).
 
 Note: `alipay-qr.jpg` / `wechat-qr.jpg` are referenced by `index.html`
 (`PAYMENT_QR`) but were never uploaded to the deployment (404 on the live
