@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>True North Finds · 加拿大代购</title>
+<meta name="description" content="True North Finds · 加拿大代购：精选加拿大好货，代购直邮中国。保健品、节日礼品，支付宝、微信支付。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="True North Finds">
+<meta property="og:title" content="True North Finds · 加拿大代购">
+<meta property="og:description" content="True North Finds · 加拿大代购：精选加拿大好货，代购直邮中国。">
+<meta property="og:url" content="https://truenorthfinds.com/">
+<meta property="og:image" content="https://truenorthfinds.com/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -157,6 +165,11 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 .empty-products-icon{font-size:3rem;margin-bottom:12px}
 @media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.detail-gallery{height:260px}.header-inner{padding:12px 16px;gap:8px}.logo{font-size:1.02rem}.admin-link span,.cart-btn span:not(.cart-count){display:none}.cart-btn,.admin-link{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
+.lang-switcher{display:flex;gap:2px;background:var(--card-2);border:1px solid var(--border);border-radius:20px;padding:3px;flex-shrink:0}
+.lang-btn{border:none;background:transparent;color:var(--text-light);padding:4px 10px;border-radius:14px;cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s}
+.lang-btn:hover{color:var(--text)}
+.lang-btn.active{background:var(--primary);color:#fff}
+@media(max-width:600px){.lang-btn{padding:4px 7px;font-size:.72rem}}
 </style>
 <base target="_blank">
 </head>
@@ -167,69 +180,70 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 <header>
   <div class="header-inner">
     <div class="logo"><span class="logo-icon">🍁</span><span>True North Finds</span></div>
-    <p class="header-tagline">专注加拿大代购 · 一站式代购·质检·打包·发货，全程透明可追踪</p>
+    <p class="header-tagline" data-i18n="tagline">专注加拿大代购 · 一站式代购·质检·打包·发货，全程透明可追踪</p>
     <div class="header-actions">
-      <a href="admin.html" class="admin-link">⚙️ <span>管理后台</span></a>
+      <div class="lang-switcher" id="langSwitcher"><button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button><button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button></div>
+      <a href="admin.html" class="admin-link">⚙️ <span data-i18n="admin">管理后台</span></a>
       <button class="cart-btn" id="accountBtn" onclick="openAccount()">👤 <span id="accountBtnText">登录</span></button>
-      <button class="cart-btn" onclick="toggleCart()">🛒 <span>购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
+      <button class="cart-btn" onclick="toggleCart()">🛒 <span data-i18n="cart">购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
     </div>
   </div>
 </header>
 
 <section class="section" id="products" style="padding-top:36px">
-  <div class="section-title"><h2>精选商品</h2><p>热门代购好货</p></div>
+  <div class="section-title"><h2 data-i18n="products_title">精选商品</h2><p data-i18n="products_sub">热门代购好货</p></div>
   <div class="browse-bar">
-    <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜索商品..." oninput="searchProducts(this.value)"></div>
+    <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜索商品..." data-i18n-ph="search_ph" oninput="searchProducts(this.value)"></div>
     <div class="product-filters" id="filters"></div>
   </div>
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <section class="section" id="process">
-  <div class="section-title"><h2>代购流程</h2><p>四步，从选到收</p></div>
+  <div class="section-title"><h2 data-i18n="process_title">代购流程</h2><p data-i18n="process_sub">四步，从选到收</p></div>
   <div class="process-grid">
-    <div class="process-card"><div class="process-num">01</div><div class="process-icon">🛍️</div><h3>选商品</h3><p>浏览网站或发送你心仪的加拿大/海外商品链接</p></div>
-    <div class="process-card"><div class="process-num">02</div><div class="process-icon">💳</div><h3>下单付款</h3><p>加入购物袋，用支付宝/微信扫码或国际卡付款</p></div>
-    <div class="process-card"><div class="process-num">03</div><div class="process-icon">📦</div><h3>代购采购</h3><p>于加拿大就地采购，质检后打包发货</p></div>
-    <div class="process-card"><div class="process-num">04</div><div class="process-icon">🚚</div><h3>收到好货</h3><p>通过追踪快递送达，全程可追踪</p></div>
+    <div class="process-card"><div class="process-num">01</div><div class="process-icon">🛍️</div><h3 data-i18n="step1_t">选商品</h3><p data-i18n="step1_d">浏览网站或发送你心仪的加拿大/海外商品链接</p></div>
+    <div class="process-card"><div class="process-num">02</div><div class="process-icon">💳</div><h3 data-i18n="step2_t">下单付款</h3><p data-i18n="step2_d">加入购物袋，用支付宝/微信扫码或国际卡付款</p></div>
+    <div class="process-card"><div class="process-num">03</div><div class="process-icon">📦</div><h3 data-i18n="step3_t">代购采购</h3><p data-i18n="step3_d">于加拿大就地采购，质检后打包发货</p></div>
+    <div class="process-card"><div class="process-num">04</div><div class="process-icon">🚚</div><h3 data-i18n="step4_t">收到好货</h3><p data-i18n="step4_d">通过追踪快递送达，全程可追踪</p></div>
   </div>
 </section>
 
 <section class="section payment-section">
-  <div class="section-title"><h2>支付方式</h2><p>多渠道收款，任选便利</p></div>
+  <div class="section-title"><h2 data-i18n="pay_title">支付方式</h2><p data-i18n="pay_sub">多渠道收款，任选便利</p></div>
   <div class="payment-grid">
-    <div class="payment-card"><div class="payment-icon">🔵</div><h3>支付宝</h3><p>扫码付款，即时到账</p></div>
-    <div class="payment-card"><div class="payment-icon">🟢</div><h3>微信支付</h3><p>微信扫码，便捷安全</p></div>
+    <div class="payment-card"><div class="payment-icon">🔵</div><h3 data-i18n="alipay">支付宝</h3><p data-i18n="alipay_d">扫码付款，即时到账</p></div>
+    <div class="payment-card"><div class="payment-icon">🟢</div><h3 data-i18n="wechat">微信支付</h3><p data-i18n="wechat_d">微信扫码，便捷安全</p></div>
   </div>
-  <p style="text-align:center;color:var(--text-light);margin-top:6px;font-size:.64rem">所有价格含代购费，以人民币（RMB）为单位显示</p>
-  <p style="text-align:center;color:var(--text-light);margin-top:2px;font-size:.62rem">积分规则：每消费¥1可获得10积分，积分每满10000分可在下单时抵扣¥10；会员等级根据累计消费自动升级，等级越高折扣越大</p>
+  <p data-i18n="price_note" style="text-align:center;color:var(--text-light);margin-top:6px;font-size:.64rem">所有价格含代购费，以人民币（RMB）为单位显示</p>
+  <p data-i18n="points_note" style="text-align:center;color:var(--text-light);margin-top:2px;font-size:.62rem">积分规则：每消费¥1可获得10积分，积分每满10000分可在下单时抵扣¥10；会员等级根据累计消费自动升级，等级越高折扣越大</p>
 </section>
 
 
 <section class="contact-section" id="contact">
-  <h2>联系我们</h2>
-  <p>有任何问题或想代购特定商品？随时联系我</p>
+  <h2 data-i18n="contact_title">联系我们</h2>
+  <p data-i18n="contact_sub">有任何问题或想代购特定商品？随时联系我</p>
 </section>
 
 <footer>
-  <p>🍁 True North Finds · 加拿大代购 · 海外好货直达</p>
-  <p style="margin-top:4px">本网站为静态展示页面，实际交易请通过微信/邮件联系确认</p>
+  <p data-i18n="footer1">🍁 True North Finds · 加拿大代购 · 海外好货直达</p>
+  <p data-i18n="footer2" style="margin-top:4px">本网站为静态展示页面，实际交易请通过微信/邮件联系确认</p>
 </footer>
 
 <div class="modal-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
   <div class="detail-modal">
-    <div class="detail-modal-header"><h3>商品详情</h3><button class="modal-close" onclick="closeDetail()">&times;</button></div>
+    <div class="detail-modal-header"><h3 data-i18n="detail_title">商品详情</h3><button class="modal-close" onclick="closeDetail()">&times;</button></div>
     <div class="detail-modal-body" id="detailBody"></div>
   </div>
 </div>
 
 <div class="cart-modal-overlay" id="cartModal" onclick="if(event.target===this)toggleCart()">
   <div class="cart-modal">
-    <div class="cart-modal-header"><h3>🛒 购物袋</h3><button class="modal-close" onclick="toggleCart()">&times;</button></div>
-    <div class="cart-modal-body" id="cartBody"><div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>购物袋是空的</p></div></div>
+    <div class="cart-modal-header"><h3 data-i18n="cart_title">🛒 购物袋</h3><button class="modal-close" onclick="toggleCart()">&times;</button></div>
+    <div class="cart-modal-body" id="cartBody"><div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p data-i18n="cart_empty">购物袋是空的</p></div></div>
     <div class="cart-modal-footer" id="cartFooter" style="display:none">
-      <div class="cart-total"><span>合计</span><span id="cartTotal">¥0</span></div>
-      <button class="checkout-btn" onclick="checkout()">去结算 →</button>
+      <div class="cart-total"><span data-i18n="total">合计</span><span id="cartTotal">¥0</span></div>
+      <button class="checkout-btn" data-i18n="checkout_btn" onclick="checkout()">去结算 →</button>
     </div>
   </div>
 </div>
@@ -242,40 +256,40 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
     <div class="cart-modal-header"><h3 id="authModalTitle">登录</h3><button class="modal-close" onclick="closeModal('authModal')">&times;</button></div>
     <div class="cart-modal-body">
       <div style="display:flex;gap:8px;margin-bottom:14px;background:var(--bg);border-radius:10px;padding:4px">
-        <button id="channelEmailBtn" onclick="switchAuthChannel('email')" style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--card-2);color:var(--text);font-family:inherit;font-size:.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)">邮箱</button>
-        <button id="channelPhoneBtn" onclick="switchAuthChannel('phone')" style="flex:1;padding:8px;border:none;border-radius:8px;background:transparent;font-family:inherit;font-size:.85rem;cursor:pointer;color:var(--text-light)">手机验证码</button>
+        <button id="channelEmailBtn" onclick="switchAuthChannel('email')" style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--card-2);color:var(--text);font-family:inherit;font-size:.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)" data-i18n="auth_email_tab">邮箱</button>
+        <button id="channelPhoneBtn" onclick="switchAuthChannel('phone')" style="flex:1;padding:8px;border:none;border-radius:8px;background:transparent;font-family:inherit;font-size:.85rem;cursor:pointer;color:var(--text-light)" data-i18n="auth_phone_tab">手机验证码</button>
       </div>
 
       <div id="authEmailBlock" style="display:flex;flex-direction:column;gap:12px">
         <div id="authExtraFields" style="display:none;flex-direction:column;gap:12px">
           <div style="display:flex;gap:10px">
-            <input type="text" id="authLastName" placeholder="姓" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
-            <input type="text" id="authFirstName" placeholder="名" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="authLastName" placeholder="姓" data-i18n-ph="auth_lastname_ph" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="authFirstName" placeholder="名" data-i18n-ph="auth_firstname_ph" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
           </div>
-          <input type="tel" id="authPhone" placeholder="手机号" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          <input type="tel" id="authPhone" placeholder="手机号" data-i18n-ph="auth_phone_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
         </div>
-        <input type="email" id="authEmail" placeholder="邮箱" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
-        <input type="password" id="authPassword" placeholder="密码（至少6位）" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <input type="email" id="authEmail" placeholder="邮箱" data-i18n-ph="auth_email_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <input type="password" id="authPassword" placeholder="密码（至少6位）" data-i18n-ph="auth_pw_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
         <div id="authError" style="color:var(--primary);font-size:.85rem;display:none"></div>
         <button class="btn btn-primary" id="authSubmitBtn" onclick="submitAuth()" style="width:100%">登录</button>
         <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
           <span id="authSwitchText">还没有账号？</span> <a href="index.html#" onclick="toggleAuthMode();return false" style="color:var(--primary)" id="authSwitchLink">立即注册</a>
         </p>
-        <p id="authForgotWrap" style="text-align:center;font-size:.85rem"><a href="index.html#" onclick="forgotPassword();return false" style="color:var(--text-light)">忘记密码？</a></p>
+        <p id="authForgotWrap" style="text-align:center;font-size:.85rem"><a href="index.html#" onclick="forgotPassword();return false" style="color:var(--text-light)" data-i18n="auth_forgot">忘记密码？</a></p>
       </div>
 
       <div id="authPhoneBlock" style="display:none;flex-direction:column;gap:12px">
         <div id="phoneExtraFields" style="display:none;flex-direction:column;gap:12px">
           <div style="display:flex;gap:10px">
-            <input type="text" id="phoneLastName" placeholder="姓" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
-            <input type="text" id="phoneFirstName" placeholder="名" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="phoneLastName" placeholder="姓" data-i18n-ph="auth_lastname_ph" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="phoneFirstName" placeholder="名" data-i18n-ph="auth_firstname_ph" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
           </div>
         </div>
         <div style="display:flex;gap:8px">
-          <input type="tel" id="phoneNum" placeholder="手机号" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          <input type="tel" id="phoneNum" placeholder="手机号" data-i18n-ph="auth_phone_ph" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
           <button id="sendOtpBtn" onclick="sendPhoneOtp()" style="flex:0 0 auto;padding:0 14px;border:1px solid var(--primary);color:var(--primary);background:transparent;border-radius:10px;font-family:inherit;font-size:.82rem;cursor:pointer;white-space:nowrap">发送验证码</button>
         </div>
-        <input type="text" id="phoneOtpCode" placeholder="6位验证码" maxlength="6" style="display:none;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <input type="text" id="phoneOtpCode" placeholder="6位验证码" data-i18n-ph="auth_otp_ph" maxlength="6" style="display:none;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
         <div id="phoneAuthError" style="color:var(--primary);font-size:.85rem;display:none"></div>
         <button class="btn btn-primary" id="verifyOtpBtn" onclick="verifyPhoneOtp()" style="width:100%;display:none">验证并登录</button>
         <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
@@ -290,7 +304,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 <!-- 账户中心 -->
 <div class="cart-modal-overlay" id="accountModal" onclick="if(event.target===this)closeModal('accountModal')">
   <div class="cart-modal" style="max-width:480px">
-    <div class="cart-modal-header"><h3>👤 我的账户</h3><button class="modal-close" onclick="closeModal('accountModal')">&times;</button></div>
+    <div class="cart-modal-header"><h3 data-i18n="my_account">👤 我的账户</h3><button class="modal-close" onclick="closeModal('accountModal')">&times;</button></div>
     <div class="cart-modal-body" id="accountBody"></div>
   </div>
 </div>
@@ -298,24 +312,24 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 <!-- 新增/编辑地址（含身份证上传）-->
 <div class="cart-modal-overlay" id="addressModal" onclick="if(event.target===this)closeModal('addressModal')">
   <div class="cart-modal" style="max-width:420px">
-    <div class="cart-modal-header"><h3>收货地址</h3><button class="modal-close" onclick="closeModal('addressModal')">&times;</button></div>
+    <div class="cart-modal-header"><h3 data-i18n="address_title">收货地址</h3><button class="modal-close" onclick="closeModal('addressModal')">&times;</button></div>
     <div class="cart-modal-body">
       <div style="display:flex;flex-direction:column;gap:12px">
-        <input type="text" id="addrName" placeholder="收件人姓名" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
-        <input type="tel" id="addrPhone" placeholder="联系电话" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
-        <textarea id="addrAddress" placeholder="详细收货地址" rows="3" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;resize:vertical"></textarea>
+        <input type="text" id="addrName" placeholder="收件人姓名" data-i18n-ph="addr_name_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <input type="tel" id="addrPhone" placeholder="联系电话" data-i18n-ph="addr_phone_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <textarea id="addrAddress" placeholder="详细收货地址" data-i18n-ph="addr_address_ph" rows="3" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;resize:vertical"></textarea>
         <div>
-          <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证正面照片</label>
+          <label data-i18n="id_front" style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证正面照片</label>
           <input type="file" id="addrIdFront" accept="image/*">
         </div>
         <div>
-          <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证反面照片</label>
+          <label data-i18n="id_back" style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">身份证反面照片</label>
           <input type="file" id="addrIdBack" accept="image/*">
         </div>
         <p id="addrIdNote" style="font-size:.78rem;color:var(--success);margin:0"></p>
-        <p style="font-size:.78rem;color:var(--text-light)">身份证照片仅用于国际物流清关/实名核验，加密存储，仅商家可见。</p>
+        <p data-i18n="id_note" style="font-size:.78rem;color:var(--text-light)">身份证照片仅用于国际物流清关/实名核验，加密存储，仅商家可见。</p>
         <div id="addrError" style="color:var(--primary);font-size:.85rem;display:none"></div>
-        <button class="btn btn-primary" id="addrSubmitBtn" onclick="submitAddress()" style="width:100%">保存地址</button>
+        <button class="btn btn-primary" id="addrSubmitBtn" onclick="submitAddress()" style="width:100%" data-i18n="save_address">保存地址</button>
       </div>
     </div>
   </div>
@@ -324,7 +338,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 <!-- 结算确认 -->
 <div class="cart-modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeModal('checkoutModal')">
   <div class="cart-modal" style="max-width:460px">
-    <div class="cart-modal-header"><h3>确认订单</h3><button class="modal-close" onclick="closeModal('checkoutModal')">&times;</button></div>
+    <div class="cart-modal-header"><h3 data-i18n="checkout_title">确认订单</h3><button class="modal-close" onclick="closeModal('checkoutModal')">&times;</button></div>
     <div class="cart-modal-body" id="checkoutBody"></div>
   </div>
 </div>
@@ -338,6 +352,395 @@ const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 const PAYMENT_QR={alipay:'alipay-qr.jpg',wechat:'wechat-qr.jpg'};
 </script>
 <script>
+// ===================== 多语言 i18n (zh / en / fr) =====================
+// 注意：法语为人工翻译初稿，尚未经过 Antidote 校对；校对后以修正版为准。
+const LANGS=['zh','en','fr'];
+let currentLang=localStorage.getItem('tnf_lang')||'zh';
+if(!LANGS.includes(currentLang))currentLang='zh';
+const I18N={
+zh:{
+page_title:"True North Finds · 加拿大代购",
+tagline:"专注加拿大代购 · 一站式代购·质检·打包·发货，全程透明可追踪",
+admin:"管理后台",cart:"购物袋",login:"登录",register:"注册",
+products_title:"精选商品",products_sub:"热门代购好货",
+search_ph:"搜索商品...",
+process_title:"代购流程",process_sub:"四步，从选到收",
+step1_t:"选商品",step1_d:"浏览网站或发送你心仪的加拿大/海外商品链接",
+step2_t:"下单付款",step2_d:"加入购物袋，用支付宝/微信扫码或国际卡付款",
+step3_t:"代购采购",step3_d:"于加拿大就地采购，质检后打包发货",
+step4_t:"收到好货",step4_d:"通过追踪快递送达，全程可追踪",
+pay_title:"支付方式",pay_sub:"多渠道收款，任选便利",
+alipay:"支付宝",alipay_d:"扫码付款，即时到账",
+wechat:"微信支付",wechat_d:"微信扫码，便捷安全",
+price_note:"所有价格含代购费，以人民币（RMB）为单位显示",
+points_note:"积分规则：每消费¥1可获得10积分，积分每满10000分可在下单时抵扣¥10；会员等级根据累计消费自动升级，等级越高折扣越大",
+contact_title:"联系我们",contact_sub:"有任何问题或想代购特定商品？随时联系我",
+footer1:"🍁 True North Finds · 加拿大代购 · 海外好货直达",
+footer2:"本网站为静态展示页面，实际交易请通过微信/邮件联系确认",
+detail_title:"商品详情",cart_title:"🛒 购物袋",cart_empty:"购物袋是空的",
+total:"合计",checkout_btn:"去结算 →",
+my_account:"我的账户",address_title:"收货地址",save_address:"保存地址",
+auth_email_tab:"邮箱",auth_phone_tab:"手机验证码",
+auth_lastname_ph:"姓",auth_firstname_ph:"名",auth_phone_ph:"手机号",
+auth_email_ph:"邮箱",auth_pw_ph:"密码（至少6位）",
+auth_forgot:"忘记密码？",auth_otp_ph:"6位验证码",
+addr_name_ph:"收件人姓名",addr_phone_ph:"联系电话",addr_address_ph:"详细收货地址",
+id_front:"身份证正面照片",id_back:"身份证反面照片",
+id_note:"身份证照片仅用于国际物流清关/实名核验，加密存储，仅商家可见。",
+checkout_title:"确认订单",
+cloud_online:"云端同步",cloud_offline:"本地模式",
+toast_added:"已加入购物袋！",
+toast_otp_sent:"验证码已发送，请查收短信",
+toast_register_check_email:"注册成功！请查收邮箱，点击确认链接后即可登录",
+toast_reset_sent:"密码重置邮件已发送，请查收邮箱",
+toast_send_failed:"发送失败：",
+toast_enter_email_first:"请先在邮箱框里输入你的邮箱",
+toast_add_addr_first:"请先添加收货地址",
+toast_logged_out:"已退出登录",
+toast_registered_login:"注册成功！请重新登录",
+toast_addr_saved:"地址已保存",
+toast_copied:"金额已复制：¥",
+toast_copy_failed:"复制失败，请手动输入 ¥",
+no_account:"还没有账号？",has_account:"已经有账号？",
+register_now:"立即注册",go_login:"去登录",
+send_otp:"发送验证码",resend_otp:"重新发送",resend_in:"{sec}秒后可重发",
+sending:"发送中...",verifying:"验证中...",
+verify_login:"验证并登录",verify_register:"验证并注册",
+processing:"处理中...",saving:"保存中...",submitting:"提交中...",
+err_enter_phone:"请输入手机号",err_enter_name:"请填写姓和名",
+err_enter_otp:"请输入验证码",err_bad_email:"请输入正确的邮箱",
+err_short_pw:"密码至少6位",err_addr_incomplete:"请填写完整的收件人信息",
+err_session_expired:"登录状态已过期，请重新登录后再试",
+err_phone_not_registered:"该手机号还未注册，请先切换到\"注册\"",
+err_rate_limit:"请求过于频繁，请稍后再试",
+err_otp_invalid:"验证码错误或已过期，请重新获取",
+err_phone_registered:"该手机号已注册，请直接登录",
+err_email_registered:"该邮箱已注册，请直接登录",
+err_bad_login:"邮箱或密码错误",
+err_email_unconfirmed:"请先点击邮箱里的确认链接完成验证",
+err_email_send:"邮件发送失败，可能是邮件服务临时故障，请稍后再试",
+err_network:"网络连接失败，请检查网络后重试",
+err_duplicate:"数据已存在，请勿重复提交",
+err_generic:"操作失败，请重试",
+loading:"加载中...",no_address:"还没有保存的地址",no_orders:"还没有买过东西",
+id_uploaded:"✓ 身份证已上传",id_missing:"⚠️ 未上传身份证",
+id_uploaded_note:"（已上传，如需更换请重新选择文件）",
+edit:"✏️ 编辑",my_orders:"已买到的宝贝",add_address:"+ 新增地址",logout:"退出登录",
+total_spent:"累计消费",points:"积分",points_unit:"积分",
+paid_amount:"实付",view_payment:"查看付款码",order_no:"订单号",
+order_submitted:"订单已提交",
+pay_amount_hint:"应付金额（扫码后请手动输入此金额）",
+copy:"📋 复制",scan_alipay:"🔵 支付宝扫码",scan_wechat:"🟢 微信扫码",
+pay_note:"付款时请备注订单号后6位「{tail}」，方便我们核对",
+contact_pay:"请通过微信或邮件联系我们确认付款方式，我们会尽快为您安排采购发货",
+done:"完成",
+my_points:"我的积分",
+points_redeem:"你有 <strong>{pts}</strong> 积分，可使用 <strong>10000</strong> 分抵扣 <strong>¥10</strong> 本次订单金额",
+goods_amount:"商品金额",member_discount:"会员折扣（{level} {pct}%）",
+points_discount:"积分抵扣",shipping:"运费",
+ship_free_health:"（保健品满2件包邮）",ship_health_one:"（保健品仅1件）",
+free_shipping:"免运费",submit_order:"提交订单",
+no_search_results:"没有找到相关商品",no_products:"暂无商品，请前往后台添加",
+incl_fee:"含代购费",add_to_cart:"加入购物袋",continue_browsing:"继续浏览",
+tier_hint:"已按优惠价计算",pieces:"件",
+welcome_register:"注册成功！欢迎",welcome_back:"欢迎回来",
+order_pending:"⏳ 订单已提交，等待付款确认",
+order_paid:"📦 您的付款已经收到，正在打包中...",
+order_shipped:"🚚 包裹已发出，物流跟踪号码：{tn}",
+order_shipped_no_tn:"🚚 包裹已发出，物流跟踪号码：（待补充）",
+order_completed:"✅ 包裹已投递",order_cancelled:"❌ 订单已取消"
+},
+en:{
+page_title:"True North Finds · Shop Canada",
+tagline:"Canada shopping service · one-stop sourcing, quality check, packing and shipping — fully transparent and trackable",
+admin:"Admin",cart:"Shopping Bag",login:"Log in",register:"Sign up",
+products_title:"Featured Products",products_sub:"Popular picks, sourced for you",
+search_ph:"Search products…",
+process_title:"How It Works",process_sub:"Four steps, from pick to delivery",
+step1_t:"Pick a product",step1_d:"Browse the site or send us a link to a Canadian or overseas product you like",
+step2_t:"Order & pay",step2_d:"Add to your bag and pay by Alipay/WeChat scan or international card",
+step3_t:"We shop for you",step3_d:"Purchased locally in Canada, quality-checked, then packed and shipped",
+step4_t:"Receive your goods",step4_d:"Delivered by tracked courier, trackable all the way",
+pay_title:"Payment Methods",pay_sub:"Several ways to pay — pick what suits you",
+alipay:"Alipay",alipay_d:"Scan to pay, instant receipt",
+wechat:"WeChat Pay",wechat_d:"Scan with WeChat — easy and secure",
+price_note:"All prices include the sourcing fee and are shown in RMB (¥)",
+points_note:"Points: earn 10 points per ¥1 spent; every 10,000 points can be redeemed for ¥10 off an order. Membership level upgrades automatically with total spend — the higher the level, the bigger the discount.",
+contact_title:"Contact Us",contact_sub:"Any questions, or want a specific product sourced? Get in touch anytime",
+footer1:"🍁 True North Finds · Shop Canada · Overseas finds delivered to you",
+footer2:"This is a static showcase page — please confirm actual orders via WeChat or email",
+detail_title:"Product Details",cart_title:"🛒 Shopping Bag",cart_empty:"Your bag is empty",
+total:"Total",checkout_btn:"Checkout →",
+my_account:"My Account",address_title:"Shipping Address",save_address:"Save Address",
+auth_email_tab:"Email",auth_phone_tab:"SMS Code",
+auth_lastname_ph:"Last name",auth_firstname_ph:"First name",auth_phone_ph:"Phone number",
+auth_email_ph:"Email",auth_pw_ph:"Password (min. 6 characters)",
+auth_forgot:"Forgot password?",auth_otp_ph:"6-digit code",
+addr_name_ph:"Recipient name",addr_phone_ph:"Contact phone",addr_address_ph:"Detailed address",
+id_front:"ID card — front photo",id_back:"ID card — back photo",
+id_note:"ID photos are used only for international shipping customs clearance and identity verification, stored encrypted and visible only to the seller.",
+checkout_title:"Confirm Order",
+cloud_online:"Cloud sync",cloud_offline:"Local mode",
+toast_added:"Added to your bag!",
+toast_otp_sent:"Verification code sent — please check your messages",
+toast_register_check_email:"Registered! Please check your email and click the confirmation link to log in",
+toast_reset_sent:"Password reset email sent — please check your inbox",
+toast_send_failed:"Send failed: ",
+toast_enter_email_first:"Please enter your email in the email field first",
+toast_add_addr_first:"Please add a shipping address first",
+toast_logged_out:"Logged out",
+toast_registered_login:"Registered! Please log in again",
+toast_addr_saved:"Address saved",
+toast_copied:"Amount copied: ¥",
+toast_copy_failed:"Copy failed — please enter ¥ manually",
+no_account:"No account yet?",has_account:"Already have an account?",
+register_now:"Sign up now",go_login:"Log in",
+send_otp:"Send code",resend_otp:"Resend",resend_in:"Resend in {sec}s",
+sending:"Sending…",verifying:"Verifying…",
+verify_login:"Verify & log in",verify_register:"Verify & sign up",
+processing:"Processing…",saving:"Saving…",submitting:"Submitting…",
+err_enter_phone:"Please enter your phone number",err_enter_name:"Please enter your last and first name",
+err_enter_otp:"Please enter the verification code",err_bad_email:"Please enter a valid email address",
+err_short_pw:"Password must be at least 6 characters",err_addr_incomplete:"Please complete the recipient information",
+err_session_expired:"Your session has expired — please log in again",
+err_phone_not_registered:"This phone number is not registered — please switch to \"Sign up\"",
+err_rate_limit:"Too many requests — please try again later",
+err_otp_invalid:"Code incorrect or expired — please request a new one",
+err_phone_registered:"This phone number is already registered — please log in",
+err_email_registered:"This email is already registered — please log in",
+err_bad_login:"Incorrect email or password",
+err_email_unconfirmed:"Please click the confirmation link in your email first",
+err_email_send:"Email send failed — the mail service may be temporarily down, please try again later",
+err_network:"Network error — please check your connection and try again",
+err_duplicate:"This already exists — please do not submit again",
+err_generic:"Operation failed — please try again",
+loading:"Loading…",no_address:"No saved address yet",no_orders:"No orders yet",
+id_uploaded:"✓ ID uploaded",id_missing:"⚠️ ID not uploaded",
+id_uploaded_note:"(Uploaded — select a new file to replace)",
+edit:"✏️ Edit",my_orders:"My Orders",add_address:"+ Add Address",logout:"Log out",
+total_spent:"Total spent",points:"Points",points_unit:"pts",
+paid_amount:"Paid",view_payment:"View payment code",order_no:"Order no.",
+order_submitted:"Order submitted",
+pay_amount_hint:"Amount due (please enter this amount manually after scanning)",
+copy:"📋 Copy",scan_alipay:"🔵 Scan with Alipay",scan_wechat:"🟢 Scan with WeChat",
+pay_note:"When paying, please add the last 6 digits of your order number \"{tail}\" in the note so we can match your payment",
+contact_pay:"Please contact us via WeChat or email to confirm the payment method — we will arrange sourcing and shipping for you as soon as possible",
+done:"Done",
+my_points:"My points",
+points_redeem:"You have <strong>{pts}</strong> points — you can redeem <strong>10,000</strong> points for <strong>¥10</strong> off this order",
+goods_amount:"Items total",member_discount:"Member discount ({level} {pct}%)",
+points_discount:"Points redeemed",shipping:"Shipping",
+ship_free_health:"(free shipping on 2+ health items)",ship_health_one:"(only 1 health item)",
+free_shipping:"Free shipping",submit_order:"Place Order",
+no_search_results:"No matching products found",no_products:"No products yet — please add some in the admin panel",
+incl_fee:"incl. sourcing fee",add_to_cart:"Add to Bag",continue_browsing:"Continue browsing",
+tier_hint:"Discounted price applied",pieces:"pcs",
+welcome_register:"Welcome — registration complete!",welcome_back:"Welcome back",
+order_pending:"⏳ Order submitted — awaiting payment confirmation",
+order_paid:"📦 Payment received — packing your order…",
+order_shipped:"🚚 Shipped — tracking number: {tn}",
+order_shipped_no_tn:"🚚 Shipped — tracking number: (to be added)",
+order_completed:"✅ Delivered",order_cancelled:"❌ Order cancelled"
+},
+fr:{
+page_title:"True North Finds · Achats au Canada",
+tagline:"Service d'achats au Canada · approvisionnement, contrôle qualité, emballage et expédition en un seul endroit — transparent et suivi de bout en bout",
+admin:"Admin",cart:"Panier",login:"Connexion",register:"S'inscrire",
+products_title:"Produits en vedette",products_sub:"Nos trouvailles les plus populaires",
+search_ph:"Rechercher un produit…",
+process_title:"Comment ça marche",process_sub:"Quatre étapes, du choix à la livraison",
+step1_t:"Choisir un produit",step1_d:"Parcourez le site ou envoyez-nous le lien d'un produit canadien ou étranger qui vous plaît",
+step2_t:"Commander et payer",step2_d:"Ajoutez au panier et payez par Alipay/WeChat ou par carte internationale",
+step3_t:"Nous achetons pour vous",step3_d:"Acheté localement au Canada, contrôlé, puis emballé et expédié",
+step4_t:"Recevoir vos achats",step4_d:"Livré par courrier suivi, avec suivi tout au long du trajet",
+pay_title:"Modes de paiement",pay_sub:"Plusieurs moyens de paiement, à votre convenance",
+alipay:"Alipay",alipay_d:"Payez par code QR, réception instantanée",
+wechat:"WeChat Pay",wechat_d:"Payez par code QR WeChat, simple et sécurisé",
+price_note:"Tous les prix incluent les frais d'achat et sont affichés en RMB (¥)",
+points_note:"Points : gagnez 10 points par 1 ¥ dépensé; tous les 10 000 points peuvent être échangés contre 10 ¥ de réduction sur une commande. Le niveau de membre augmente automatiquement avec vos achats — plus le niveau est élevé, plus la réduction est grande.",
+contact_title:"Contactez-nous",contact_sub:"Une question ou un produit précis à vous procurer? Contactez-moi à tout moment",
+footer1:"🍁 True North Finds · Achats au Canada · Vos trouvailles livrées chez vous",
+footer2:"Ce site est une vitrine statique — veuillez confirmer vos commandes par WeChat ou par courriel",
+detail_title:"Détails du produit",cart_title:"🛒 Panier",cart_empty:"Votre panier est vide",
+total:"Total",checkout_btn:"Passer à la caisse →",
+my_account:"Mon compte",address_title:"Adresse de livraison",save_address:"Enregistrer l'adresse",
+auth_email_tab:"Courriel",auth_phone_tab:"Code SMS",
+auth_lastname_ph:"Nom de famille",auth_firstname_ph:"Prénom",auth_phone_ph:"Numéro de téléphone",
+auth_email_ph:"Courriel",auth_pw_ph:"Mot de passe (min. 6 caractères)",
+auth_forgot:"Mot de passe oublié ?",auth_otp_ph:"Code à 6 chiffres",
+addr_name_ph:"Nom du destinataire",addr_phone_ph:"Téléphone",addr_address_ph:"Adresse complète",
+id_front:"Pièce d'identité — photo du recto",id_back:"Pièce d'identité — photo du verso",
+id_note:"Les photos de votre pièce d'identité servent uniquement au dédouanement et à la vérification d'identité pour la livraison internationale; elles sont stockées de façon chiffrée et visibles uniquement par le vendeur.",
+checkout_title:"Confirmer la commande",
+cloud_online:"Synchronisé",cloud_offline:"Mode local",
+toast_added:"Ajouté au panier !",
+toast_otp_sent:"Code de vérification envoyé — vérifiez vos messages",
+toast_register_check_email:"Inscription réussie ! Vérifiez votre courriel et cliquez sur le lien de confirmation pour vous connecter.",
+toast_reset_sent:"Courriel de réinitialisation envoyé — vérifiez votre boîte de réception",
+toast_send_failed:"Échec de l'envoi : ",
+toast_enter_email_first:"Veuillez d'abord saisir votre courriel dans le champ prévu",
+toast_add_addr_first:"Veuillez d'abord ajouter une adresse de livraison",
+toast_logged_out:"Vous êtes déconnecté(e)",
+toast_registered_login:"Inscription réussie ! Veuillez vous reconnecter.",
+toast_addr_saved:"Adresse enregistrée",
+toast_copied:"Montant copié : ",
+toast_copy_failed:"Copie impossible — veuillez saisir le montant manuellement : ",
+no_account:"Pas encore de compte ?",has_account:"Vous avez déjà un compte ?",
+register_now:"S'inscrire",go_login:"Se connecter",
+send_otp:"Envoyer le code",resend_otp:"Renvoyer",resend_in:"Renvoi possible dans {sec} s",
+sending:"Envoi en cours…",verifying:"Vérification en cours…",
+verify_login:"Vérifier et se connecter",verify_register:"Vérifier et s'inscrire",
+processing:"Traitement en cours…",saving:"Enregistrement en cours…",submitting:"Envoi en cours…",
+err_enter_phone:"Veuillez saisir votre numéro de téléphone",err_enter_name:"Veuillez saisir votre nom et votre prénom",
+err_enter_otp:"Veuillez saisir le code de vérification",err_bad_email:"Veuillez saisir une adresse courriel valide",
+err_short_pw:"Le mot de passe doit contenir au moins 6 caractères",err_addr_incomplete:"Veuillez remplir toutes les informations du destinataire",
+err_session_expired:"Votre session a expiré — veuillez vous reconnecter",
+err_phone_not_registered:"Ce numéro n'est pas inscrit — veuillez passer à « S'inscrire »",
+err_rate_limit:"Trop de demandes — veuillez réessayer plus tard",
+err_otp_invalid:"Code incorrect ou expiré — veuillez en demander un nouveau",
+err_phone_registered:"Ce numéro est déjà inscrit — veuillez vous connecter",
+err_email_registered:"Ce courriel est déjà inscrit — veuillez vous connecter",
+err_bad_login:"Courriel ou mot de passe incorrect",
+err_email_unconfirmed:"Veuillez d'abord cliquer sur le lien de confirmation dans votre courriel",
+err_email_send:"Échec de l'envoi du courriel — le service est peut-être temporairement indisponible, veuillez réessayer plus tard",
+err_network:"Erreur réseau — vérifiez votre connexion et réessayez",
+err_duplicate:"Ces données existent déjà — veuillez ne pas soumettre de nouveau",
+err_generic:"Échec de l'opération — veuillez réessayer",
+loading:"Chargement…",no_address:"Aucune adresse enregistrée",no_orders:"Aucune commande pour le moment",
+id_uploaded:"✓ Pièce d'identité téléversée",id_missing:"⚠️ Pièce d'identité non téléversée",
+id_uploaded_note:"(Déjà téléversée — sélectionnez un nouveau fichier pour la remplacer)",
+edit:"✏️ Modifier",my_orders:"Mes commandes",add_address:"+ Ajouter une adresse",logout:"Se déconnecter",
+total_spent:"Total dépensé",points:"Points",points_unit:"pts",
+paid_amount:"Payé",view_payment:"Voir le code de paiement",order_no:"Nº de commande",
+order_submitted:"Commande envoyée",
+pay_amount_hint:"Montant à payer (veuillez saisir ce montant manuellement après le scan)",
+copy:"📋 Copier",scan_alipay:"🔵 Scanner avec Alipay",scan_wechat:"🟢 Scanner avec WeChat",
+pay_note:"Lors du paiement, veuillez indiquer les 6 derniers chiffres de votre numéro de commande « {tail} » en remarque pour nous aider à rapprocher votre paiement",
+contact_pay:"Veuillez nous contacter par WeChat ou par courriel pour confirmer le mode de paiement — nous organiserons vos achats et l'expédition dès que possible",
+done:"Terminé",
+my_points:"Mes points",
+points_redeem:"Vous avez <strong>{pts}</strong> points — vous pouvez échanger <strong>10 000</strong> points contre <strong>10 ¥</strong> de réduction sur cette commande",
+goods_amount:"Total des articles",member_discount:"Réduction membre ({level} {pct} %)",
+points_discount:"Points échangés",shipping:"Livraison",
+ship_free_health:"(livraison gratuite dès 2 articles de santé)",ship_health_one:"(un seul article de santé)",
+free_shipping:"Livraison gratuite",submit_order:"Passer la commande",
+no_search_results:"Aucun produit correspondant",no_products:"Aucun produit pour le moment — veuillez en ajouter dans l'administration",
+incl_fee:"frais d'achat inclus",add_to_cart:"Ajouter au panier",continue_browsing:"Continuer mes achats",
+tier_hint:"Prix réduit appliqué",pieces:"art.",
+welcome_register:"Bienvenue — inscription terminée !",welcome_back:"Bon retour",
+order_pending:"⏳ Commande envoyée — en attente de confirmation du paiement",
+order_paid:"📦 Paiement reçu — préparation de votre commande…",
+order_shipped:"🚚 Colis expédié — numéro de suivi : {tn}",
+order_shipped_no_tn:"🚚 Colis expédié — numéro de suivi : (à venir)",
+order_completed:"✅ Colis livré",order_cancelled:"❌ Commande annulée"
+}
+};
+function t(key,vars){let s=(I18N[currentLang]&&I18N[currentLang][key])||I18N.zh[key]||key;if(vars){for(const k in vars)s=s.split('{'+k+'}').join(vars[k])}return s}
+const CAT_I18N={
+all:{zh:"全部",en:"All",fr:"Tout"},
+food:{zh:"食品",en:"Food",fr:"Alimentation"},
+fashion:{zh:"服饰",en:"Fashion",fr:"Mode"},
+beauty:{zh:"美妆",en:"Beauty",fr:"Beauté"},
+other:{zh:"其他",en:"Other",fr:"Autres"},
+health:{zh:"保健品",en:"Health & Wellness",fr:"Santé et bien-être"},
+"new-year":{zh:"元旦",en:"New Year's Day",fr:"Jour de l'An"},
+"family-day":{zh:"家庭日",en:"Family Day",fr:"Jour de la famille"},
+"valentines-day":{zh:"情人节",en:"Valentine's Day",fr:"Saint-Valentin"},
+easter:{zh:"复活节",en:"Easter",fr:"Pâques"},
+"victoria-day":{zh:"维多利亚日",en:"Victoria Day",fr:"Fête de la Reine"},
+"canada-day":{zh:"加拿大国庆日",en:"Canada Day",fr:"Fête du Canada"},
+"civic-holiday":{zh:"公民假日",en:"Civic Holiday",fr:"Congé civique"},
+"mothers-day":{zh:"母亲节",en:"Mother's Day",fr:"Fête des Mères"},
+"fathers-day":{zh:"父亲节",en:"Father's Day",fr:"Fête des Pères"},
+"labour-day":{zh:"劳动节",en:"Labour Day",fr:"Fête du Travail"},
+thanksgiving:{zh:"感恩节",en:"Thanksgiving",fr:"Action de grâce"},
+halloween:{zh:"万圣节",en:"Halloween",fr:"Halloween"},
+"remembrance-day":{zh:"国殇日",en:"Remembrance Day",fr:"Jour du Souvenir"},
+christmas:{zh:"圣诞节",en:"Christmas",fr:"Noël"},
+"boxing-day":{zh:"节礼日",en:"Boxing Day",fr:"Lendemain de Noël"}
+};
+const LEVEL_I18N={"普通会员":{en:"Regular Member",fr:"Membre régulier"}};
+// 商品翻译（按商品 id；中文名默认用数据库里的名字；缺失时回落到数据库名字/描述）
+const PRODUCT_I18N={
+"new-year-1":{name:{en:"ONEMOKA moka pot gift box — dual-valve coffee maker set, gift for coffee lovers",fr:"Coffret cadeau cafetière moka ONEMOKA — cafetière à double valve, cadeau pour amateurs de café"},desc:{zh:"ONEMOKA 摩卡壶礼盒，双阀设计，是咖啡爱好者的理想礼物。",en:"ONEMOKA moka pot gift box — dual-valve coffee maker set, gift for coffee lovers",fr:"Coffret cadeau cafetière moka ONEMOKA à double valve, le cadeau idéal pour les amateurs de café."}},
+"new-year-2":{name:{en:"2027 desk calendar — creative desktop planner/calendar notebook, retro minimalist style",fr:"Calendrier de bureau 2027 — agenda et calendrier créatif, style rétro et minimaliste"},desc:{zh:"2027 年桌面台历，创意记事日历本，复古简约风格，可作桌面摆件。",en:"2027 desk calendar — creative desktop planner/calendar notebook, retro minimalist style",fr:"Calendrier de bureau 2027, agenda créatif au style rétro et minimaliste, parfait comme objet décoratif."}},
+"new-year-3":{name:{en:"2027 New Year decoration — custom KT-board backdrop/standing display for New Year's Day events and shop decor",fr:"Décoration du Nouvel An 2027 — panneau KT personnalisé pour fêtes et boutiques"},desc:{zh:"2027 新年装饰，定制 KT 板背景墙与立牌，适合元旦活动与店铺布置。",en:"2027 New Year decoration — custom KT-board backdrop/standing display for New Year's Day events and shop decor",fr:"Décoration du Nouvel An 2027, panneau KT personnalisé pour les fêtes du Nouvel An et la décoration de boutiques."}},
+"new-year-4":{name:{en:"Charabanc fireplace aroma diffuser — retro fireplace-style home fragrance, New Year gift",fr:"Diffuseur d'arômes cheminée Charabanc — parfum d'ambiance rétro, cadeau du Nouvel An"},desc:{zh:"Charabanc 壁炉香薰机，复古壁炉造型家居香氛，新年送礼佳品。",en:"Charabanc fireplace aroma diffuser — retro fireplace-style home fragrance, New Year gift",fr:"Diffuseur d'arômes en forme de cheminée Charabanc, parfum d'ambiance rétro, cadeau idéal pour le Nouvel An."}},
+"new-year-5":{name:{en:"Forbidden City Jinshan tea set — full ceramic tea set with tray, for home/office and gifting",fr:"Service à thé Jinshan de la Cité interdite — service complet en céramique avec plateau, pour la maison, le bureau et les cadeaux"},desc:{zh:"故宫金山茶具套装，整套陶瓷茶具配茶盘，家用、办公、送礼皆宜。",en:"Forbidden City Jinshan tea set — full ceramic tea set with tray, for home/office and gifting",fr:"Service à thé Jinshan de la Cité interdite, service complet en céramique avec plateau, pour la maison, le bureau ou à offrir."}},
+"christmas-1":{name:{en:"Winter scarf gift box — 2026 Christmas gift for girlfriend/friend, elegant red scarf gift set",fr:"Coffret cadeau écharpe d'hiver — cadeau de Noël 2026 pour amie ou conjointe, élégant ensemble écharpe rouge"},desc:{zh:"冬季围巾礼盒，2026 圣诞节送女友、朋友的高级感礼物，优雅红色围巾套装。",en:"Winter scarf gift box — 2026 Christmas gift for girlfriend/friend, elegant red scarf gift set",fr:"Coffret cadeau écharpe d'hiver, cadeau de Noël 2026 pour une amie ou votre conjointe, élégant ensemble écharpe rouge."}},
+"christmas-2":{name:{en:"Santa Claus plush doll bag pendant / keychain — cute Christmas plush charm for bags",fr:"Pendentif en peluche père Noël pour sac / porte-clés — mignon charme en peluche de Noël"},desc:{zh:"圣诞老人毛绒玩偶包包挂件/钥匙扣，可爱的圣诞毛绒挂饰。",en:"Santa Claus plush doll bag pendant / keychain — cute Christmas plush charm for bags",fr:"Pendentif en peluche père Noël pour sac ou porte-clés, mignon charme en peluche pour Noël."}},
+"christmas-3":{name:{en:"Christmas brooch — cute cartoon Santa metal pin badge, clothing accessory and gift",fr:"Broche de Noël — joli badge métallique père Noël, accessoire vestimentaire et cadeau"},desc:{zh:"圣诞节胸针，可爱卡通圣诞老人金属徽章，衣服配饰与礼物皆宜。",en:"Christmas brooch — cute cartoon Santa metal pin badge, clothing accessory and gift",fr:"Broche de Noël, joli badge métallique père Noël, accessoire vestimentaire et cadeau."}},
+"christmas-4":{name:{en:"Christmas LED string lights — festive Christmas-tree atmosphere fairy lights for bedroom/room decor",fr:"Guirlande lumineuse LED de Noël — guirlande féerique pour une ambiance de Noël dans la chambre"},desc:{zh:"圣诞 LED 彩灯串，营造圣诞树氛围的装饰灯串，适合卧室与房间布置。",en:"Christmas LED string lights — festive Christmas-tree atmosphere fairy lights for bedroom/room decor",fr:"Guirlande lumineuse LED de Noël, guirlande féerique pour créer une ambiance de Noël dans la chambre."}},
+"christmas-5":{name:{en:"Christmas tree — 2026 new home DIY set, dense premium-style Christmas tree with lights for living-room decor",fr:"Sapin de Noël — ensemble DIY 2026, sapin dense et élégant avec lumières pour le salon"},desc:{zh:"圣诞树，2026 新款家用 DIY 套装，加密高级感圣诞树带灯，客厅装饰摆件。",en:"Christmas tree — 2026 new home DIY set, dense premium-style Christmas tree with lights for living-room decor",fr:"Sapin de Noël, ensemble DIY 2026, sapin dense et élégant avec lumières, décoration pour le salon."}},
+"boxing-day-1":{name:{en:"Embroidered scarf gift box with touchscreen gloves — warm winter gift for girlfriend/friend",fr:"Coffret cadeau écharpe brodée avec gants tactiles — cadeau d'hiver chaleureux pour amie ou conjointe"},desc:{zh:"刺绣围巾礼盒配触屏手套，冬季保暖礼物，送女友、闺蜜皆宜。",en:"Embroidered scarf gift box with touchscreen gloves — warm winter gift for girlfriend/friend",fr:"Coffret cadeau écharpe brodée avec gants tactiles, cadeau d'hiver chaleureux pour une amie ou votre conjointe."}},
+"boxing-day-2":{name:{en:"Flameless aroma diffuser gift box with scented stones — long-lasting home fragrance for bedroom",fr:"Coffret cadeau diffuseur sans flamme avec pierres parfumées — parfum d'ambiance durable pour la chambre"},desc:{zh:"无火香薰礼盒配扩香晶石，持久家居香氛，适合卧室。",en:"Flameless aroma diffuser gift box with scented stones — long-lasting home fragrance for bedroom",fr:"Coffret cadeau diffuseur sans flamme avec pierres parfumées, parfum d'ambiance durable pour la chambre."}},
+"boxing-day-3":{name:{en:"Vanow insulated thermos cup with ceramic inner liner, tea-separating design — gift-box packaged",fr:"Tasse isotherme Vanow avec doublure en céramique et infuseur à thé — emballage cadeau"},desc:{zh:"Vanow 保温杯，陶瓷内胆，茶水分离设计，礼盒包装。",en:"Vanow insulated thermos cup with ceramic inner liner, tea-separating design — gift-box packaged",fr:"Tasse isotherme Vanow avec doublure en céramique et infuseur à thé séparé, emballage cadeau."}},
+"boxing-day-4":{name:{en:"Disney Lotso (Strawberry Bear) rechargeable hand warmer — officially licensed cute winter gift",fr:"Chauffe-mains rechargeable Lotso (Ours Fraise) Disney — cadeau d'hiver mignon, licence officielle"},desc:{zh:"迪士尼草莓熊暖手宝，充电式，正版授权，可爱的冬季礼物。",en:"Disney Lotso (Strawberry Bear) rechargeable hand warmer — officially licensed cute winter gift",fr:"Chauffe-mains rechargeable Lotso (Ours Fraise) Disney, cadeau d'hiver mignon sous licence officielle."}},
+"boxing-day-5":{name:{en:"Heated wearable shawl blanket — portable knitted lap blanket for office/nap, warm gift",fr:"Couverture-châle chauffante à porter — couverture tricotée portable pour le bureau ou la sieste, cadeau chaleureux"},desc:{zh:"发热披肩毛毯，可穿戴针织毛毯，便携办公室午睡毯，温暖礼物。",en:"Heated wearable shawl blanket — portable knitted lap blanket for office/nap, warm gift",fr:"Couverture-châle chauffante à porter, couverture tricotée portable pour le bureau ou la sieste, cadeau chaleureux."}},
+"p1":{name:{en:"Maple Brownie",fr:"Brownie à l'érable"},desc:{zh:"加拿大原产枫糖制作，浓郁香甜，独立包装，适合送礼或自享。每盒12块，保质期6个月。",en:"Made with pure Canadian maple syrup — rich and sweet, individually wrapped. Perfect as a gift or for yourself. 12 pieces per box, 6-month shelf life.",fr:"Préparé avec du sirop d'érable pur du Canada — riche et sucré, emballé individuellement. Parfait à offrir ou à savourer. 12 morceaux par boîte, conservation de 6 mois."}},
+"p2":{name:{en:"Canada Goose Expedition Parka",fr:"Parka Expedition Canada Goose"},desc:{zh:"经典 Expedition 系列，625蓬松度白鸭绒，可抵御-30°C严寒。加拿大专柜直采，含防伪标签。",en:"Classic Expedition series with 625 fill-power white duck down, rated to -30°C. Sourced directly from a Canadian boutique, with authenticity tag.",fr:"Série classique Expedition, duvet de canard blanc 625, résiste jusqu'à -30 °C. Acheté directement en boutique au Canada, avec étiquette d'authenticité."}},
+"p3":{name:{en:"UGG Classic Snow Boots",fr:"Bottes de neige classiques UGG"},desc:{zh:"澳洲美利奴羊毛内里，防滑橡胶大底。加拿大专柜采购，多色可选，尺码齐全。",en:"Australian Merino wool lining with a non-slip rubber sole. Sourced from a Canadian boutique; multiple colours and full size range available.",fr:"Doublure en laine mérinos d'Australie et semelle antidérapante en caoutchouc. Acheté en boutique au Canada; plusieurs couleurs et toutes les tailles disponibles."}},
+"p4":{name:{en:"Canadian Craft Beer Combo (6 bottles)",fr:"Coffret de bières artisanales canadiennes (6 bouteilles)"},desc:{zh:"6瓶装精选本地精酿啤酒，包含 IPA、Stout、Pale Ale 各2瓶。冰袋保温发货。",en:"Six bottles of selected local craft beer — 2 each of IPA, Stout and Pale Ale. Shipped with ice packs.",fr:"Six bouteilles de bières artisanales locales — 2 IPA, 2 Stouts et 2 Pale Ales. Expédié avec des blocs réfrigérants."}},
+"p5":{name:{en:"The Ordinary Serum Set",fr:"Coffret de sérums The Ordinary"},desc:{zh:"加拿大本土护肤品牌，成分党最爱。含烟酰胺、透明质酸、维C精华各一瓶。",en:"Beloved Canadian skincare brand, a favourite with ingredient-conscious buyers. Includes one bottle each of niacinamide, hyaluronic acid and vitamin C serum.",fr:"Marque canadienne de soins très appréciée des amateurs d'ingrédients. Comprend un flacon de niacinamide, un d'acide hyaluronique et un de sérum à la vitamine C."}},
+"p6":{name:{en:"Maple Syrup Gift Box 250ml × 3",fr:"Coffret cadeau sirop d'érable 250 ml × 3"},desc:{zh:"100%纯枫糖浆，加拿大魁北克特产。A级琥珀色，口感醇厚，礼盒包装。",en:"100% pure maple syrup, a Québec specialty. Grade A amber, rich taste, gift-box packaged.",fr:"Sirop d'érable 100 % pur, spécialité du Québec. Ambré de catégorie A, goût riche, emballage cadeau."}}
+};
+function langLocale(){return currentLang==='zh'?'zh-CN':currentLang==='en'?'en-CA':'fr-CA'}
+// 去掉商品描述里的 "Source: ..." 行与拼多多链接（来源仅后台可见，顾客看不到）
+function stripSource(desc){
+  if(!desc)return'';
+  let s=String(desc);
+  s=s.replace(/source\s*:\s*https?:\/\/\S+/gi,'');
+  s=s.replace(/https?:\/\/\S*pinduoduo\.com\S*/gi,'');
+  s=s.split(/\r?\n/).map(l=>l.trim()).filter(l=>l&&!/^source\s*:?$/i.test(l)).join('\n');
+  return s.trim();
+}
+function getProductName(p){
+  const tr=PRODUCT_I18N[p.id];
+  if(tr&&tr.name&&tr.name[currentLang])return tr.name[currentLang];
+  return p.name;
+}
+function getProductDesc(p){
+  const tr=PRODUCT_I18N[p.id];
+  if(tr&&tr.desc&&tr.desc[currentLang])return stripSource(tr.desc[currentLang]);
+  return stripSource(p.desc);
+}
+function getLevelName(name){
+  const tr=LEVEL_I18N[name];
+  if(tr&&tr[currentLang])return tr[currentLang];
+  return name;
+}
+function applyStaticI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh)});
+}
+function applyAuthModalText(){
+  document.getElementById('authModalTitle').textContent=t(authMode==='login'?'login':'register');
+  document.getElementById('authSubmitBtn').textContent=t(authMode==='login'?'login':'register');
+  document.getElementById('authSwitchText').textContent=t(authMode==='login'?'no_account':'has_account');
+  document.getElementById('authSwitchLink').textContent=t(authMode==='login'?'register_now':'go_login');
+  document.getElementById('phoneSwitchText').textContent=t(authMode==='login'?'no_account':'has_account');
+  document.getElementById('phoneSwitchLink').textContent=t(authMode==='login'?'register_now':'go_login');
+  document.getElementById('verifyOtpBtn').textContent=t(authMode==='login'?'verify_login':'verify_register');
+  if(!otpSent)document.getElementById('sendOtpBtn').textContent=t('send_otp');
+}
+function setLang(lang){
+  if(!LANGS.includes(lang))return;
+  currentLang=lang;
+  localStorage.setItem('tnf_lang',lang);
+  document.documentElement.lang=lang==='zh'?'zh-CN':lang;
+  document.title=t('page_title');
+  document.querySelectorAll('#langSwitcher .lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  applyStaticI18n();
+  applyAuthModalText();
+  updateAccountBtn();
+  renderFilters();renderProducts();updateCartUI();
+  if(currentDetailProduct)openDetail(currentDetailProduct.id);
+  const co=document.getElementById('checkoutModal');
+  if(co&&co.classList.contains('active')&&checkoutAddresses.length)drawCheckout();
+  const am=document.getElementById('accountModal');
+  if(am&&am.classList.contains('active')&&currentCustomer)renderAccountBody();
+}
+
 // 图片地址解析：商品图可能是完整 URL（Unsplash 等），也可能是站内相对路径，两种都原样使用。
 // 注意：不要再给图片地址拼 vercel.app 前缀——完整 URL 一旦被加前缀就会变成双重地址而破图（2026-11-12 修）。
 function resolveImg(u){if(!u)return '';return String(u).trim();}
@@ -405,8 +808,8 @@ function updateCloudStatus(online){
   const badge=document.getElementById('cloudStatus');
   if(!badge)return;
   badge.style.display='flex';
-  if(online){badge.className='cloud-status online';document.getElementById('cloudStatusDot').textContent='🟢';document.getElementById('cloudStatusText').textContent='云端同步'}
-  else{badge.className='cloud-status offline';document.getElementById('cloudStatusDot').textContent='🟡';document.getElementById('cloudStatusText').textContent='本地模式'}
+  if(online){badge.className='cloud-status online';document.getElementById('cloudStatusDot').textContent='🟢';document.getElementById('cloudStatusText').textContent=t('cloud_online')}
+  else{badge.className='cloud-status offline';document.getElementById('cloudStatusDot').textContent='🟡';document.getElementById('cloudStatusText').textContent=t('cloud_offline')}
 }
 
 function getProducts(){return siteData.products}
@@ -416,7 +819,7 @@ function renderAll(){renderFilters();renderProducts();updateCartUI()}
 
 let cart={};
 function addToCart(id,btn){
-  cart[id]=(cart[id]||0)+1;updateCartUI();showToast('已加入购物袋！');
+  cart[id]=(cart[id]||0)+1;updateCartUI();showToast(t('toast_added'));
   if(btn){btn.textContent='✓';btn.classList.add('added');setTimeout(()=>{btn.textContent='+';btn.classList.remove('added')},1200)}
 }
 function removeFromCart(id){delete cart[id];updateCartUI()}
@@ -428,16 +831,16 @@ function updateCartUI(){
   const body=document.getElementById('cartBody');
   const footer=document.getElementById('cartFooter');
   const products=getProducts();
-  if(count===0){body.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>购物袋是空的</p></div>';footer.style.display='none';return}
+  if(count===0){body.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>'+t('cart_empty')+'</p></div>';footer.style.display='none';return}
   let total=0;
   body.innerHTML=Object.entries(cart).map(([id,qty])=>{
     const p=products.find(x=>x.id===id);if(!p)return'';
     const lineTotal=computeLineTotal(p,qty);
     total+=lineTotal;
     const tiers=tiersByProduct[p.id];
-    const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">已按优惠价计算</div>`:'';
+    const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">${t('tier_hint')}</div>`:'';
     const img=p.images&&p.images[0]?`<img src="${resolveImg(p.images[0])}" alt="">`:'📦';
-    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${p.name}</h4><div class="price">¥${lineTotal}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty}件)</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
+    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${getProductName(p)}</h4><div class="price">¥${lineTotal}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty} ${t('pieces')})</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
   }).join('');
   document.getElementById('cartTotal').textContent='¥'+total;footer.style.display='block'
 }
@@ -460,17 +863,11 @@ function switchAuthChannel(channel){
 }
 function toggleAuthMode(){
   authMode=authMode==='login'?'register':'login';
-  document.getElementById('authModalTitle').textContent=authMode==='login'?'登录':'注册';
-  document.getElementById('authSubmitBtn').textContent=authMode==='login'?'登录':'注册';
-  document.getElementById('authSwitchText').textContent=authMode==='login'?'还没有账号？':'已经有账号？';
-  document.getElementById('authSwitchLink').textContent=authMode==='login'?'立即注册':'去登录';
+  applyAuthModalText();
   document.getElementById('authExtraFields').style.display=authMode==='register'?'flex':'none';
   document.getElementById('authForgotWrap').style.display=authMode==='login'?'block':'none';
   document.getElementById('authError').style.display='none';
   document.getElementById('phoneExtraFields').style.display=authMode==='register'?'flex':'none';
-  document.getElementById('phoneSwitchText').textContent=authMode==='login'?'还没有账号？':'已经有账号？';
-  document.getElementById('phoneSwitchLink').textContent=authMode==='login'?'立即注册':'去登录';
-  document.getElementById('verifyOtpBtn').textContent=authMode==='login'?'验证并登录':'验证并注册';
   resetOtpState();
 }
 function resetOtpState(){
@@ -479,7 +876,7 @@ function resetOtpState(){
   document.getElementById('phoneOtpCode').value='';
   document.getElementById('verifyOtpBtn').style.display='none';
   document.getElementById('sendOtpBtn').disabled=false;
-  document.getElementById('sendOtpBtn').textContent='发送验证码';
+  document.getElementById('sendOtpBtn').textContent=t('send_otp');
   document.getElementById('phoneAuthError').style.display='none';
 }
 function normalizePhone(raw){
@@ -491,14 +888,14 @@ function normalizePhone(raw){
 async function sendPhoneOtp(){
   const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
   const phoneRaw=document.getElementById('phoneNum').value.trim();
-  if(!phoneRaw){errEl.textContent='请输入手机号';errEl.style.display='block';return}
+  if(!phoneRaw){errEl.textContent=t('err_enter_phone');errEl.style.display='block';return}
   if(authMode==='register'){
     const ln=document.getElementById('phoneLastName').value.trim();
     const fn=document.getElementById('phoneFirstName').value.trim();
-    if(!ln||!fn){errEl.textContent='请填写姓和名';errEl.style.display='block';return}
+    if(!ln||!fn){errEl.textContent=t('err_enter_name');errEl.style.display='block';return}
   }
   const phone=normalizePhone(phoneRaw);
-  const btn=document.getElementById('sendOtpBtn');btn.disabled=true;btn.textContent='发送中...';
+  const btn=document.getElementById('sendOtpBtn');btn.disabled=true;btn.textContent=t('sending');
   try{
     const options={shouldCreateUser:authMode==='register'};
     if(authMode==='register'){
@@ -509,11 +906,11 @@ async function sendPhoneOtp(){
     otpSent=true;
     document.getElementById('phoneOtpCode').style.display='block';
     document.getElementById('verifyOtpBtn').style.display='block';
-    showToast('验证码已发送，请查收短信');
+    showToast(t('toast_otp_sent'));
     startOtpCountdown();
   }catch(e){
     errEl.textContent=translateError(e);errEl.style.display='block';
-    btn.disabled=false;btn.textContent='发送验证码';
+    btn.disabled=false;btn.textContent=t('send_otp');
   }
 }
 function startOtpCountdown(){
@@ -521,16 +918,16 @@ function startOtpCountdown(){
   btn.disabled=true;
   const timer=setInterval(()=>{
     sec--;
-    if(sec<=0){clearInterval(timer);btn.disabled=false;btn.textContent='重新发送'}
-    else{btn.textContent=`${sec}秒后可重发`}
+    if(sec<=0){clearInterval(timer);btn.disabled=false;btn.textContent=t('resend_otp')}
+    else{btn.textContent=t('resend_in',{sec})}
   },1000);
 }
 async function verifyPhoneOtp(){
   const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
   const phone=normalizePhone(document.getElementById('phoneNum').value.trim());
   const code=document.getElementById('phoneOtpCode').value.trim();
-  if(!code){errEl.textContent='请输入验证码';errEl.style.display='block';return}
-  const btn=document.getElementById('verifyOtpBtn');btn.disabled=true;btn.textContent='验证中...';
+  if(!code){errEl.textContent=t('err_enter_otp');errEl.style.display='block';return}
+  const btn=document.getElementById('verifyOtpBtn');btn.disabled=true;btn.textContent=t('verifying');
   try{
     const{error}=await sb.auth.verifyOtp({phone,token:code,type:'sms'});
     if(error)throw error;
@@ -539,27 +936,27 @@ async function verifyPhoneOtp(){
     document.getElementById('phoneLastName').value='';document.getElementById('phoneFirstName').value='';
     resetOtpState();
     await initAuthState();
-    showToast(authMode==='register'?getWelcomeMessage('注册成功！欢迎'):getWelcomeMessage('欢迎回来'),4000);
+    showToast(getWelcomeMessage(authMode==='register'?'register':'welcome_back'),4000);
   }catch(e){
     errEl.textContent=translateError(e);errEl.style.display='block';
   }
-  btn.disabled=false;btn.textContent=authMode==='login'?'验证并登录':'验证并注册';
+  btn.disabled=false;btn.textContent=t(authMode==='login'?'verify_login':'verify_register');
 }
 function openAuth(){authMode='login';switchAuthChannel('email');toggleAuthMode();toggleAuthMode();openModal('authModal')}
 async function submitAuth(){
   const email=document.getElementById('authEmail').value.trim();
   const password=document.getElementById('authPassword').value;
   const errEl=document.getElementById('authError');errEl.style.display='none';
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){errEl.textContent='请输入正确的邮箱';errEl.style.display='block';return}
-  if(password.length<6){errEl.textContent='密码至少6位';errEl.style.display='block';return}
-  const btn=document.getElementById('authSubmitBtn');const originalBtnText=btn.textContent;btn.disabled=true;btn.textContent='处理中...';
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){errEl.textContent=t('err_bad_email');errEl.style.display='block';return}
+  if(password.length<6){errEl.textContent=t('err_short_pw');errEl.style.display='block';return}
+  const btn=document.getElementById('authSubmitBtn');const originalBtnText=btn.textContent;btn.disabled=true;btn.textContent=t('processing');
   try{
     if(authMode==='register'){
       const lastName=document.getElementById('authLastName').value.trim();
       const firstName=document.getElementById('authFirstName').value.trim();
       const phone=document.getElementById('authPhone').value.trim();
-      if(!lastName||!firstName){errEl.textContent='请填写姓和名';errEl.style.display='block';return}
-      if(!phone){errEl.textContent='请填写手机号';errEl.style.display='block';return}
+      if(!lastName||!firstName){errEl.textContent=t('err_enter_name');errEl.style.display='block';return}
+      if(!phone){errEl.textContent=t('err_enter_phone');errEl.style.display='block';return}
       // 姓名/手机号先存进账号的 metadata，等真正登录（session建立）后再落到 customers 表，避免邮箱未验证时因权限问题静默失败
       const{data,error}=await sb.auth.signUp({email,password,options:{data:{first_name:firstName,last_name:lastName,phone}}});
       if(error)throw error;
@@ -567,9 +964,9 @@ async function submitAuth(){
       clearAuthForm();
       if(data.session){
         await initAuthState();
-        showToast(getWelcomeMessage('注册成功！欢迎'),4000);
+        showToast(getWelcomeMessage('register'),4000);
       }else{
-        showToast('注册成功！请查收邮箱，点击确认链接后即可登录',5000);
+        showToast(t('toast_register_check_email'),5000);
       }
     }else{
       const{error}=await sb.auth.signInWithPassword({email,password});
@@ -577,7 +974,7 @@ async function submitAuth(){
       closeModal('authModal');
       clearAuthForm();
       await initAuthState();
-      showToast(getWelcomeMessage('欢迎回来'),4000);
+      showToast(getWelcomeMessage('welcome_back'),4000);
     }
   }catch(e){
     errEl.textContent=translateError(e);
@@ -591,14 +988,14 @@ function clearAuthForm(){
 }
 async function forgotPassword(){
   const email=document.getElementById('authEmail').value.trim();
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showToast('请先在邮箱框里输入你的邮箱');return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showToast(t('toast_enter_email_first'));return}
   try{
     const{error}=await sb.auth.resetPasswordForEmail(email);
     if(error)throw error;
-    showToast('密码重置邮件已发送，请查收邮箱');
-  }catch(e){showToast('发送失败：'+translateError(e))}
+    showToast(t('toast_reset_sent'));
+  }catch(e){showToast(t('toast_send_failed')+translateError(e))}
 }
-async function logout(){await sb.auth.signOut();currentCustomer=null;currentLevel=null;updateAccountBtn();closeModal('accountModal');showToast('已退出登录')}
+async function logout(){await sb.auth.signOut();currentCustomer=null;currentLevel=null;updateAccountBtn();closeModal('accountModal');showToast(t('toast_logged_out'))}
 async function initAuthState(){
   const{data:{session}}=await sb.auth.getSession();
   if(session){
@@ -624,15 +1021,16 @@ function getDisplayName(){
   if(name)return name;
   if(currentCustomer.email)return currentCustomer.email.split('@')[0];
   if(currentCustomer.phone)return currentCustomer.phone.slice(-4);
-  return'我的账户';
+  return t('my_account');
 }
-function getWelcomeMessage(prefix){
-  const lvl=currentLevel?currentLevel.name:'普通会员';
+function getWelcomeMessage(kind){
+  const prefix=t(kind==='register'?'welcome_register':'welcome_back');
+  const lvl=currentLevel?getLevelName(currentLevel.name):getLevelName('普通会员');
   const pts=currentCustomer?(currentCustomer.points||0):0;
-  return`${prefix}，${getDisplayName()}！${lvl} · ${pts}积分`;
+  return`${prefix}，${getDisplayName()}！${lvl} · ${pts}${t('points_unit')}`;
 }
 function updateAccountBtn(){
-  document.getElementById('accountBtnText').textContent=currentCustomer?('👋 '+getDisplayName()):'登录'
+  document.getElementById('accountBtnText').textContent=currentCustomer?('👋 '+getDisplayName()):t('login')
 }
 function openAccount(){
   if(!currentCustomer){openAuth();return}
@@ -640,7 +1038,7 @@ function openAccount(){
 }
 async function renderAccountBody(){
   const body=document.getElementById('accountBody');
-  body.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px">加载中...</p>';
+  body.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px">'+t('loading')+'</p>';
   const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
   const{data:orders}=await sb.from('orders').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
   accountAddressesCache=addresses||[];
@@ -650,11 +1048,11 @@ async function renderAccountBody(){
         <div>
           <div style="font-weight:600;font-size:.9rem">${a.receiver_name} ${a.phone}</div>
           <div style="font-size:.85rem;color:var(--text-light);margin-top:4px">${a.address}</div>
-          <div style="font-size:.75rem;color:var(--success);margin-top:4px">${a.id_card_front_path&&a.id_card_back_path?'✓ 身份证已上传':'⚠️ 未上传身份证'}</div>
+          <div style="font-size:.75rem;color:var(--success);margin-top:4px">${a.id_card_front_path&&a.id_card_back_path?t('id_uploaded'):t('id_missing')}</div>
         </div>
-        <button onclick="editAddressById('${a.id}')" style="border:none;background:none;color:var(--primary);font-size:.8rem;cursor:pointer;white-space:nowrap">✏️ 编辑</button>
+        <button onclick="editAddressById('${a.id}')" style="border:none;background:none;color:var(--primary);font-size:.8rem;cursor:pointer;white-space:nowrap">${t('edit')}</button>
       </div>
-    </div>`).join(''):'<p style="color:var(--text-light);font-size:.9rem">还没有保存的地址</p>';
+    </div>`).join(''):'<p style="color:var(--text-light);font-size:.9rem">'+t('no_address')+'</p>';
   const productsForLookup=getProducts();
   const ordersHtml=(orders&&orders.length)?orders.map(o=>{
     const itemsHtml=(o.items||[]).map(it=>{
@@ -669,44 +1067,44 @@ async function renderAccountBody(){
     return`
     <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
       <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px;border-bottom:1px solid var(--border)">
-        <span style="font-size:.78rem;color:var(--text-light)">${new Date(o.created_at).toLocaleDateString('zh-CN')} · 订单号${o.id.slice(0,8)}</span>
+        <span style="font-size:.78rem;color:var(--text-light)">${new Date(o.created_at).toLocaleDateString(langLocale())} · ${t('order_no')} ${o.id.slice(0,8)}</span>
         <span style="font-size:.8rem">${orderStatusLabel(o)}</span>
       </div>
       ${itemsHtml}
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <span style="font-size:.8rem;color:var(--text-light)">实付</span>
+        <span style="font-size:.8rem;color:var(--text-light)">${t('paid_amount')}</span>
         <span style="font-weight:700;color:var(--primary)">¥${o.final_amount}</span>
       </div>
-      ${o.status==='pending'?`<button class="btn btn-outline" style="width:100%;margin-top:8px;padding:8px" onclick="closeModal('accountModal');reopenPayment('${o.id}',${o.final_amount})">查看付款码</button>`:''}
+      ${o.status==='pending'?`<button class="btn btn-outline" style="width:100%;margin-top:8px;padding:8px" onclick="closeModal('accountModal');reopenPayment('${o.id}',${o.final_amount})">${t('view_payment')}</button>`:''}
     </div>`;
-  }).join(''):'<p style="color:var(--text-light);font-size:.9rem">还没有买过东西</p>';
+  }).join(''):'<p style="color:var(--text-light);font-size:.9rem">'+t('no_orders')+'</p>';
   body.innerHTML=`
     <div style="background:var(--bg);border-radius:14px;padding:16px;margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
-          <div style="font-weight:700;font-size:1.05rem">${currentLevel?currentLevel.name:'普通会员'}</div>
-          <div style="font-size:.8rem;color:var(--text-light)">累计消费 ¥${currentCustomer.total_spend||0}</div>
+          <div style="font-weight:700;font-size:1.05rem">${currentLevel?getLevelName(currentLevel.name):getLevelName('普通会员')}</div>
+          <div style="font-size:.8rem;color:var(--text-light)">${t('total_spent')} ¥${currentCustomer.total_spend||0}</div>
         </div>
         <div style="text-align:right">
           <div style="font-weight:700;color:var(--primary);font-size:1.2rem">${currentCustomer.points||0}</div>
-          <div style="font-size:.75rem;color:var(--text-light)">积分</div>
+          <div style="font-size:.75rem;color:var(--text-light)">${t('points')}</div>
         </div>
       </div>
     </div>
-    <h4 style="margin-bottom:10px;font-size:.95rem">已买到的宝贝</h4>
+    <h4 style="margin-bottom:10px;font-size:.95rem">${t('my_orders')}</h4>
     ${ordersHtml}
-    <h4 style="margin:16px 0 10px;font-size:.95rem">收货地址</h4>
+    <h4 style="margin:16px 0 10px;font-size:.95rem">${t('address_title')}</h4>
     ${addrHtml}
-    <button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="openAddressModal()">+ 新增地址</button>
-    <button class="btn btn-outline" style="width:100%;margin-top:8px;color:var(--primary);border-color:var(--primary)" onclick="logout()">退出登录</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="openAddressModal()">${t('add_address')}</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px;color:var(--primary);border-color:var(--primary)" onclick="logout()">${t('logout')}</button>
   `;
 }
 function orderStatusLabel(o){
-  if(o.status==='pending')return'⏳ 订单已提交，等待付款确认';
-  if(o.status==='paid')return'📦 您的付款已经收到，正在打包中...';
-  if(o.status==='shipped')return`🚚 包裹已发出，物流跟踪号码：${o.tracking_number||'（待补充）'}`;
-  if(o.status==='completed')return'✅ 包裹已投递';
-  if(o.status==='cancelled')return'❌ 订单已取消';
+  if(o.status==='pending')return t('order_pending');
+  if(o.status==='paid')return t('order_paid');
+  if(o.status==='shipped')return o.tracking_number?t('order_shipped',{tn:o.tracking_number}):t('order_shipped_no_tn');
+  if(o.status==='completed')return t('order_completed');
+  if(o.status==='cancelled')return t('order_cancelled');
   return o.status;
 }
 function reopenPayment(orderId,amount){drawPaymentStep(orderId,amount);openModal('checkoutModal')}
@@ -724,25 +1122,25 @@ function openAddressModal(context,addr){
   document.getElementById('addrIdFront').value='';document.getElementById('addrIdBack').value='';
   document.getElementById('addrError').style.display='none';
   const idNote=document.getElementById('addrIdNote');
-  if(idNote)idNote.textContent=addr&&addr.id_card_front_path&&addr.id_card_back_path?'（已上传，如需更换请重新选择文件）':'';
+  if(idNote)idNote.textContent=addr&&addr.id_card_front_path&&addr.id_card_back_path?t('id_uploaded_note'):'';
   openModal('addressModal');
 }
 function translateError(e){
   const msg=(e&&(e.message||e.error_description||e.msg))||String(e||'');
   const m=msg.toLowerCase();
-  if(m.includes('signups not allowed')||m.includes('signup is disabled')||m.includes('otp for this phone'))return'该手机号还未注册，请先切换到"注册"';
-  if(m.includes('sms')&&(m.includes('rate limit')||m.includes('security purposes')))return'请求过于频繁，请稍后再试';
-  if(m.includes('token has expired')||m.includes('invalid otp')||m.includes('otp_expired'))return'验证码错误或已过期，请重新获取';
-  if(m.includes('phone')&&(m.includes('already registered')||m.includes('already exists')))return'该手机号已注册，请直接登录';
-  if(m.includes('row-level security')||m.includes('violates row-level'))return'登录状态已过期，请重新登录后再试';
-  if(m.includes('jwt')||m.includes('not authenticated')||m.includes('invalid token'))return'登录状态已过期，请重新登录后再试';
-  if(m.includes('already registered')||m.includes('already been registered'))return'该邮箱已注册，请直接登录';
-  if(m.includes('invalid login'))return'邮箱或密码错误';
-  if(m.includes('email not confirmed'))return'请先点击邮箱里的确认链接完成验证';
-  if(m.includes('sending')||m.includes('smtp')||m.includes('email'))return'邮件发送失败，可能是邮件服务临时故障，请稍后再试';
-  if(m.includes('network'))return'网络连接失败，请检查网络后重试';
-  if(m.includes('duplicate key'))return'数据已存在，请勿重复提交';
-  return msg||'操作失败，请重试';
+  if(m.includes('signups not allowed')||m.includes('signup is disabled')||m.includes('otp for this phone'))return t('err_phone_not_registered');
+  if(m.includes('sms')&&(m.includes('rate limit')||m.includes('security purposes')))return t('err_rate_limit');
+  if(m.includes('token has expired')||m.includes('invalid otp')||m.includes('otp_expired'))return t('err_otp_invalid');
+  if(m.includes('phone')&&(m.includes('already registered')||m.includes('already exists')))return t('err_phone_registered');
+  if(m.includes('row-level security')||m.includes('violates row-level'))return t('err_session_expired');
+  if(m.includes('jwt')||m.includes('not authenticated')||m.includes('invalid token'))return t('err_session_expired');
+  if(m.includes('already registered')||m.includes('already been registered'))return t('err_email_registered');
+  if(m.includes('invalid login'))return t('err_bad_login');
+  if(m.includes('email not confirmed'))return t('err_email_unconfirmed');
+  if(m.includes('sending')||m.includes('smtp')||m.includes('email'))return t('err_email_send');
+  if(m.includes('network'))return t('err_network');
+  if(m.includes('duplicate key'))return t('err_duplicate');
+  return msg||t('err_generic');
 }
 async function submitAddress(){
   const name=document.getElementById('addrName').value.trim();
@@ -751,11 +1149,11 @@ async function submitAddress(){
   const frontFile=document.getElementById('addrIdFront').files[0];
   const backFile=document.getElementById('addrIdBack').files[0];
   const errEl=document.getElementById('addrError');errEl.style.display='none';
-  if(!name||!phone||!address){errEl.textContent='请填写完整的收件人信息';errEl.style.display='block';return}
-  const btn=document.getElementById('addrSubmitBtn');btn.disabled=true;btn.textContent='保存中...';
+  if(!name||!phone||!address){errEl.textContent=t('err_addr_incomplete');errEl.style.display='block';return}
+  const btn=document.getElementById('addrSubmitBtn');btn.disabled=true;btn.textContent=t('saving');
   try{
     const{data:{user}}=await sb.auth.getUser();
-    if(!user){errEl.textContent='登录状态已过期，请重新登录后再试';errEl.style.display='block';btn.disabled=false;btn.textContent='保存地址';closeModal('addressModal');openAuth();return}
+    if(!user){errEl.textContent=t('err_session_expired');errEl.style.display='block';btn.disabled=false;btn.textContent=t('save_address');closeModal('addressModal');openAuth();return}
     let frontPath=null,backPath=null;
     if(frontFile){
       frontPath=`${user.id}/front_${Date.now()}_${frontFile.name}`;
@@ -780,7 +1178,7 @@ async function submitAddress(){
       });
       if(insErr)throw insErr;
     }
-    closeModal('addressModal');showToast('地址已保存');
+    closeModal('addressModal');showToast(t('toast_addr_saved'));
     if(addressModalContext==='checkout'){
       const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',user.id).order('created_at',{ascending:false});
       if(addresses&&addresses.length){await renderCheckout(addresses);openModal('checkoutModal')}
@@ -788,7 +1186,7 @@ async function submitAddress(){
       renderAccountBody();
     }
   }catch(e){errEl.textContent=translateError(e);errEl.style.display='block'}
-  finally{btn.disabled=false;btn.textContent='保存地址'}
+  finally{btn.disabled=false;btn.textContent=t('save_address')}
 }
 
 // ===================== 结算 / 下单 =====================
@@ -796,7 +1194,7 @@ async function checkout(){
   if(Object.keys(cart).length===0)return;
   if(!currentCustomer){toggleCart();openAuth();return}
   const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
-  if(!addresses||addresses.length===0){toggleCart();showToast('请先添加收货地址');openAddressModal('checkout');return}
+  if(!addresses||addresses.length===0){toggleCart();showToast(t('toast_add_addr_first'));openAddressModal('checkout');return}
   toggleCart();
   await renderCheckout(addresses);
   openModal('checkoutModal');
@@ -816,7 +1214,7 @@ function drawCheckout(){
     const lineTotal=computeLineTotal(p,qty);
     goodsAmount+=lineTotal;
     if(p.category==='health')healthQty+=qty;
-    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${p.name} x${qty}</span><span>¥${lineTotal}</span></div>`;
+    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${getProductName(p)} x${qty}</span><span>¥${lineTotal}</span></div>`;
   }).join('');
   const shipping=healthQty===1?50:0;
   const discountPercent=currentLevel?Number(currentLevel.discount_percent):0;
@@ -829,32 +1227,32 @@ function drawCheckout(){
 
   document.getElementById('checkoutBody').innerHTML=`
     <div style="background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:.85rem;color:var(--text-light)">我的积分</span>
-      <span style="font-weight:700;color:var(--primary)">${currentCustomer.points||0} 分</span>
+      <span style="font-size:.85rem;color:var(--text-light)">${t('my_points')}</span>
+      <span style="font-weight:700;color:var(--primary)">${currentCustomer.points||0} ${t('points_unit')}</span>
     </div>
     <div style="margin-bottom:14px">${itemsHtml}</div>
     <div style="margin-bottom:12px">
-      <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">收货地址</label>
+      <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">${t('address_title')}</label>
       <select id="checkoutAddrSelect" onchange="checkoutSelectedAddr=this.value" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-family:inherit">${addrOptions}</select>
     </div>
     ${canRedeem?`
     <label style="display:flex;align-items:center;gap:10px;background:#2e2410;border:1px solid #473518;border-radius:10px;padding:12px;margin-bottom:12px;cursor:pointer">
       <input type="checkbox" ${checkoutUsePoints>=10000?'checked':''} onchange="checkoutUsePoints=this.checked?10000:0;drawCheckout()" style="width:18px;height:18px">
-      <span style="font-size:.85rem">你有 <strong>${currentCustomer.points}</strong> 积分，可使用 <strong>10000</strong> 分抵扣 <strong>¥10</strong> 本次订单金额</span>
+      <span style="font-size:.85rem">${t('points_redeem',{pts:currentCustomer.points})}</span>
     </label>`:''}
     <div style="border-top:1px solid var(--border);padding-top:12px;font-size:.88rem">
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>商品金额</span><span>¥${goodsAmount}</span></div>
-      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>会员折扣（${currentLevel.name} ${discountPercent}%）</span><span>-¥${memberDiscount}</span></div>`:''}
-      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>积分抵扣</span><span>-¥${pointsDiscount}</span></div>`:''}
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>运费${healthQty>=2?'（保健品满2件包邮）':healthQty===1?'（保健品仅1件）':''}</span><span>${shipping>0?'¥'+shipping:'免运费'}</span></div>
-      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>合计</span><span style="color:var(--primary)">¥${final}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('goods_amount')}</span><span>¥${goodsAmount}</span></div>
+      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('member_discount',{level:getLevelName(currentLevel.name),pct:discountPercent})}</span><span>-¥${memberDiscount}</span></div>`:''}
+      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('points_discount')}</span><span>-¥${pointsDiscount}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('shipping')}${healthQty>=2?t('ship_free_health'):healthQty===1?t('ship_health_one'):''}</span><span>${shipping>0?'¥'+shipping:t('free_shipping')}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>${t('total')}</span><span style="color:var(--primary)">¥${final}</span></div>
     </div>
     <div id="checkoutError" style="color:var(--primary);font-size:.85rem;display:none;margin-top:8px"></div>
-    <button class="checkout-btn" style="margin-top:14px" id="checkoutSubmitBtn" onclick="submitOrder()">提交订单</button>
+    <button class="checkout-btn" style="margin-top:14px" id="checkoutSubmitBtn" onclick="submitOrder()">${t('submit_order')}</button>
   `;
 }
 async function submitOrder(){
-  const btn=document.getElementById('checkoutSubmitBtn');btn.disabled=true;btn.textContent='提交中...';
+  const btn=document.getElementById('checkoutSubmitBtn');btn.disabled=true;btn.textContent=t('submitting');
   const errEl=document.getElementById('checkoutError');errEl.style.display='none';
   try{
     const items=Object.entries(cart).map(([id,qty])=>({product_id:id,qty}));
@@ -866,7 +1264,7 @@ async function submitOrder(){
     drawPaymentStep(orderId,order?order.final_amount:null);
   }catch(e){
     errEl.textContent=translateError(e);errEl.style.display='block';
-    btn.disabled=false;btn.textContent='提交订单';
+    btn.disabled=false;btn.textContent=t('submit_order');
   }
 }
 function drawPaymentStep(orderId,amount){
@@ -874,46 +1272,46 @@ function drawPaymentStep(orderId,amount){
   document.getElementById('checkoutBody').innerHTML=`
     <div style="text-align:center;padding:10px 0 16px">
       <div style="font-size:2.4rem">✅</div>
-      <h3 style="margin:10px 0 4px">订单已提交</h3>
-      <p style="color:var(--text-light);font-size:.85rem">订单号：${orderId.slice(0,8)}</p>
+      <h3 style="margin:10px 0 4px">${t('order_submitted')}</h3>
+      <p style="color:var(--text-light);font-size:.85rem">${t('order_no')} ${orderId.slice(0,8)}</p>
     </div>
     ${hasQr?`
     <div style="background:var(--bg);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px">
-      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:4px">应付金额（扫码后请手动输入此金额）</p>
+      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:4px">${t('pay_amount_hint')}</p>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px">
         <span id="payAmountText" style="font-weight:800;font-size:2.2rem;color:var(--primary)">¥${amount}</span>
-        <button onclick="copyAmount(${amount})" style="border:1px solid var(--border);background:var(--card-2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;cursor:pointer;font-family:inherit">📋 复制</button>
+        <button onclick="copyAmount(${amount})" style="border:1px solid var(--border);background:var(--card-2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;cursor:pointer;font-family:inherit">${t('copy')}</button>
       </div>
     </div>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
-      ${PAYMENT_QR.alipay?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.alipay}" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">🔵 支付宝扫码</p></div>`:''}
-      ${PAYMENT_QR.wechat?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.wechat}" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">🟢 微信扫码</p></div>`:''}
+      ${PAYMENT_QR.alipay?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.alipay}" onerror="this.parentElement.style.display='none'" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">${t('scan_alipay')}</p></div>`:''}
+      ${PAYMENT_QR.wechat?`<div style="text-align:center"><img src="https://true-north-finds.vercel.app/${PAYMENT_QR.wechat}" onerror="this.parentElement.style.display='none'" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:1px solid var(--border)"><p style="font-size:.8rem;margin-top:6px">${t('scan_wechat')}</p></div>`:''}
     </div>
-    <p style="font-size:.8rem;color:var(--text-light);text-align:center">付款时请备注订单号后6位「${orderId.slice(-6)}」，方便我们核对</p>
+    <p style="font-size:.8rem;color:var(--text-light);text-align:center">${t('pay_note',{tail:orderId.slice(-6)})}</p>
     `:`
     <p style="font-weight:800;font-size:2rem;color:var(--primary);text-align:center;margin-bottom:10px">¥${amount}</p>
-    <p style="font-size:.85rem;color:var(--text-light);text-align:center;background:var(--bg);padding:14px;border-radius:10px">请通过微信或邮件联系我们确认付款方式，我们会尽快为您安排采购发货</p>
+    <p style="font-size:.85rem;color:var(--text-light);text-align:center;background:var(--bg);padding:14px;border-radius:10px">${t('contact_pay')}</p>
     `}
-    <button class="checkout-btn" style="margin-top:16px" onclick="closeModal('checkoutModal')">完成</button>
+    <button class="checkout-btn" style="margin-top:16px" onclick="closeModal('checkoutModal')">${t('done')}</button>
   `;
 }
 function copyAmount(amount){
-  navigator.clipboard.writeText(String(amount)).then(()=>showToast('金额已复制：¥'+amount)).catch(()=>showToast('复制失败，请手动输入 ¥'+amount));
+  navigator.clipboard.writeText(String(amount)).then(()=>showToast(t('toast_copied')+amount)).catch(()=>showToast(t('toast_copy_failed')+amount));
 }
 
 let currentFilter='all',productImageIndex={},searchQuery='';
 function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
 function renderFilters(){
   const cats=getCategories();
-  document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${c.name}</button>`).join('')
+  document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}</button>`).join('')
 }
 function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
 function renderProducts(){
   const products=getProducts();
   const grid=document.getElementById('productsGrid');
   let filtered=currentFilter==='all'?products:products.filter(p=>p.category===currentFilter);
-  if(searchQuery){filtered=filtered.filter(p=>(p.name||'').toLowerCase().includes(searchQuery)||(p.desc||'').toLowerCase().includes(searchQuery))}
-  if(filtered.length===0){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">📦</div><p>${searchQuery?'没有找到相关商品':'暂无商品，请前往后台添加'}</p></div>`;return}
+  if(searchQuery){filtered=filtered.filter(p=>((getProductName(p)||'')+' '+(getProductDesc(p)||'')+' '+(p.name||'')+' '+(p.desc||'')).toLowerCase().includes(searchQuery))}
+  if(filtered.length===0){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">📦</div><p>${searchQuery?t('no_search_results'):t('no_products')}</p></div>`;return}
   grid.innerHTML=filtered.map(p=>{
     const img=p.images&&p.images[0]?p.images[0]:'';
     const hasMultiple=p.images&&p.images.length>1;
@@ -922,7 +1320,7 @@ function renderProducts(){
     const currentImg=p.images&&p.images[idx]?p.images[idx]:img;
     const dotsHtml=hasMultiple?`<div class="img-dots">${p.images.map((_,i)=>`<div class="img-dot ${i===idx?'active':''}"></div>`).join('')}</div>`:'';
     const navHtml=hasMultiple?`<button class="img-nav prev" onclick="event.stopPropagation();cycleImage('${p.id}',-1)">‹</button><button class="img-nav next" onclick="event.stopPropagation();cycleImage('${p.id}',1)">›</button>`:'';
-    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${p.name}</h3><div class="product-price-row"><div class="product-price">¥${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="加入购物袋">+</button></div></div></div>`
+    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${getProductName(p)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${getProductName(p)}</h3><div class="product-price-row"><div class="product-price">¥${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="${t('add_to_cart')}">+</button></div></div></div>`
   }).join('')
 }
 function cycleImage(productId,dir){
@@ -933,7 +1331,7 @@ function cycleImage(productId,dir){
   idx=(idx+dir+p.images.length)%p.images.length;
   productImageIndex[productId]=idx;renderProducts()
 }
-function getCategoryName(catId){const cats=getCategories();const c=cats.find(x=>x.id===catId);return c?c.name:catId}
+function getCategoryName(catId){const tr=CAT_I18N[catId];if(tr&&tr[currentLang])return tr[currentLang];const cats=getCategories();const c=cats.find(x=>x.id===catId);return c?c.name:catId}
 
 let currentDetailProduct=null,detailImageIndex=0;
 function openDetail(id){
@@ -944,8 +1342,8 @@ function openDetail(id){
   const catName=getCategoryName(p.category);
   const images=p.images&&p.images.length>0?p.images:[''];
   const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
-  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
-  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${p.name}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${p.name}</h2><div class="detail-price">¥${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">含代购费</span></div><p class="detail-desc">${p.desc}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">加入购物袋</button><button class="btn btn-outline" onclick="closeDetail()">继续浏览</button></div></div>`;
+  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" alt="" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${getProductName(p)}</h2><div class="detail-price">¥${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">${t('incl_fee')}</span></div><p class="detail-desc">${getProductDesc(p)}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
   document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
 }
 function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
@@ -962,12 +1360,15 @@ function showToast(msg,duration){const t=document.getElementById('toast');t.text
     history.replaceState(null,'',window.location.pathname);
     sb.auth.signOut().finally(()=>{
       updateAccountBtn();
-      showToast('注册成功！请重新登录',4000);
+      showToast(t('toast_registered_login'),4000);
     });
   }
 })();
 
 loadData();
+
+// 初始化语言（localStorage 优先，默认中文）
+setLang(currentLang);
 </script>
 </body>
 </html>
