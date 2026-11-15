@@ -622,6 +622,25 @@ halloween:{zh:"万圣节",en:"Halloween",fr:"Halloween"},
 christmas:{zh:"圣诞节",en:"Christmas",fr:"Noël"},
 "boxing-day":{zh:"节礼日",en:"Boxing Day",fr:"Lendemain de Noël"}
 };
+// 节日日期（2026-11-15 新增：每个节日的发生日期；固定日期为每年同一天，可变日期按规则推算，2027年日期见工作表）
+const HOLIDAY_DATES={
+"new-year":{zh:"每年1月1日",en:"Jan 1 every year",fr:"1er janv. chaque année"},
+"family-day":{zh:"每年2月第3个周一",en:"3rd Mon in Feb",fr:"3e lun. de fév."},
+"valentines-day":{zh:"每年2月14日",en:"Feb 14 every year",fr:"14 fév. chaque année"},
+easter:{zh:"春分后首个周日（2027年3月28日）",en:"First Sun after spring equinox (Mar 28, 2027)",fr:"1er dim. après l'équinoxe (28 mars 2027)"},
+"victoria-day":{zh:"5月25日前最后一个周一",en:"Last Mon before May 25",fr:"Dernier lun. avant le 25 mai"},
+"canada-day":{zh:"每年7月1日",en:"Jul 1 every year",fr:"1er juil. chaque année"},
+"civic-holiday":{zh:"每年8月第1个周一",en:"1st Mon in Aug",fr:"1er lun. d'août"},
+"mothers-day":{zh:"每年5月第2个周日",en:"2nd Sun in May",fr:"2e dim. de mai"},
+"fathers-day":{zh:"每年6月第3个周日",en:"3rd Sun in Jun",fr:"3e dim. de juin"},
+"labour-day":{zh:"每年9月第1个周一",en:"1st Mon in Sep",fr:"1er lun. de sept."},
+thanksgiving:{zh:"每年10月第2个周一",en:"2nd Mon in Oct",fr:"2e lun. d'oct."},
+halloween:{zh:"每年10月31日",en:"Oct 31 every year",fr:"31 oct. chaque année"},
+"remembrance-day":{zh:"每年11月11日",en:"Nov 11 every year",fr:"11 nov. chaque année"},
+christmas:{zh:"每年12月25日",en:"Dec 25 every year",fr:"25 déc. chaque année"},
+"boxing-day":{zh:"每年12月26日",en:"Dec 26 every year",fr:"26 déc. chaque année"}
+};
+function getHolidayDate(catId){const d=HOLIDAY_DATES[catId];if(!d)return'';return d[currentLang]||d.zh||''}
 const LEVEL_I18N={"普通会员":{en:"Regular Member",fr:"Membre régulier"}};
 // 商品翻译（按商品 id；中文名默认用数据库里的名字；缺失时回落到数据库名字/描述）
 const PRODUCT_I18N={
@@ -1296,7 +1315,7 @@ let currentFilter='all',productImageIndex={},searchQuery='';
 function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
 function renderFilters(){
   const cats=getCategories();
-  document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}</button>`).join('')
+  document.getElementById('filters').innerHTML=cats.map(c=>{const d=getHolidayDate(c.id);return`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}${d?` <span style="font-size:.72em;opacity:.65;font-weight:400">· ${d}</span>`:''}</button>`}).join('')
 }
 function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
 function renderProducts(){
