@@ -183,7 +183,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
     <p class="header-tagline" data-i18n="tagline">从中国精选节日好物，直送加拿大 · 质检·打包·发货，全程透明可追踪</p>
     <div class="header-actions">
       <div class="lang-switcher" id="langSwitcher"><button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button><button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button></div>
-      <a href="admin.html" class="admin-link">⚙️ <span data-i18n="admin">管理后台</span></a>
+      <a href="admin.html" class="admin-link" style="display:none">⚙️ <span data-i18n="admin">管理后台</span></a>
       <button class="cart-btn" id="accountBtn" onclick="openAccount()">👤 <span id="accountBtnText">登录</span></button>
       <button class="cart-btn" onclick="toggleCart()">🛒 <span data-i18n="cart">购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
     </div>
@@ -597,6 +597,8 @@ order_completed:"✅ Colis livré",order_cancelled:"❌ Commande annulée"
 }
 };
 function t(key,vars){let s=(I18N[currentLang]&&I18N[currentLang][key])||I18N.zh[key]||key;if(vars){for(const k in vars)s=s.split('{'+k+'}').join(vars[k])}return s}
+// 统一价格格式：两位小数 + CAD（2026-11-15 修复：价格显示不统一、缺币种）
+function fmtPrice(n){return '$'+Number(n||0).toFixed(2)+' CAD'}
 const CAT_I18N={
 all:{zh:"全部",en:"All",fr:"Tout"},
 food:{zh:"食品",en:"Food",fr:"Alimentation"},
@@ -755,6 +757,7 @@ function setLang(lang){
   applyStaticI18n();
   applyAuthModalText();
   updateAccountBtn();
+  updateCloudStatus(isCloudMode);
   renderFilters();renderProducts();updateCartUI();
   if(currentDetailProduct)openDetail(currentDetailProduct.id);
   const co=document.getElementById('checkoutModal');
@@ -862,9 +865,9 @@ function updateCartUI(){
     const tiers=tiersByProduct[p.id];
     const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">${t('tier_hint')}</div>`:'';
     const img=p.images&&p.images[0]?`<img src="${resolveImg(p.images[0])}" alt="">`:'📦';
-    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${getProductName(p)}</h4><div class="price">$${lineTotal}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty} ${t('pieces')})</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
+    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${getProductName(p)}</h4><div class="price">${fmtPrice(lineTotal)}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty} ${t('pieces')})</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
   }).join('');
-  document.getElementById('cartTotal').textContent='$'+total;footer.style.display='block'
+  document.getElementById('cartTotal').textContent=fmtPrice(total);footer.style.display='block'
 }
 function toggleCart(){document.getElementById('cartModal').classList.toggle('active')}
 
@@ -1242,11 +1245,11 @@ function drawCheckout(){
       <span style="font-size:.85rem">${t('points_redeem',{pts:currentCustomer.points})}</span>
     </label>`:''}
     <div style="border-top:1px solid var(--border);padding-top:12px;font-size:.88rem">
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('goods_amount')}</span><span>$${goodsAmount}</span></div>
-      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('member_discount',{level:getLevelName(currentLevel.name),pct:discountPercent})}</span><span>-$${memberDiscount}</span></div>`:''}
-      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('points_discount')}</span><span>-$${pointsDiscount}</span></div>`:''}
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('shipping')}</span><span>${shipping>0?'$'+shipping:t('free_shipping')}</span></div>
-      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>${t('total')}</span><span style="color:var(--primary)">$${final}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('goods_amount')}</span><span>${fmtPrice(goodsAmount)}</span></div>
+      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('member_discount',{level:getLevelName(currentLevel.name),pct:discountPercent})}</span><span>-${fmtPrice(memberDiscount)}</span></div>`:''}
+      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('points_discount')}</span><span>-${fmtPrice(pointsDiscount)}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('shipping')}</span><span>${shipping>0?fmtPrice(shipping):t('free_shipping')}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>${t('total')}</span><span style="color:var(--primary)">${fmtPrice(final)}</span></div>
     </div>
     <div id="checkoutError" style="color:var(--primary);font-size:.85rem;display:none;margin-top:8px"></div>
     <button class="checkout-btn" style="margin-top:14px" id="checkoutSubmitBtn" onclick="submitOrder()">${t('submit_order')}</button>
@@ -1310,7 +1313,7 @@ function renderProducts(){
     const currentImg=p.images&&p.images[idx]?p.images[idx]:img;
     const dotsHtml=hasMultiple?`<div class="img-dots">${p.images.map((_,i)=>`<div class="img-dot ${i===idx?'active':''}"></div>`).join('')}</div>`:'';
     const navHtml=hasMultiple?`<button class="img-nav prev" onclick="event.stopPropagation();cycleImage('${p.id}',-1)">‹</button><button class="img-nav next" onclick="event.stopPropagation();cycleImage('${p.id}',1)">›</button>`:'';
-    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${getProductName(p)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${getProductName(p)}</h3><div class="product-price-row"><div class="product-price">$${p.price}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="${t('add_to_cart')}">+</button></div></div></div>`
+    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${getProductName(p)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${getProductName(p)}</h3><div class="product-price-row"><div class="product-price">${fmtPrice(p.price)}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="${t('add_to_cart')}">+</button></div></div></div>`
   }).join('')
 }
 function cycleImage(productId,dir){
@@ -1333,7 +1336,7 @@ function openDetail(id){
   const images=p.images&&p.images.length>0?p.images:[''];
   const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
   const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" alt="" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
-  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${getProductName(p)}</h2><div class="detail-price">$${p.price} <span style="font-size:.8rem;color:var(--text-light);font-weight:400">${t('incl_fee')}</span></div><p class="detail-desc">${getProductDesc(p)}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${getProductName(p)}</h2><div class="detail-price">${fmtPrice(p.price)} <span style="font-size:.8rem;color:var(--text-light);font-weight:400;margin-left:4px">${t('incl_fee')}</span></div><p class="detail-desc">${getProductDesc(p)}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
   document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
 }
 function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
