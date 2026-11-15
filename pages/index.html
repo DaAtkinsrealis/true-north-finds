@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True North Finds · 中国好物直达加拿大</title>
+<meta name="description" content="True North Finds · 中国好物直达加拿大：精选中国节日礼品，加元结算，加拿大本地派送。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="True North Finds">
+<meta property="og:title" content="True North Finds · 中国好物直达加拿大">
+<meta property="og:description" content="True North Finds · 中国好物直达加拿大：精选中国节日礼品，加元结算。">
+<meta property="og:url" content="https://truenorthfinds.com/">
+<meta property="og:image" content="https://truenorthfinds.com/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#121014">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#E2434A;--primary-dark:#B8262F;--accent:#D9A84E;--bg:#121014;--card:#1C191E;--card-2:#242027;--text:#F4EFE8;--text-light:#9C958F;--border:#322D33;--input-bg:#17151A;--success:#3FA86B;--shadow:0 2px 14px rgba(0,0,0,.35);--shadow-hover:0 16px 44px rgba(0,0,0,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+input[type=text],input[type=email],input[type=password],input[type=tel],input[type=number],textarea,select{background:var(--input-bg);color:var(--text);font-family:inherit}
+input[type=text]:focus,input[type=email]:focus,input[type=password]:focus,input[type=tel]:focus,input[type=number]:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)!important}
+input::placeholder,textarea::placeholder{color:var(--text-light)}
+input[type=file]{color:var(--text-light);font-size:.85rem}
+body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.cloud-status{position:fixed;top:70px;right:16px;z-index:999;padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:all .3s}
+.cloud-status.online{background:#15291e;color:#5cc98a;border:1px solid #234530}
+.cloud-status.offline{background:#2e2410;color:#e0a855;border:1px solid #473518}
+header{background:var(--card);border-bottom:1px solid var(--border);color:var(--text);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 24px}
+.logo{font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.logo-icon{font-size:1.5rem}
+.header-tagline{flex:1;text-align:center;font-size:.78rem;color:var(--text-light);padding:0 20px;display:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(min-width:960px){.header-tagline{display:block}}
+.header-actions{display:flex;gap:12px;align-items:center}
+.cart-btn,.admin-link{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:24px;cursor:pointer;font-size:.85rem;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.cart-btn:hover,.admin-link:hover{background:#2c2731;border-color:var(--accent)}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#1a1408;width:20px;height:20px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.hero{background:radial-gradient(ellipse 120% 100% at 50% -10%,#241a1c 0%,var(--bg) 60%);padding:90px 24px 70px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🍁';position:absolute;font-size:350px;opacity:.05;top:-60px;right:-40px;pointer-events:none;filter:saturate(1.4)}
+.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;margin-bottom:14px;color:var(--text);letter-spacing:-.5px}
+.hero p{font-size:1.1rem;color:var(--text-light);max-width:580px;margin:0 auto 32px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 32px;border-radius:30px;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(196,30,58,.3)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(196,30,58,.4)}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.section{max-width:1200px;margin:0 auto;padding:70px 24px}
+#products{max-width:1920px;padding-left:32px;padding-right:32px}
+#products .browse-bar{max-width:1200px;margin-left:auto;margin-right:auto}
+.section-title{text-align:center;margin-bottom:28px}
+.section-title h2{font-size:1.7rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.section-title p{color:var(--text-light);font-size:.95rem}
+#products .section-title{margin-bottom:16px}
+#process{padding:10px 24px 2px}
+#process .section-title{margin-bottom:8px}
+#process .section-title h2{font-size:.85rem;margin-bottom:0}
+#process .section-title p,.payment-section .section-title p{display:none}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.process-card{background:var(--card);padding:7px 10px;border-radius:10px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;text-align:left;text-align:center;box-shadow:var(--shadow);transition:all .35s;position:relative;border:1px solid var(--border)}
+.process-card:hover{transform:none;box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.process-num{position:absolute;top:-7px;left:8px;background:var(--primary);color:#fff;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.55rem;box-shadow:0 2px 8px rgba(226,67,74,.35)}
+.process-icon{font-size:1.1rem;margin:0;line-height:1;grid-row:1/3}
+.process-card h3{font-size:.74rem;margin:0;font-weight:600;grid-column:2;line-height:1.3}
+.process-card p{font-size:.62rem;line-height:1.35;color:var(--text-light);grid-column:2;margin:0}
+.browse-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.search-wrap{position:relative;flex:0 1 220px}
+.search-wrap input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.85rem;background:var(--input-bg);color:var(--text);box-sizing:border-box}
+.search-wrap input:focus{outline:none;border-color:var(--accent)}
+.search-wrap input::placeholder{color:var(--text-light)}
+.search-wrap::before{content:'🔍';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.78rem;opacity:.6}
+.product-filters{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.filter-btn{padding:6px 14px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text-light);cursor:pointer;font-size:.8rem;transition:all .25s;font-family:inherit;white-space:nowrap}
+.filter-btn:hover{border-color:var(--accent);color:var(--text)}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.products-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.product-card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all .25s;display:flex;flex-direction:column;cursor:pointer;border:1px solid var(--border)}
+.product-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.product-img-wrap{position:relative;width:100%;padding-top:100%;overflow:hidden;background:linear-gradient(135deg,#242027,#1a1720)}
+.product-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product-card:hover .product-img-wrap img{transform:scale(1.04)}
+.img-dots{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:4px}
+.img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .3s}
+.img-dot.active{background:#fff;width:13px;border-radius:3px}
+.img-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(18,16,20,.6);border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:.75rem;color:#fff;display:flex;align-items:center;justify-content:center;opacity:.7;transition:opacity .2s}
+.img-nav:active,.product-card:hover .img-nav{opacity:1}
+.img-nav:hover{background:var(--primary)}
+.img-nav.prev{left:6px}
+.img-nav.next{right:6px}
+.product-info{padding:8px 9px 9px;flex:1;display:flex;flex-direction:column}
+.product-tag{display:inline-block;background:var(--card-2);color:var(--accent);padding:2px 7px;border-radius:7px;font-size:.62rem;margin-bottom:5px;width:fit-content;font-weight:500}
+.product-info h3{font-size:.8rem;font-weight:500;margin-bottom:6px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.1em}
+.product-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.product-price{font-size:.98rem;font-weight:700;color:var(--primary)}
+.product-price .unit{display:none}
+.add-cart-btn{width:24px;height:24px;background:var(--primary);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:1rem;line-height:1;font-weight:500;transition:all .25s;font-family:inherit;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.add-cart-btn:hover{background:var(--primary-dark);transform:scale(1.1)}
+.add-cart-btn.added{background:var(--success)}
+@media(min-width:1024px){.products-grid{gap:16px}.product-info{padding:10px 12px 12px}.product-info h3{font-size:.85rem}.product-price{font-size:1.05rem}}
+.section.payment-section{background:var(--bg);padding:8px 24px 10px}
+.payment-section .section-title{margin-bottom:6px}
+.payment-section .section-title h2{font-size:.85rem;margin-bottom:0}
+.payment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:420px;margin:0 auto}
+.payment-card{background:var(--card);padding:6px 10px;border-radius:10px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;text-align:left;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border);transition:all .3s}
+.payment-card:hover{border-color:var(--accent)}
+.payment-icon{font-size:1rem;margin:0;line-height:1;grid-row:1/3}
+.payment-card h3{font-size:.74rem;margin:0;font-weight:600;grid-column:2;line-height:1.3}
+.payment-card p{font-size:.62rem;color:var(--text-light);grid-column:2;margin:0}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.active{display:flex}
+.detail-modal{background:var(--card);border-radius:20px;width:100%;max-width:700px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.5);border:1px solid var(--border)}
+.detail-modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.detail-modal-header h3{font-size:1.1rem}
+.modal-close{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-light);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--card-2);color:var(--text)}
+.detail-modal-body{overflow-y:auto;flex:1}
+.detail-gallery{position:relative;width:100%;height:380px;background:linear-gradient(135deg,#242027,#1a1720)}
+.detail-gallery img{width:100%;height:100%;object-fit:cover}
+.detail-thumbs{display:flex;gap:8px;padding:12px 20px;overflow-x:auto;background:var(--input-bg)}
+.detail-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0;opacity:.6}
+.detail-thumb:hover,.detail-thumb.active{border-color:var(--primary);opacity:1}
+.detail-info{padding:20px}
+.detail-info .tag{display:inline-block;background:var(--card-2);color:var(--accent);padding:3px 10px;border-radius:10px;font-size:.72rem;margin-bottom:10px;font-weight:500}
+.detail-info h2{font-size:1.3rem;margin-bottom:8px}
+.detail-info .detail-price{font-size:1.5rem;font-weight:700;color:var(--primary);margin-bottom:12px}
+.detail-info .detail-desc{color:var(--text-light);font-size:.9rem;line-height:1.8;margin-bottom:20px}
+.detail-actions{display:flex;gap:12px}
+.detail-actions .btn{flex:1;text-align:center}
+.cart-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.cart-modal-overlay.active{display:flex}
+.cart-modal{background:var(--card);border-radius:20px;width:100%;max-width:480px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid var(--border)}
+.cart-modal-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-modal-header h3{font-size:1.15rem}
+.cart-modal-body{padding:16px 24px;overflow-y:auto;flex:1}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cart-item-img{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#242027,#1a1720);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:.9rem;margin-bottom:3px;font-weight:600}
+.cart-item-info .price{color:var(--primary);font-weight:600;font-size:.9rem}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.cart-empty{text-align:center;padding:40px;color:var(--text-light)}
+.cart-empty-icon{font-size:3rem;margin-bottom:12px}
+.cart-modal-footer{padding:18px 24px;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:700;margin-bottom:14px}
+.checkout-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit}
+.checkout-btn:hover{background:var(--primary-dark)}
+.contact-section{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:#fff;padding:8px 24px;text-align:center}
+.contact-section h2{font-size:.85rem;margin-bottom:0}
+.contact-section p{opacity:.9;margin-bottom:0;font-size:.66rem}
+.contact-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.contact-link{background:rgba(255,255,255,.12);color:#fff;padding:12px 24px;border-radius:30px;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.2);font-size:.9rem}
+.contact-link:hover{background:rgba(255,255,255,.22)}
+footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82rem;border-top:1px solid var(--border);background:var(--card)}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card-2);color:var(--text);border:1px solid var(--border);padding:14px 28px;border-radius:30px;font-size:.88rem;z-index:3000;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.empty-products{text-align:center;padding:60px 20px;color:var(--text-light)}
+.empty-products-icon{font-size:3rem;margin-bottom:12px}
+@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.detail-gallery{height:260px}.header-inner{padding:12px 16px;gap:8px}.logo{font-size:1.02rem}.admin-link span,.cart-btn span:not(.cart-count){display:none}.cart-btn,.admin-link{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
+.lang-switcher{display:flex;gap:2px;background:var(--card-2);border:1px solid var(--border);border-radius:20px;padding:3px;flex-shrink:0}
+.lang-btn{border:none;background:transparent;color:var(--text-light);padding:4px 10px;border-radius:14px;cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s}
+.lang-btn:hover{color:var(--text)}
+.lang-btn.active{background:var(--primary);color:#fff}
+@media(max-width:600px){.lang-btn{padding:4px 7px;font-size:.72rem}}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="cloud-status offline" id="cloudStatus" style="display:none"><span id="cloudStatusDot">🟡</span><span id="cloudStatusText">本地模式</span></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-icon">🍁</span><span>True North Finds</span></div>
+    <p class="header-tagline" data-i18n="tagline">从中国精选节日好物，直送加拿大 · 质检·打包·发货，全程透明可追踪</p>
+    <div class="header-actions">
+      <div class="lang-switcher" id="langSwitcher"><button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button><button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button></div>
+      <a href="admin.html" class="admin-link" style="display:none">⚙️ <span data-i18n="admin">管理后台</span></a>
+      <button class="cart-btn" id="accountBtn" onclick="openAccount()">👤 <span id="accountBtnText">登录</span></button>
+      <button class="cart-btn" onclick="toggleCart()">🛒 <span data-i18n="cart">购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="products" style="padding-top:36px">
+  <div class="section-title"><h2 data-i18n="products_title">精选商品</h2><p data-i18n="products_sub">中国精选节日好物</p></div>
+  <div class="browse-bar">
+    <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜索商品..." data-i18n-ph="search_ph" oninput="searchProducts(this.value)"></div>
+    <div class="product-filters" id="filters"></div>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section class="section" id="process">
+  <div class="section-title"><h2 data-i18n="process_title">购物流程</h2><p data-i18n="process_sub">四步，从选到收</p></div>
+  <div class="process-grid">
+    <div class="process-card"><div class="process-num">01</div><div class="process-icon">🛍️</div><h3 data-i18n="step1_t">选商品</h3><p data-i18n="step1_d">浏览网站，挑选中国节日好物</p></div>
+    <div class="process-card"><div class="process-num">02</div><div class="process-icon">💳</div><h3 data-i18n="step2_t">下单付款</h3><p data-i18n="step2_d">加入购物袋，联系我们确认付款方式</p></div>
+    <div class="process-card"><div class="process-num">03</div><div class="process-icon">📦</div><h3 data-i18n="step3_t">中国采购</h3><p data-i18n="step3_d">我们在中国采购，质检后打包发往加拿大</p></div>
+    <div class="process-card"><div class="process-num">04</div><div class="process-icon">🚚</div><h3 data-i18n="step4_t">收到好货</h3><p data-i18n="step4_d">加拿大本地派送，全程可追踪</p></div>
+  </div>
+</section>
+
+<section class="section payment-section">
+  <div class="section-title"><h2 data-i18n="pay_title">支付方式</h2><p data-i18n="pay_sub">请联系我们确认付款方式</p></div>
+  <div class="payment-grid">
+    <div class="payment-card"><div class="payment-icon">💬</div><h3 data-i18n="pay_contact">联系确认付款</h3><p data-i18n="pay_contact_d">通过微信或邮件联系我们，确认付款方式后安排发货</p></div>
+  </div>
+  <p data-i18n="price_note" style="text-align:center;color:var(--text-light);margin-top:6px;font-size:.64rem">所有价格以加元（CAD）为单位显示</p>
+  <p data-i18n="points_note" style="text-align:center;color:var(--text-light);margin-top:2px;font-size:.62rem">积分规则：每消费 $1 可获得 10 积分，积分每满 10000 分可在下单时抵扣 $10；会员等级根据累计消费自动升级，等级越高折扣越大</p>
+</section>
+
+
+<section class="contact-section" id="contact">
+  <h2 data-i18n="contact_title">联系我们</h2>
+  <p data-i18n="contact_sub">有任何问题或想找特定商品？随时联系我</p>
+</section>
+
+<footer>
+  <p data-i18n="footer1">🍁 True North Finds · 中国好物 · 直达加拿大</p>
+  <p data-i18n="footer2" style="margin-top:4px">本网站为静态展示页面，实际交易请通过微信/邮件联系确认</p>
+</footer>
+
+<div class="modal-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-modal">
+    <div class="detail-modal-header"><h3 data-i18n="detail_title">商品详情</h3><button class="modal-close" onclick="closeDetail()">&times;</button></div>
+    <div class="detail-modal-body" id="detailBody"></div>
+  </div>
+</div>
+
+<div class="cart-modal-overlay" id="cartModal" onclick="if(event.target===this)toggleCart()">
+  <div class="cart-modal">
+    <div class="cart-modal-header"><h3 data-i18n="cart_title">🛒 购物袋</h3><button class="modal-close" onclick="toggleCart()">&times;</button></div>
+    <div class="cart-modal-body" id="cartBody"><div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p data-i18n="cart_empty">购物袋是空的</p></div></div>
+    <div class="cart-modal-footer" id="cartFooter" style="display:none">
+      <div class="cart-total"><span data-i18n="total">合计</span><span id="cartTotal">$0</span></div>
+      <button class="checkout-btn" data-i18n="checkout_btn" onclick="checkout()">去结算 →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 登录/注册 -->
+<div class="cart-modal-overlay" id="authModal" onclick="if(event.target===this)closeModal('authModal')">
+  <div class="cart-modal" style="max-width:380px">
+    <div class="cart-modal-header"><h3 id="authModalTitle">登录</h3><button class="modal-close" onclick="closeModal('authModal')">&times;</button></div>
+    <div class="cart-modal-body">
+      <div style="display:flex;gap:8px;margin-bottom:14px;background:var(--bg);border-radius:10px;padding:4px">
+        <button id="channelEmailBtn" onclick="switchAuthChannel('email')" style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--card-2);color:var(--text);font-family:inherit;font-size:.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)" data-i18n="auth_email_tab">邮箱</button>
+        <button id="channelPhoneBtn" onclick="switchAuthChannel('phone')" style="flex:1;padding:8px;border:none;border-radius:8px;background:transparent;font-family:inherit;font-size:.85rem;cursor:pointer;color:var(--text-light)" data-i18n="auth_phone_tab">手机验证码</button>
+      </div>
+
+      <div id="authEmailBlock" style="display:flex;flex-direction:column;gap:12px">
+        <div id="authExtraFields" style="display:none;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:10px">
+            <input type="text" id="authLastName" placeholder="姓" data-i18n-ph="auth_lastname_ph" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="authFirstName" placeholder="名" data-i18n-ph="auth_firstname_ph" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          </div>
+          <input type="tel" id="authPhone" placeholder="手机号" data-i18n-ph="auth_phone_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        </div>
+        <input type="email" id="authEmail" placeholder="邮箱" data-i18n-ph="auth_email_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <input type="password" id="authPassword" placeholder="密码（至少6位）" data-i18n-ph="auth_pw_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <div id="authError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="authSubmitBtn" onclick="submitAuth()" style="width:100%">登录</button>
+        <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
+          <span id="authSwitchText">还没有账号？</span> <a href="index.html#" onclick="toggleAuthMode();return false" style="color:var(--primary)" id="authSwitchLink">立即注册</a>
+        </p>
+        <p id="authForgotWrap" style="text-align:center;font-size:.85rem"><a href="index.html#" onclick="forgotPassword();return false" style="color:var(--text-light)" data-i18n="auth_forgot">忘记密码？</a></p>
+      </div>
+
+      <div id="authPhoneBlock" style="display:none;flex-direction:column;gap:12px">
+        <div id="phoneExtraFields" style="display:none;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:10px">
+            <input type="text" id="phoneLastName" placeholder="姓" data-i18n-ph="auth_lastname_ph" maxlength="2" style="flex:0 0 30%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+            <input type="text" id="phoneFirstName" placeholder="名" data-i18n-ph="auth_firstname_ph" maxlength="3" style="flex:1;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <input type="tel" id="phoneNum" placeholder="手机号" data-i18n-ph="auth_phone_ph" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+          <button id="sendOtpBtn" onclick="sendPhoneOtp()" style="flex:0 0 auto;padding:0 14px;border:1px solid var(--primary);color:var(--primary);background:transparent;border-radius:10px;font-family:inherit;font-size:.82rem;cursor:pointer;white-space:nowrap">发送验证码</button>
+        </div>
+        <input type="text" id="phoneOtpCode" placeholder="6位验证码" data-i18n-ph="auth_otp_ph" maxlength="6" style="display:none;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem">
+        <div id="phoneAuthError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="verifyOtpBtn" onclick="verifyPhoneOtp()" style="width:100%;display:none">验证并登录</button>
+        <p style="text-align:center;font-size:.85rem;color:var(--text-light)">
+          <span id="phoneSwitchText">还没有账号？</span> <a href="index.html#" onclick="toggleAuthMode();return false" style="color:var(--primary)" id="phoneSwitchLink">立即注册</a>
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- 账户中心 -->
+<div class="cart-modal-overlay" id="accountModal" onclick="if(event.target===this)closeModal('accountModal')">
+  <div class="cart-modal" style="max-width:480px">
+    <div class="cart-modal-header"><h3 data-i18n="my_account">👤 我的账户</h3><button class="modal-close" onclick="closeModal('accountModal')">&times;</button></div>
+    <div class="cart-modal-body" id="accountBody"></div>
+  </div>
+</div>
+
+<!-- 新增/编辑地址 -->
+<div class="cart-modal-overlay" id="addressModal" onclick="if(event.target===this)closeModal('addressModal')">
+  <div class="cart-modal" style="max-width:420px">
+    <div class="cart-modal-header"><h3 data-i18n="address_title">收货地址</h3><button class="modal-close" onclick="closeModal('addressModal')">&times;</button></div>
+    <div class="cart-modal-body">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <input type="text" id="addrName" placeholder="收件人姓名" data-i18n-ph="addr_name_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <input type="tel" id="addrPhone" placeholder="联系电话" data-i18n-ph="addr_phone_ph" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit">
+        <textarea id="addrAddress" placeholder="详细收货地址" data-i18n-ph="addr_address_ph" rows="3" style="padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;resize:vertical"></textarea>
+        <div id="addrError" style="color:var(--primary);font-size:.85rem;display:none"></div>
+        <button class="btn btn-primary" id="addrSubmitBtn" onclick="submitAddress()" style="width:100%" data-i18n="save_address">保存地址</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 结算确认 -->
+<div class="cart-modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeModal('checkoutModal')">
+  <div class="cart-modal" style="max-width:460px">
+    <div class="cart-modal-header"><h3 data-i18n="checkout_title">确认订单</h3><button class="modal-close" onclick="closeModal('checkoutModal')">&times;</button></div>
+    <div class="cart-modal-body" id="checkoutBody"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://cyaegfnkjwwdsjkfnlfl.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5YWVnZm5rand3ZHNqa2ZubGZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NDQ3ODksImV4cCI6MjEwMTEyMDc4OX0._W7WMcSW7tOCI6NmeegHWcR6CDZ0WMIJMyCMZvLcwU0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+// 收款方式：加拿大收款方式待定，结账时显示联系客服确认付款
+</script>
+<script>
+// ===================== 多语言 i18n (zh / en / fr) =====================
+// 注意：法语为人工翻译初稿，尚未经过 Antidote 校对；校对后以修正版为准。
+const LANGS=['zh','en','fr'];
+let currentLang=localStorage.getItem('tnf_lang')||'en';
+if(!LANGS.includes(currentLang))currentLang='en';
+const I18N={
+zh:{
+page_title:"True North Finds · 中国好物直达加拿大",
+tagline:"从中国精选节日好物，直送加拿大 · 质检·打包·发货，全程透明可追踪",
+admin:"管理后台",cart:"购物袋",login:"登录",register:"注册",
+products_title:"精选商品",products_sub:"中国精选节日好物",
+search_ph:"搜索商品...",
+process_title:"购物流程",process_sub:"四步，从选到收",
+step1_t:"选商品",step1_d:"浏览网站，挑选中国节日好物",
+step2_t:"下单付款",step2_d:"加入购物袋，联系我们确认付款方式",
+step3_t:"中国采购",step3_d:"我们在中国采购，质检后打包发往加拿大",
+step4_t:"收到好货",step4_d:"加拿大本地派送，全程可追踪",
+pay_title:"支付方式",pay_sub:"请联系我们确认付款方式",
+pay_contact:"联系确认付款",pay_contact_d:"通过微信或邮件联系我们，确认付款方式后安排发货",
+price_note:"所有价格以加元（CAD）为单位显示",
+points_note:"积分规则：每消费 $1 可获得 10 积分，积分每满 10000 分可在下单时抵扣 $10；会员等级根据累计消费自动升级，等级越高折扣越大",
+contact_title:"联系我们",contact_sub:"有任何问题或想找特定商品？随时联系我",
+footer1:"🍁 True North Finds · 中国好物 · 直达加拿大",
+footer2:"本网站为静态展示页面，实际交易请通过微信/邮件联系确认",
+detail_title:"商品详情",cart_title:"🛒 购物袋",cart_empty:"购物袋是空的",
+total:"合计",checkout_btn:"去结算 →",
+my_account:"我的账户",address_title:"收货地址",save_address:"保存地址",
+auth_email_tab:"邮箱",auth_phone_tab:"手机验证码",
+auth_lastname_ph:"姓",auth_firstname_ph:"名",auth_phone_ph:"手机号",
+auth_email_ph:"邮箱",auth_pw_ph:"密码（至少6位）",
+auth_forgot:"忘记密码？",auth_otp_ph:"6位验证码",
+addr_name_ph:"收件人姓名",addr_phone_ph:"联系电话",addr_address_ph:"详细收货地址",
+checkout_title:"确认订单",
+cloud_online:"云端同步",cloud_offline:"本地模式",
+toast_added:"已加入购物袋！",
+toast_otp_sent:"验证码已发送，请查收短信",
+toast_register_check_email:"注册成功！请查收邮箱，点击确认链接后即可登录",
+toast_reset_sent:"密码重置邮件已发送，请查收邮箱",
+toast_send_failed:"发送失败：",
+toast_enter_email_first:"请先在邮箱框里输入你的邮箱",
+toast_add_addr_first:"请先添加收货地址",
+toast_logged_out:"已退出登录",
+toast_registered_login:"注册成功！请重新登录",
+toast_addr_saved:"地址已保存",
+toast_copied:"金额已复制：$",
+toast_copy_failed:"复制失败，请手动输入 $",
+no_account:"还没有账号？",has_account:"已经有账号？",
+register_now:"立即注册",go_login:"去登录",
+send_otp:"发送验证码",resend_otp:"重新发送",resend_in:"{sec}秒后可重发",
+sending:"发送中...",verifying:"验证中...",
+verify_login:"验证并登录",verify_register:"验证并注册",
+processing:"处理中...",saving:"保存中...",submitting:"提交中...",
+err_enter_phone:"请输入手机号",err_enter_name:"请填写姓和名",
+err_enter_otp:"请输入验证码",err_bad_email:"请输入正确的邮箱",
+err_short_pw:"密码至少6位",err_addr_incomplete:"请填写完整的收件人信息",
+err_session_expired:"登录状态已过期，请重新登录后再试",
+err_phone_not_registered:"该手机号还未注册，请先切换到\"注册\"",
+err_rate_limit:"请求过于频繁，请稍后再试",
+err_otp_invalid:"验证码错误或已过期，请重新获取",
+err_phone_registered:"该手机号已注册，请直接登录",
+err_email_registered:"该邮箱已注册，请直接登录",
+err_bad_login:"邮箱或密码错误",
+err_email_unconfirmed:"请先点击邮箱里的确认链接完成验证",
+err_email_send:"邮件发送失败，可能是邮件服务临时故障，请稍后再试",
+err_network:"网络连接失败，请检查网络后重试",
+err_duplicate:"数据已存在，请勿重复提交",
+err_generic:"操作失败，请重试",
+loading:"加载中...",no_address:"还没有保存的地址",no_orders:"还没有买过东西",
+edit:"✏️ 编辑",my_orders:"已买到的宝贝",add_address:"+ 新增地址",logout:"退出登录",
+total_spent:"累计消费",points:"积分",points_unit:"积分",
+paid_amount:"实付",view_payment:"查看付款信息",order_no:"订单号",
+order_submitted:"订单已提交",
+copy:"📋 复制",contact_pay:"请通过微信或邮件联系我们确认付款方式，我们会尽快为您安排发货",
+done:"完成",
+my_points:"我的积分",
+points_redeem:"你有 <strong>{pts}</strong> 积分，可使用 <strong>10000</strong> 分抵扣 <strong>$10</strong> 本次订单金额",
+goods_amount:"商品金额",member_discount:"会员折扣（{level} {pct}%）",
+points_discount:"积分抵扣",shipping:"运费",
+free_shipping:"免运费",submit_order:"提交订单",
+no_search_results:"没有找到相关商品",no_products:"暂无商品，请前往后台添加",
+incl_fee:"含服务费",add_to_cart:"加入购物袋",continue_browsing:"继续浏览",
+tier_hint:"已按优惠价计算",pieces:"件",
+welcome_register:"注册成功！欢迎",welcome_back:"欢迎回来",
+order_pending:"⏳ 订单已提交，等待付款确认",
+order_paid:"📦 您的付款已经收到，正在打包中...",
+order_shipped:"🚚 包裹已发出，物流跟踪号码：{tn}",
+order_shipped_no_tn:"🚚 包裹已发出，物流跟踪号码：（待补充）",
+order_completed:"✅ 包裹已投递",order_cancelled:"❌ 订单已取消"
+},
+en:{
+page_title:"True North Finds · Chinese Finds, Delivered in Canada",
+tagline:"Hand-picked holiday finds from China, delivered across Canada — quality-checked, packed and shipped, fully transparent and trackable",
+admin:"Admin",cart:"Shopping Bag",login:"Log in",register:"Sign up",
+products_title:"Featured Products",products_sub:"Hand-picked holiday finds from China",
+search_ph:"Search products…",
+process_title:"How It Works",process_sub:"Four steps, from pick to delivery",
+step1_t:"Pick a product",step1_d:"Browse the site and pick your favourite holiday finds from China",
+step2_t:"Order & pay",step2_d:"Add to your bag, then contact us to confirm your payment method",
+step3_t:"We source in China",step3_d:"We source in China, quality-check, pack and ship to Canada",
+step4_t:"Receive your goods",step4_d:"Delivered locally in Canada by tracked courier",
+pay_title:"Payment Methods",pay_sub:"Please contact us to confirm your payment method",
+pay_contact:"Contact to confirm payment",pay_contact_d:"Reach us on WeChat or by email to confirm how to pay — we'll arrange shipping once confirmed",
+price_note:"All prices are shown in Canadian dollars (CAD)",
+points_note:"Points: earn 10 points per $1 spent; every 10,000 points can be redeemed for $10 off an order. Membership level upgrades automatically with total spend — the higher the level, the bigger the discount.",
+contact_title:"Contact Us",contact_sub:"Any questions, or looking for a specific product? Get in touch anytime",
+footer1:"🍁 True North Finds · Finds from China · Delivered across Canada",
+footer2:"This is a static showcase page — please confirm actual orders via WeChat or email",
+detail_title:"Product Details",cart_title:"🛒 Shopping Bag",cart_empty:"Your bag is empty",
+total:"Total",checkout_btn:"Checkout →",
+my_account:"My Account",address_title:"Shipping Address",save_address:"Save Address",
+auth_email_tab:"Email",auth_phone_tab:"SMS Code",
+auth_lastname_ph:"Last name",auth_firstname_ph:"First name",auth_phone_ph:"Phone number",
+auth_email_ph:"Email",auth_pw_ph:"Password (min. 6 characters)",
+auth_forgot:"Forgot password?",auth_otp_ph:"6-digit code",
+addr_name_ph:"Recipient name",addr_phone_ph:"Contact phone",addr_address_ph:"Detailed address",
+checkout_title:"Confirm Order",
+cloud_online:"Cloud sync",cloud_offline:"Local mode",
+toast_added:"Added to your bag!",
+toast_otp_sent:"Verification code sent — please check your messages",
+toast_register_check_email:"Registered! Please check your email and click the confirmation link to log in",
+toast_reset_sent:"Password reset email sent — please check your inbox",
+toast_send_failed:"Send failed: ",
+toast_enter_email_first:"Please enter your email in the email field first",
+toast_add_addr_first:"Please add a shipping address first",
+toast_logged_out:"Logged out",
+toast_registered_login:"Registered! Please log in again",
+toast_addr_saved:"Address saved",
+toast_copied:"Amount copied: $",
+toast_copy_failed:"Copy failed — please enter $ manually",
+no_account:"No account yet?",has_account:"Already have an account?",
+register_now:"Sign up now",go_login:"Log in",
+send_otp:"Send code",resend_otp:"Resend",resend_in:"Resend in {sec}s",
+sending:"Sending…",verifying:"Verifying…",
+verify_login:"Verify & log in",verify_register:"Verify & sign up",
+processing:"Processing…",saving:"Saving…",submitting:"Submitting…",
+err_enter_phone:"Please enter your phone number",err_enter_name:"Please enter your last and first name",
+err_enter_otp:"Please enter the verification code",err_bad_email:"Please enter a valid email address",
+err_short_pw:"Password must be at least 6 characters",err_addr_incomplete:"Please complete the recipient information",
+err_session_expired:"Your session has expired — please log in again",
+err_phone_not_registered:"This phone number is not registered — please switch to \"Sign up\"",
+err_rate_limit:"Too many requests — please try again later",
+err_otp_invalid:"Code incorrect or expired — please request a new one",
+err_phone_registered:"This phone number is already registered — please log in",
+err_email_registered:"This email is already registered — please log in",
+err_bad_login:"Incorrect email or password",
+err_email_unconfirmed:"Please click the confirmation link in your email first",
+err_email_send:"Email send failed — the mail service may be temporarily down, please try again later",
+err_network:"Network error — please check your connection and try again",
+err_duplicate:"This already exists — please do not submit again",
+err_generic:"Operation failed — please try again",
+loading:"Loading…",no_address:"No saved address yet",no_orders:"No orders yet",
+edit:"✏️ Edit",my_orders:"My Orders",add_address:"+ Add Address",logout:"Log out",
+total_spent:"Total spent",points:"Points",points_unit:"pts",
+paid_amount:"Paid",view_payment:"View payment info",order_no:"Order no.",
+order_submitted:"Order submitted",
+copy:"📋 Copy",contact_pay:"Please contact us via WeChat or email to confirm the payment method — we will arrange shipping for you as soon as possible",
+done:"Done",
+my_points:"My points",
+points_redeem:"You have <strong>{pts}</strong> points — you can redeem <strong>10,000</strong> points for <strong>$10</strong> off this order",
+goods_amount:"Items total",member_discount:"Member discount ({level} {pct}%)",
+points_discount:"Points redeemed",shipping:"Shipping",
+free_shipping:"Free shipping",submit_order:"Place Order",
+no_search_results:"No matching products found",no_products:"No products yet — please add some in the admin panel",
+incl_fee:"incl. service fee",add_to_cart:"Add to Bag",continue_browsing:"Continue browsing",
+tier_hint:"Discounted price applied",pieces:"pcs",
+welcome_register:"Welcome — registration complete!",welcome_back:"Welcome back",
+order_pending:"⏳ Order submitted — awaiting payment confirmation",
+order_paid:"📦 Payment received — packing your order…",
+order_shipped:"🚚 Shipped — tracking number: {tn}",
+order_shipped_no_tn:"🚚 Shipped — tracking number: (to be added)",
+order_completed:"✅ Delivered",order_cancelled:"❌ Order cancelled"
+},
+fr:{
+page_title:"True North Finds · Trouvailles de Chine, livrées au Canada",
+tagline:"Des trouvailles festives choisies en Chine, livrées partout au Canada — contrôle qualité, emballage et expédition, en toute transparence et avec suivi",
+admin:"Admin",cart:"Panier",login:"Connexion",register:"S'inscrire",
+products_title:"Produits en vedette",products_sub:"Trouvailles festives choisies en Chine",
+search_ph:"Rechercher un produit…",
+process_title:"Comment ça marche",process_sub:"Quatre étapes, du choix à la livraison",
+step1_t:"Choisir un produit",step1_d:"Parcourez le site et choisissez vos trouvailles festives de Chine",
+step2_t:"Commander et payer",step2_d:"Ajoutez au panier, puis contactez-nous pour confirmer votre mode de paiement",
+step3_t:"Nous achetons en Chine",step3_d:"Nous achetons en Chine, contrôlons la qualité, emballons et expédions vers le Canada",
+step4_t:"Recevoir vos achats",step4_d:"Livraison locale au Canada par courrier suivi",
+pay_title:"Modes de paiement",pay_sub:"Veuillez nous contacter pour confirmer votre mode de paiement",
+pay_contact:"Confirmer le paiement par contact",pay_contact_d:"Contactez-nous sur WeChat ou par courriel pour confirmer votre paiement — nous organiserons l’expédition une fois confirmé",
+price_note:"Tous les prix sont affichés en dollars canadiens (CAD)",
+points_note:"Points : gagnez 10 points par 1 $ dépensé ; tous les 10 000 points peuvent être échangés contre 10 $ de réduction sur une commande. Le niveau de membre augmente automatiquement avec vos achats — plus le niveau est élevé, plus la réduction est grande.",
+contact_title:"Contactez-nous",contact_sub:"Une question ou un produit précis à trouver ? Contactez-moi à tout moment.",
+footer1:"🍁 True North Finds · Trouvailles de Chine · livrées partout au Canada",
+footer2:"Ce site est une vitrine statique — veuillez confirmer vos commandes par WeChat ou par courriel",
+detail_title:"Détails du produit",cart_title:"🛒 Panier",cart_empty:"Votre panier est vide",
+total:"Total",checkout_btn:"Passer à la caisse →",
+my_account:"Mon compte",address_title:"Adresse de livraison",save_address:"Enregistrer l'adresse",
+auth_email_tab:"Courriel",auth_phone_tab:"Code SMS",
+auth_lastname_ph:"Nom de famille",auth_firstname_ph:"Prénom",auth_phone_ph:"Numéro de téléphone",
+auth_email_ph:"Courriel",auth_pw_ph:"Mot de passe (min. 6 caractères)",
+auth_forgot:"Mot de passe oublié ?",auth_otp_ph:"Code à 6 chiffres",
+addr_name_ph:"Nom du destinataire",addr_phone_ph:"Téléphone",addr_address_ph:"Adresse complète",
+checkout_title:"Confirmer la commande",
+cloud_online:"Synchronisé",cloud_offline:"Mode local",
+toast_added:"Ajouté au panier !",
+toast_otp_sent:"Code de vérification envoyé — vérifiez vos messages",
+toast_register_check_email:"Inscription réussie ! Vérifiez votre courriel et cliquez sur le lien de confirmation pour vous connecter.",
+toast_reset_sent:"Courriel de réinitialisation envoyé — vérifiez votre boîte de réception",
+toast_send_failed:"Échec de l'envoi : ",
+toast_enter_email_first:"Veuillez d'abord saisir votre courriel dans le champ prévu",
+toast_add_addr_first:"Veuillez d'abord ajouter une adresse de livraison",
+toast_logged_out:"Vous êtes déconnecté(e)",
+toast_registered_login:"Inscription réussie ! Veuillez vous reconnecter.",
+toast_addr_saved:"Adresse enregistrée",
+toast_copied:"Montant copié : $",
+toast_copy_failed:"Copie impossible — veuillez saisir le montant manuellement : $",
+no_account:"Pas encore de compte ?",has_account:"Vous avez déjà un compte ?",
+register_now:"S'inscrire",go_login:"Se connecter",
+send_otp:"Envoyer le code",resend_otp:"Renvoyer",resend_in:"Renvoi possible dans {sec} s",
+sending:"Envoi en cours…",verifying:"Vérification en cours…",
+verify_login:"Vérifier et se connecter",verify_register:"Vérifier et s'inscrire",
+processing:"Traitement en cours…",saving:"Enregistrement en cours…",submitting:"Envoi en cours…",
+err_enter_phone:"Veuillez saisir votre numéro de téléphone",err_enter_name:"Veuillez saisir votre nom et votre prénom",
+err_enter_otp:"Veuillez saisir le code de vérification",err_bad_email:"Veuillez saisir une adresse courriel valide",
+err_short_pw:"Le mot de passe doit contenir au moins 6 caractères",err_addr_incomplete:"Veuillez remplir toutes les informations du destinataire",
+err_session_expired:"Votre session a expiré — veuillez vous reconnecter",
+err_phone_not_registered:"Ce numéro n'est pas inscrit — veuillez passer à « S'inscrire »",
+err_rate_limit:"Trop de demandes — veuillez réessayer plus tard",
+err_otp_invalid:"Code incorrect ou expiré — veuillez en demander un nouveau",
+err_phone_registered:"Ce numéro est déjà inscrit — veuillez vous connecter",
+err_email_registered:"Ce courriel est déjà inscrit — veuillez vous connecter",
+err_bad_login:"Courriel ou mot de passe incorrect",
+err_email_unconfirmed:"Veuillez d'abord cliquer sur le lien de confirmation dans votre courriel",
+err_email_send:"Échec de l'envoi du courriel — le service est peut-être temporairement indisponible, veuillez réessayer plus tard",
+err_network:"Erreur réseau — vérifiez votre connexion et réessayez",
+err_duplicate:"Ces données existent déjà — veuillez ne pas soumettre de nouveau",
+err_generic:"Échec de l'opération — veuillez réessayer",
+loading:"Chargement…",no_address:"Aucune adresse enregistrée",no_orders:"Aucune commande pour le moment",
+edit:"✏️ Modifier",my_orders:"Mes commandes",add_address:"+ Ajouter une adresse",logout:"Se déconnecter",
+total_spent:"Total dépensé",points:"Points",points_unit:"pts",
+paid_amount:"Payé",view_payment:"Voir les informations de paiement",order_no:"Nº de commande",
+order_submitted:"Commande envoyée",
+copy:"📋 Copier",contact_pay:"Veuillez nous contacter par WeChat ou par courriel pour confirmer le mode de paiement — nous organiserons l’expédition dès que possible",
+done:"Terminé",
+my_points:"Mes points",
+points_redeem:"Vous avez <strong>{pts}</strong> points — vous pouvez échanger <strong>10 000</strong> points contre <strong>10 $</strong> de réduction sur cette commande",
+goods_amount:"Total des articles",member_discount:"Réduction membre ({level} {pct} %)",
+points_discount:"Points échangés",shipping:"Livraison",
+free_shipping:"Livraison gratuite",submit_order:"Passer la commande",
+no_search_results:"Aucun produit correspondant",no_products:"Aucun produit pour le moment — veuillez en ajouter dans l'administration",
+incl_fee:"frais de service inclus",add_to_cart:"Ajouter au panier",continue_browsing:"Continuer mes achats",
+tier_hint:"Prix réduit appliqué",pieces:"art.",
+welcome_register:"Bienvenue — inscription terminée !",welcome_back:"Bon retour",
+order_pending:"⏳ Commande envoyée — en attente de confirmation du paiement",
+order_paid:"📦 Paiement reçu — préparation de votre commande…",
+order_shipped:"🚚 Colis expédié — numéro de suivi : {tn}",
+order_shipped_no_tn:"🚚 Colis expédié — numéro de suivi : (à venir)",
+order_completed:"✅ Colis livré",order_cancelled:"❌ Commande annulée"
+}
+};
+function t(key,vars){let s=(I18N[currentLang]&&I18N[currentLang][key])||I18N.zh[key]||key;if(vars){for(const k in vars)s=s.split('{'+k+'}').join(vars[k])}return s}
+// 统一价格格式：两位小数 + CAD（2026-11-15 修复：价格显示不统一、缺币种）
+function fmtPrice(n){return '$'+Number(n||0).toFixed(2)+' CAD'}
+const CAT_I18N={
+all:{zh:"全部",en:"All",fr:"Tout"},
+food:{zh:"食品",en:"Food",fr:"Alimentation"},
+fashion:{zh:"服饰",en:"Fashion",fr:"Mode"},
+beauty:{zh:"美妆",en:"Beauty",fr:"Beauté"},
+other:{zh:"其他",en:"Other",fr:"Autres"},
+health:{zh:"保健品",en:"Health & Wellness",fr:"Santé et bien-être"},
+"new-year":{zh:"元旦",en:"New Year's Day",fr:"Jour de l'An"},
+"family-day":{zh:"家庭日",en:"Family Day",fr:"Jour de la famille"},
+"valentines-day":{zh:"情人节",en:"Valentine's Day",fr:"Saint-Valentin"},
+easter:{zh:"复活节",en:"Easter",fr:"Pâques"},
+"victoria-day":{zh:"维多利亚日",en:"Victoria Day",fr:"Fête de la Reine"},
+"canada-day":{zh:"加拿大国庆日",en:"Canada Day",fr:"Fête du Canada"},
+"civic-holiday":{zh:"公民假日",en:"Civic Holiday",fr:"Congé civique"},
+"mothers-day":{zh:"母亲节",en:"Mother's Day",fr:"Fête des Mères"},
+"fathers-day":{zh:"父亲节",en:"Father's Day",fr:"Fête des Pères"},
+"labour-day":{zh:"劳动节",en:"Labour Day",fr:"Fête du Travail"},
+thanksgiving:{zh:"感恩节",en:"Thanksgiving",fr:"Action de grâce"},
+halloween:{zh:"万圣节",en:"Halloween",fr:"Halloween"},
+"remembrance-day":{zh:"国殇日",en:"Remembrance Day",fr:"Jour du Souvenir"},
+christmas:{zh:"圣诞节",en:"Christmas",fr:"Noël"},
+"boxing-day":{zh:"节礼日",en:"Boxing Day",fr:"Lendemain de Noël"}
+};
+// 节日日期（2026-11-15 新增：每个节日的发生日期；固定日期为每年同一天，可变日期按规则推算，2027年日期见工作表）
+const HOLIDAY_DATES={
+"new-year":{zh:"每年1月1日",en:"Jan 1 every year",fr:"1er janv. chaque année"},
+"family-day":{zh:"每年2月第3个周一",en:"3rd Mon in Feb",fr:"3e lun. de fév."},
+"valentines-day":{zh:"每年2月14日",en:"Feb 14 every year",fr:"14 fév. chaque année"},
+easter:{zh:"春分后首个周日（2027年3月28日）",en:"First Sun after spring equinox (Mar 28, 2027)",fr:"1er dim. après l'équinoxe (28 mars 2027)"},
+"victoria-day":{zh:"5月25日前最后一个周一",en:"Last Mon before May 25",fr:"Dernier lun. avant le 25 mai"},
+"canada-day":{zh:"每年7月1日",en:"Jul 1 every year",fr:"1er juil. chaque année"},
+"civic-holiday":{zh:"每年8月第1个周一",en:"1st Mon in Aug",fr:"1er lun. d'août"},
+"mothers-day":{zh:"每年5月第2个周日",en:"2nd Sun in May",fr:"2e dim. de mai"},
+"fathers-day":{zh:"每年6月第3个周日",en:"3rd Sun in Jun",fr:"3e dim. de juin"},
+"labour-day":{zh:"每年9月第1个周一",en:"1st Mon in Sep",fr:"1er lun. de sept."},
+thanksgiving:{zh:"每年10月第2个周一",en:"2nd Mon in Oct",fr:"2e lun. d'oct."},
+halloween:{zh:"每年10月31日",en:"Oct 31 every year",fr:"31 oct. chaque année"},
+"remembrance-day":{zh:"每年11月11日",en:"Nov 11 every year",fr:"11 nov. chaque année"},
+christmas:{zh:"每年12月25日",en:"Dec 25 every year",fr:"25 déc. chaque année"},
+"boxing-day":{zh:"每年12月26日",en:"Dec 26 every year",fr:"26 déc. chaque année"}
+};
+function getHolidayDate(catId){const d=HOLIDAY_DATES[catId];if(!d)return'';return d[currentLang]||d.zh||''}
+const LEVEL_I18N={"普通会员":{en:"Regular Member",fr:"Membre régulier"}};
+// 商品翻译（按商品 id；中文名默认用数据库里的名字；缺失时回落到数据库名字/描述）
+const PRODUCT_I18N={
+"new-year-1":{name:{en:"ONEMOKA moka pot gift box — dual-valve coffee maker set, gift for coffee lovers",fr:"Coffret cadeau cafetière moka ONEMOKA — cafetière à double valve, cadeau pour amateurs de café"},desc:{zh:"ONEMOKA 摩卡壶礼盒，双阀设计，是咖啡爱好者的理想礼物。",en:"ONEMOKA moka pot gift box — dual-valve coffee maker set, gift for coffee lovers",fr:"Coffret cadeau cafetière moka ONEMOKA à double valve, le cadeau idéal pour les amateurs de café."}},
+"new-year-2":{name:{en:"2027 desk calendar — creative desktop planner/calendar notebook, retro minimalist style",fr:"Calendrier de bureau 2027 — agenda et calendrier créatif, style rétro et minimaliste"},desc:{zh:"2027 年桌面台历，创意记事日历本，复古简约风格，可作桌面摆件。",en:"2027 desk calendar — creative desktop planner/calendar notebook, retro minimalist style",fr:"Calendrier de bureau 2027, agenda créatif au style rétro et minimaliste, parfait comme objet décoratif."}},
+"new-year-3":{name:{en:"2027 New Year decoration — custom KT-board backdrop/standing display for New Year's Day events and shop decor",fr:"Décoration du Nouvel An 2027 — panneau KT personnalisé pour fêtes et boutiques"},desc:{zh:"2027 新年装饰，定制 KT 板背景墙与立牌，适合元旦活动与店铺布置。",en:"2027 New Year decoration — custom KT-board backdrop/standing display for New Year's Day events and shop decor",fr:"Décoration du Nouvel An 2027, panneau KT personnalisé pour les fêtes du Nouvel An et la décoration de boutiques."}},
+"new-year-4":{name:{en:"Charabanc fireplace aroma diffuser — retro fireplace-style home fragrance, New Year gift",fr:"Diffuseur d'arômes cheminée Charabanc — parfum d'ambiance rétro, cadeau du Nouvel An"},desc:{zh:"Charabanc 壁炉香薰机，复古壁炉造型家居香氛，新年送礼佳品。",en:"Charabanc fireplace aroma diffuser — retro fireplace-style home fragrance, New Year gift",fr:"Diffuseur d'arômes en forme de cheminée Charabanc, parfum d'ambiance rétro, cadeau idéal pour le Nouvel An."}},
+"new-year-5":{name:{en:"Forbidden City Jinshan tea set — full ceramic tea set with tray, for home/office and gifting",fr:"Service à thé Jinshan de la Cité interdite — service complet en céramique avec plateau, pour la maison, le bureau et les cadeaux"},desc:{zh:"故宫金山茶具套装，整套陶瓷茶具配茶盘，家用、办公、送礼皆宜。",en:"Forbidden City Jinshan tea set — full ceramic tea set with tray, for home/office and gifting",fr:"Service à thé Jinshan de la Cité interdite, service complet en céramique avec plateau, pour la maison, le bureau ou à offrir."}},
+"christmas-1":{name:{en:"Winter scarf gift box — 2026 Christmas gift for girlfriend/friend, elegant red scarf gift set",fr:"Coffret cadeau écharpe d'hiver — cadeau de Noël 2026 pour amie ou conjointe, élégant ensemble écharpe rouge"},desc:{zh:"冬季围巾礼盒，2026 圣诞节送女友、朋友的高级感礼物，优雅红色围巾套装。",en:"Winter scarf gift box — 2026 Christmas gift for girlfriend/friend, elegant red scarf gift set",fr:"Coffret cadeau écharpe d'hiver, cadeau de Noël 2026 pour une amie ou votre conjointe, élégant ensemble écharpe rouge."}},
+"christmas-2":{name:{en:"Santa Claus plush doll bag pendant / keychain — cute Christmas plush charm for bags",fr:"Pendentif en peluche père Noël pour sac / porte-clés — mignon charme en peluche de Noël"},desc:{zh:"圣诞老人毛绒玩偶包包挂件/钥匙扣，可爱的圣诞毛绒挂饰。",en:"Santa Claus plush doll bag pendant / keychain — cute Christmas plush charm for bags",fr:"Pendentif en peluche père Noël pour sac ou porte-clés, mignon charme en peluche pour Noël."}},
+"christmas-3":{name:{en:"Christmas brooch — cute cartoon Santa metal pin badge, clothing accessory and gift",fr:"Broche de Noël — joli badge métallique père Noël, accessoire vestimentaire et cadeau"},desc:{zh:"圣诞节胸针，可爱卡通圣诞老人金属徽章，衣服配饰与礼物皆宜。",en:"Christmas brooch — cute cartoon Santa metal pin badge, clothing accessory and gift",fr:"Broche de Noël, joli badge métallique père Noël, accessoire vestimentaire et cadeau."}},
+"christmas-4":{name:{en:"Christmas LED string lights — festive Christmas-tree atmosphere fairy lights for bedroom/room decor",fr:"Guirlande lumineuse LED de Noël — guirlande féerique pour une ambiance de Noël dans la chambre"},desc:{zh:"圣诞 LED 彩灯串，营造圣诞树氛围的装饰灯串，适合卧室与房间布置。",en:"Christmas LED string lights — festive Christmas-tree atmosphere fairy lights for bedroom/room decor",fr:"Guirlande lumineuse LED de Noël, guirlande féerique pour créer une ambiance de Noël dans la chambre."}},
+"christmas-5":{name:{en:"Christmas tree — 2026 new home DIY set, dense premium-style Christmas tree with lights for living-room decor",fr:"Sapin de Noël — ensemble DIY 2026, sapin dense et élégant avec lumières pour le salon"},desc:{zh:"圣诞树，2026 新款家用 DIY 套装，加密高级感圣诞树带灯，客厅装饰摆件。",en:"Christmas tree — 2026 new home DIY set, dense premium-style Christmas tree with lights for living-room decor",fr:"Sapin de Noël, ensemble DIY 2026, sapin dense et élégant avec lumières, décoration pour le salon."}},
+"boxing-day-1":{name:{en:"Embroidered scarf gift box with touchscreen gloves — warm winter gift for girlfriend/friend",fr:"Coffret cadeau écharpe brodée avec gants tactiles — cadeau d'hiver chaleureux pour amie ou conjointe"},desc:{zh:"刺绣围巾礼盒配触屏手套，冬季保暖礼物，送女友、闺蜜皆宜。",en:"Embroidered scarf gift box with touchscreen gloves — warm winter gift for girlfriend/friend",fr:"Coffret cadeau écharpe brodée avec gants tactiles, cadeau d'hiver chaleureux pour une amie ou votre conjointe."}},
+"boxing-day-2":{name:{en:"Flameless aroma diffuser gift box with scented stones — long-lasting home fragrance for bedroom",fr:"Coffret cadeau diffuseur sans flamme avec pierres parfumées — parfum d'ambiance durable pour la chambre"},desc:{zh:"无火香薰礼盒配扩香晶石，持久家居香氛，适合卧室。",en:"Flameless aroma diffuser gift box with scented stones — long-lasting home fragrance for bedroom",fr:"Coffret cadeau diffuseur sans flamme avec pierres parfumées, parfum d'ambiance durable pour la chambre."}},
+"boxing-day-3":{name:{en:"Vanow insulated thermos cup with ceramic inner liner, tea-separating design — gift-box packaged",fr:"Tasse isotherme Vanow avec doublure en céramique et infuseur à thé — emballage cadeau"},desc:{zh:"Vanow 保温杯，陶瓷内胆，茶水分离设计，礼盒包装。",en:"Vanow insulated thermos cup with ceramic inner liner, tea-separating design — gift-box packaged",fr:"Tasse isotherme Vanow avec doublure en céramique et infuseur à thé séparé, emballage cadeau."}},
+"boxing-day-4":{name:{en:"Disney Lotso (Strawberry Bear) rechargeable hand warmer — officially licensed cute winter gift",fr:"Chauffe-mains rechargeable Lotso (Ours Fraise) Disney — cadeau d'hiver mignon, licence officielle"},desc:{zh:"迪士尼草莓熊暖手宝，充电式，正版授权，可爱的冬季礼物。",en:"Disney Lotso (Strawberry Bear) rechargeable hand warmer — officially licensed cute winter gift",fr:"Chauffe-mains rechargeable Lotso (Ours Fraise) Disney, cadeau d'hiver mignon sous licence officielle."}},
+"boxing-day-5":{name:{en:"Heated wearable shawl blanket — portable knitted lap blanket for office/nap, warm gift",fr:"Couverture-châle chauffante à porter — couverture tricotée portable pour le bureau ou la sieste, cadeau chaleureux"},desc:{zh:"发热披肩毛毯，可穿戴针织毛毯，便携办公室午睡毯，温暖礼物。",en:"Heated wearable shawl blanket — portable knitted lap blanket for office/nap, warm gift",fr:"Couverture-châle chauffante à porter, couverture tricotée portable pour le bureau ou la sieste, cadeau chaleureux."}},
+"family-day-1":{name:{en:"Large Rich Man China Tour Deluxe Board Game, Two-in-One Flying Chess / Carpet Mat, Family Table Game for Children and Adults"}},
+"family-day-2":{name:{en:"Seaside Town Wooden 1000-Piece Puzzle, Adult Stress-Relief Educational DIY Puzzle, Home Gift"}},
+"family-day-3":{name:{en:"\"Family Harmony Brings Prosperity\" Panda Ornament, Living Room / Entrance / TV Cabinet Home Decoration, Housewarming Gift"}},
+"family-day-4":{name:{en:"Gift-Boxed Caldecott Award Master Picture Book Set, 10 Books, Parent-Child Bedtime Stories for Young Children"}},
+"family-day-5":{name:{en:"Speed Gomoku / Tic-Tac-Toe Team-Building Game Set, Fun Sports Day / Family Outdoor Game Equipment"}},
+"easter-1":{name:{en:"Alice in Wonderland Rabbit Basket Ornament, Retro Resin Craft for Easter, Home / Garden Decoration"}},
+"easter-2":{name:{en:"Easter Bunny Resin Ornament for Outdoor Courtyard / Balcony / Garden Landscaping Decoration, Small Gift"}},
+"easter-3":{name:{en:"Easter Bunny Flower Basket with Easter Eggs, Living Room / Bedroom Wall Decoration, Ins-Style Hanging Ornament"}},
+"easter-4":{name:{en:"New LED Cracked-Egg Birch Tree Easter Ambient Light, Bedroom Decoration, Warm Glowing Artificial Tree Lamp"}},
+"easter-5":{name:{en:"Forest-Style Ins Artificial Easter Straw-Woven Rabbit Ornament, Living Room / Balcony Decoration, Nordic Country Style"}},
+"victoria-day-1":{name:{en:"Large Outdoor Charcoal BBQ Grill Rack, Full Home / Courtyard Charcoal Grill Set, Portable for Field Use"}},
+"victoria-day-2":{name:{en:"Panda Sculpture Creative Ornament for Park / Lawn / Villa, Outdoor Garden / Courtyard Lifelike Animal Decoration"}},
+"victoria-day-3":{name:{en:"Checkered Cat Picnic Mat, Thickened Moisture-Proof Outdoor Waterproof Beach / Camping Mat with Shoulder Strap"}},
+"victoria-day-4":{name:{en:"Solar Bubble-Ball Ambient Light String, Courtyard / Camping Canopy LED String Lights, Waterproof Garden Decoration"}},
+"victoria-day-5":{name:{en:"Upgraded Outdoor Picnic Folding Table and Chair Set, Portable Camping / Fishing Equipment, Roll-Up Table and Moon Chair"}},
+"canada-day-1":{name:{en:"Canada National Flag Desk Flag with Stand, Desktop Flag Ornament for Office / Meeting Room Decoration"}},
+"canada-day-2":{name:{en:"90×150 cm Canada National Flag, 3×5 ft Polyester Flag"}},
+"canada-day-3":{name:{en:"Canada Maple Leaf Fridge Magnet Ornament, Minimalist Ins-Style Home Decoration"}},
+"canada-day-4":{name:{en:"Canada Flag Maple Leaf Metal Keychain, Travel Souvenir, Bag / Key Decoration"}},
+"canada-day-5":{name:{en:"No. 8 14×21 cm Canada Hand Flag, Small Hand-Waving Flag for National Day / Party Decoration"}},
+"civic-holiday-1":{name:{en:"Children's Beach Toy Set, Baby Seaside Sand-Digging Shovel, Hourglass, Bucket and Digging Tools, Straw Cart Set"}},
+"civic-holiday-2":{name:{en:"Outdoor Camping-Style Hanging Banner, Picnic Atmosphere Decoration Backdrop for Campsite / Team Building"}},
+"civic-holiday-3":{name:{en:"Cute Capybara Water Gun, Children's Cartoon Water / Beach Toy"}},
+"civic-holiday-4":{name:{en:"Large-Capacity Hand-Carried Picnic Basket Bag, Insulated / Keep-Warm / Keep-Cold Foldable Outdoor Picnic Basket"}},
+"civic-holiday-5":{name:{en:"Beach Castle Toy Set, Children's Seaside Sand Play Set with Shovel, Bucket, Hourglass and Digging Tools"}},
+"labour-day-1":{name:{en:"Train-shaped ceramic aroma diffuser / humidifier"}},
+"labour-day-2":{name:{en:"Portable touch table lamp / night light"}},
+"labour-day-3":{name:{en:"Cute sheep cushion / office chair back cushion"}},
+"labour-day-4":{name:{en:"Timid cat night light, voice-controlled bedside lamp"}},
+"labour-day-5":{name:{en:"Tent-shaped night light"}},
+"thanksgiving-1":{name:{en:"Vintage walnut glass rechargeable table lamp"}},
+"thanksgiving-2":{name:{en:"Silver-gilt Kung Fu tea set in gift box"}},
+"thanksgiving-3":{name:{en:"Jingdezhen blue-and-white rose round ceramic vase"}},
+"thanksgiving-4":{name:{en:"Sailing-boat desk ornament with helm pen holder"}},
+"thanksgiving-5":{name:{en:"Little elephant candle holder / Dream Island scented candle gift box"}},
+"halloween-1":{name:{en:"Halloween photo-area wall hanging / backdrop poster"}},
+"halloween-2":{name:{en:"Halloween static window stickers: pumpkin, bat, ghost, tombstone"}},
+"halloween-3":{name:{en:"Halloween light-up hand-held pumpkin lantern"}},
+"halloween-4":{name:{en:"Guitar-playing ghost night light / Halloween ornament"}},
+"halloween-5":{name:{en:"Light-up Halloween pumpkin lantern decoration"}},
+"remembrance-day-1":{name:{en:"Red artificial flower boutonniere / corsage pin"}},
+"remembrance-day-2":{name:{en:"Handmade crochet forget-me-not brooch, ready-made"}},
+"remembrance-day-3":{name:{en:"Forget-me-not bouquet brooch, blue flower pin"}},
+"remembrance-day-4":{name:{en:"Blue forget-me-not bouquet enamel brooch"}},
+"remembrance-day-5":{name:{en:"Silver forget-me-not enamel brooch / flower pin"}},
+"valentines-day-1":{name:{en:"Charabanc Fireplace Humidifier, Creative Aroma Diffuser Ambient Lamp – Valentine's Day / Qixi Gift"}},
+"valentines-day-2":{name:{en:"Charabanc Magic Flower Crystal Aroma Lamp, Bedroom Ambient Ornament – 520 / Birthday Gift for Her"}},
+"valentines-day-3":{name:{en:"Preserved-Flower Artificial Rose Bouquet – Birthday Gift for Wife / Girlfriend / Friend / Mum, Decorative Ornament"}},
+"valentines-day-4":{name:{en:"999 Fine Silver Cupid Necklace for Women, Premium Pendant – Birthday / Anniversary Gift for Girlfriend / Friend"}},
+"valentines-day-5":{name:{en:"Bowin Bear Plush Teddy Bear Doll in Sweater, Hugging Pillow Plush Toy – Gift for Her"}},
+"mothers-day-1":{name:{en:"Alpaca massager gift"}},
+"mothers-day-2":{name:{en:"Dunhuang Feitian ceramic lidded mug in gift box"}},
+"mothers-day-3":{name:{en:"Middle-aged/elderly women's winter padded coat with fur collar"}},
+"mothers-day-4":{name:{en:"Neck/shoulder massager with constant-temperature heat"}},
+"mothers-day-5":{name:{en:"Salt/flower night light, rechargeable bedside lamp with fragrance"}},
+"fathers-day-1":{name:{en:"\"Smooth sailing\" sailboat desk ornament with pen holder"}},
+"fathers-day-2":{name:{en:"Hero fountain pen + notebook gift set"}},
+"fathers-day-3":{name:{en:"Heat-resistant glass tea kettle / electric ceramic stove tea set"}},
+"fathers-day-4":{name:{en:"Pure titanium automatic tea brewer / health kettle"}},
+"fathers-day-5":{name:{en:"Magnetic automatic tea brewer / Kung Fu tea set"}},
+"boxing-day-6":{"name":{"en":"Men's Antibacterial Socks Gift Box — 7 Pairs"},"desc":{"zh":"男士抗菌袜礼盒（7双）","en":"Men's Antibacterial Socks Gift Box — 7 Pairs"}},
+"canada-day-6":{"name":{"en":"Maple Leaf Enamel Brooch — Double-Layer with Pearl Centre"},"desc":{"zh":"枫叶珐琅徽章（双层炫彩珍珠）","en":"Maple Leaf Enamel Brooch — Double-Layer with Pearl Centre"}},
+"canada-day-7":{"name":{"en":"Canadian Flag Stickers — 104-Piece Pack (Flag, Maple Leaf, Moose)"},"desc":{"zh":"加拿大国旗贴纸（104张）","en":"Canadian Flag Stickers — 104-Piece Pack (Flag, Maple Leaf, Moose)"}},
+"canada-day-8":{"name":{"en":"Maple Leaf Embroidered Iron-On Patch — 10 Colours"},"desc":{"zh":"枫叶刺绣布贴（10色，可熨可缝）","en":"Maple Leaf Embroidered Iron-On Patch — 10 Colours"}},
+"canada-day-9":{"name":{"en":"Handmade Maple Leaf Keychain — Enamel Leaves on Gold Chain"},"desc":{"zh":"手工枫叶钥匙扣（珐琅四叶）","en":"Handmade Maple Leaf Keychain — Enamel Leaves on Gold Chain"}},
+"canada-day-10":{"name":{"en":"Canadian Hand-Waving Flags — 21×14cm, Pair"},"desc":{"zh":"加拿大手摇小国旗（21×14cm，一对）","en":"Canadian Hand-Waving Flags — 21×14cm, Pair"}},
+"christmas-6":{"name":{"en":"3D Pop-Up Christmas Greeting Card with Envelope"},"desc":{"zh":"3D立体圣诞贺卡（带信封）","en":"3D Pop-Up Christmas Greeting Card with Envelope"}},
+"christmas-7":{"name":{"en":"Acrylic Christmas Tree Fridge Magnet"},"desc":{"zh":"亚克力圣诞树冰箱贴","en":"Acrylic Christmas Tree Fridge Magnet"}},
+"christmas-8":{"name":{"en":"Snowflake Christmas Keychain & Phone Charm"},"desc":{"zh":"圣诞雪花钥匙扣/手机挂件","en":"Snowflake Christmas Keychain & Phone Charm"}},
+"christmas-9":{"name":{"en":"Christmas Gold-Foil Stamp Sticker Set"},"desc":{"zh":"圣诞烫金邮票贴纸","en":"Christmas Gold-Foil Stamp Sticker Set"}},
+"christmas-10":{"name":{"en":"Snowflake Rhinestone Brooch Pin"},"desc":{"zh":"雪花水钻胸针","en":"Snowflake Rhinestone Brooch Pin"}},
+"civic-holiday-6":{"name":{"en":"Beach Watercolor PET Stickers — Summer Vacation Waterproof Sticker Pack"},"desc":{"zh":"抖音蓝调海滩水彩PET贴纸清新度假风ins防水贴画手账本手机壳装饰","en":"Beach Watercolor PET Stickers — Summer Vacation Waterproof Sticker Pack"}},
+"civic-holiday-7":{"name":{"en":"Iridescent Starfish & Shell Keychain — Ocean Charm"},"desc":{"zh":"炫彩海星贝壳海洋风蓝色挂件手机饰品相机包包背包饰品闺蜜礼物","en":"Iridescent Starfish & Shell Keychain — Ocean Charm"}},
+"civic-holiday-8":{"name":{"en":"Gold Henna Temporary Tattoo Stickers — Beach Party Edition"},"desc":{"zh":"烫金色大纹身贴纸婚礼沙滩派对银色手链背部逼真防水女生性感刺青","en":"Gold Henna Temporary Tattoo Stickers — Beach Party Edition"}},
+"civic-holiday-9":{"name":{"en":"Summer Ocean Fridge Magnets — Starfish & Shell Set"},"desc":{"zh":"夏日海洋冰箱贴仿真海星扇贝入户装饰磁铁磁吸式备忘留言贴冰箱贴","en":"Summer Ocean Fridge Magnets — Starfish & Shell Set"}},
+"civic-holiday-10":{"name":{"en":"Outdoor Camping Enamel Pin — Hiking & Tent Badge"},"desc":{"zh":"户外徒步登山系列户外露营背包帐篷设计合金烤漆胸针背包配饰徽章","en":"Outdoor Camping Enamel Pin — Hiking & Tent Badge"}},
+"easter-6":{"name":{"en":"Happy Easter 3D Resin Bunny & Egg Window Stickers — Large Sheet"},"desc":{"zh":"复活节立体贴纸（兔子/彩蛋/狐狸/小鸡大张）","en":"Happy Easter 3D Resin Bunny & Egg Window Stickers — Large Sheet"}},
+"easter-7":{"name":{"en":"Cute White Bunny Acrylic Keychain — 12 Expressions"},"desc":{"zh":"小白兔亚克力钥匙扣（12款表情）","en":"Cute White Bunny Acrylic Keychain — 12 Expressions"}},
+"easter-8":{"name":{"en":"Easter Egg Fridge Magnets — 20-Piece Set"},"desc":{"zh":"复活节彩蛋冰箱贴（20片）","en":"Easter Egg Fridge Magnets — 20-Piece Set"}},
+"easter-9":{"name":{"en":"Bunny Bookmark Clip — Metal, Cute Rabbit Page Marker"},"desc":{"zh":"兔子造型书签夹（金属）","en":"Bunny Bookmark Clip — Metal, Cute Rabbit Page Marker"}},
+"easter-10":{"name":{"en":"Bubble-Blowing Plush Chick Keychain — Press to Blow Bubbles"},"desc":{"zh":"会吐泡泡的小鸡毛绒钥匙扣","en":"Bubble-Blowing Plush Chick Keychain — Press to Blow Bubbles"}},
+"family-day-6":{"name":{"en":"Family Card Game Set — Party Card Games Bundle"},"desc":{"zh":"家庭桌游卡牌大全（一整套）","en":"Family Card Game Set — Party Card Games Bundle"}},
+"family-day-7":{"name":{"en":"Mini Jigsaw Puzzle 100 Pieces — Cartoon, 10 Designs Mixed"},"desc":{"zh":"卡通迷你拼图100片（10款混搭）","en":"Mini Jigsaw Puzzle 100 Pieces — Cartoon, 10 Designs Mixed"}},
+"family-day-8":{"name":{"en":"DIY Rainbow Loom Bracelet Making Kit — 28/32 Grid"},"desc":{"zh":"DIY手链编织套装（彩虹橡皮筋28格）","en":"DIY Rainbow Loom Bracelet Making Kit — 28/32 Grid"}},
+"family-day-9":{"name":{"en":"Kids Colouring Set with Markers — Quiet Focus Activity"},"desc":{"zh":"儿童涂色套装（含马克笔）","en":"Kids Colouring Set with Markers — Quiet Focus Activity"}},
+"family-day-10":{"name":{"en":"Snowflake Window Stickers — Static Cling, Christmas/New Year"},"desc":{"zh":"雪花窗贴（静电贴）","en":"Snowflake Window Stickers — Static Cling, Christmas/New Year"}},
+"halloween-6":{"name":{"en":"Halloween Pumpkin & Ghost Enamel Pin Set"},"desc":{"zh":"万圣节南瓜幽灵可爱搞怪卡通合金金属胸针小清新创意学生胸针配饰","en":"Halloween Pumpkin & Ghost Enamel Pin Set"}},
+"halloween-7":{"name":{"en":"Halloween Pumpkin Face Temporary Tattoos"},"desc":{"zh":"南瓜万圣节纹身贴派对新款脸贴一次性网红个性潮流万圣节儿童脸贴","en":"Halloween Pumpkin Face Temporary Tattoos"}},
+"halloween-8":{"name":{"en":"Halloween Pumpkin & Bat Wing Acrylic Keychain"},"desc":{"zh":"卡通万圣节系列南瓜亚克力钥匙扣蝙蝠翅膀钥匙圈装饰手工挂件礼品","en":"Halloween Pumpkin & Bat Wing Acrylic Keychain"}},
+"halloween-9":{"name":{"en":"Halloween Trick or Treat Greeting Card — Pumpkin, Ghost & Black Cat"},"desc":{"zh":"万圣节贺卡可爱南瓜幽灵黑猫插画节日祝福卡片派对礼物手写留言卡","en":"Halloween Trick or Treat Greeting Card — Pumpkin, Ghost & Black Cat"}},
+"halloween-10":{"name":{"en":"Halloween Pumpkin & Ghost Fridge Magnets"},"desc":{"zh":"万圣节冰箱贴可爱小南瓜幽灵冰箱贴拍立得固定日系","en":"Halloween Pumpkin & Ghost Fridge Magnets"}},
+"labour-day-6":{"name":{"en":"Mini Tool Keychain — Wrench, Hammer & Screwdriver Set"},"desc":{"zh":"仿工具个性搞怪钥匙扣小锤子扳手包包挂饰听诊器挂件百搭小巧挂件","en":"Mini Tool Keychain — Wrench, Hammer & Screwdriver Set"}},
+"labour-day-7":{"name":{"en":"Outdoor BBQ Checklist Sticker Sheets (18 Sheets)"},"desc":{"zh":"18张户外烧烤贴纸BBQ烧烤食材治愈系美食家庭烧烤露营装备烤串贴","en":"Outdoor BBQ Checklist Sticker Sheets (18 Sheets)"}},
+"labour-day-8":{"name":{"en":"BBQ Skewer Keychain — Grilled Food Charm"},"desc":{"zh":"网红ins精致烧烤钥匙链男创意食物钥匙挂饰小挂件女汽车钥匙扣潮","en":"BBQ Skewer Keychain — Grilled Food Charm"}},
+"labour-day-9":{"name":{"en":"Summer Picnic Postcards (10-Pack, 100×150 mm)"},"desc":{"zh":"夏日野餐卡片ins风森系田园风高颜值露营图案背景改造墙贴卡片","en":"Summer Picnic Postcards (10-Pack, 100×150 mm)"}},
+"labour-day-10":{"name":{"en":"Cartoon Wrench & Screw Brooch Pin"},"desc":{"zh":"趣味卡通螺钉活动扳手胸针可爱生活工具合金徽章服装包包配饰礼品","en":"Cartoon Wrench & Screw Brooch Pin"}},
+"new-year-6":{"name":{"en":"Outdoor Self-Heating Warm Patch"},"desc":{"zh":"山山户外高温暖贴","en":"Outdoor Self-Heating Warm Patch"}},
+"new-year-7":{"name":{"en":"Happy New Year Bottle Opener Keychain — \"Good Fortune\" Horse"},"desc":{"zh":"新年开瓶器钥匙扣（马上有钱）","en":"Happy New Year Bottle Opener Keychain — \"Good Fortune\" Horse"}},
+"new-year-8":{"name":{"en":"Lucky Gold Foil Blessing Stickers — Chinese Calligraphy"},"desc":{"zh":"烫金文字贴纸（祈福许愿）","en":"Lucky Gold Foil Blessing Stickers — Chinese Calligraphy"}},
+"new-year-9":{"name":{"en":"\"2027\" Acrylic Cake Topper Picks — New Year Cake Decoration"},"desc":{"zh":"2027数字蛋糕插牌（亚克力）","en":"\"2027\" Acrylic Cake Topper Picks — New Year Cake Decoration"}},
+"new-year-10":{"name":{"en":"Mini Champagne Glass Keychain — Toast Beer Mug Charm"},"desc":{"zh":"迷你香槟杯钥匙扣（啤酒杯造型）","en":"Mini Champagne Glass Keychain — Toast Beer Mug Charm"}},
+"remembrance-day-6":{"name":{"en":"Lest We Forget Red Poppy Brooch Pin — Remembrance Day Enamel Badge"},"desc":{"zh":"Lest We Forget胸针虞美人罂粟花纪念徽章UV印刷环保合金衣服装饰","en":"Lest We Forget Red Poppy Brooch Pin — Remembrance Day Enamel Badge"}},
+"remembrance-day-7":{"name":{"en":"Red Poppy (Corn Poppy) PET Sticker Pack (100 pcs) — Remembrance Poppy Stickers"},"desc":{"zh":"100张虞美人花卉PET贴纸精致浪漫素材花卉手账贴画高清手机壳装饰","en":"Red Poppy (Corn Poppy) PET Sticker Pack (100 pcs) — Remembrance Poppy Stickers"}},
+"remembrance-day-8":{"name":{"en":"Red Poppy Flower Heads (5 pcs) — Fabric Remembrance Poppies"},"desc":{"zh":"5pcs虞美人仿真花头 DIY装饰发夹配件罂粟花头婚庆家居装饰假花","en":"Red Poppy Flower Heads (5 pcs) — Fabric Remembrance Poppies"}},
+"remembrance-day-9":{"name":{"en":"Remembrance Poppy Acrylic Keychain — \"Remember and Honor\""},"desc":{"zh":"“铭记与致敬”虞美人主题亚克力钥匙扣","en":"Remembrance Poppy Acrylic Keychain — \"Remember and Honor\""}},
+"remembrance-day-10":{"name":{"en":"Forget-Me-Not Acrylic Keychain — Blue Flower Bouquet"},"desc":{"zh":"勿忘我亚克力钥匙扣（永生花）","en":"Forget-Me-Not Acrylic Keychain — Blue Flower Bouquet"}},
+"thanksgiving-6":{"name":{"en":"Canada Maple Leaf & Moose Fridge Magnet"},"desc":{"zh":"加拿大枫叶驼鹿地标冰箱贴立体磁性贴旅行伴手礼礼物可爱家居装饰","en":"Canada Maple Leaf & Moose Fridge Magnet"}},
+"thanksgiving-7":{"name":{"en":"Harvest Pumpkin Keychain — 3D Pumpkin Charm"},"desc":{"zh":"仿真蔬菜南瓜钥匙扣ins甜美少女心学生书包挂件日韩百搭包包饰品","en":"Harvest Pumpkin Keychain — 3D Pumpkin Charm"}},
+"thanksgiving-8":{"name":{"en":"Autumn Harvest Sticker Pack (100 pcs) — Fall Leaves & Pumpkins"},"desc":{"zh":"100张创意秋日丰收贴纸秋天涂鸦枫叶diy装饰手机壳行李箱防水贴画","en":"Autumn Harvest Sticker Pack (100 pcs) — Fall Leaves & Pumpkins"}},
+"thanksgiving-9":{"name":{"en":"Thanksgiving Thank-You Greeting Cards — Sunflower & Chrysanthemum (2-Pack)"},"desc":{"zh":"感恩留言卡高级感秋菊向日葵手绘贺卡节日创意伴手礼感谢祝福卡片","en":"Thanksgiving Thank-You Greeting Cards — Sunflower & Chrysanthemum (2-Pack)"}},
+"thanksgiving-10":{"name":{"en":"Happy Thanksgiving Round Enamel Pin — Turkey & Pumpkin Wreath"},"desc":{"zh":"可爱卡通感恩节快乐圆形胸针趣味火鸡南瓜合金徽章百搭个性配饰","en":"Happy Thanksgiving Round Enamel Pin — Turkey & Pumpkin Wreath"}},
+"victoria-day-6":{"name":{"en":"Mini Crown Keychain — Colourful Alloy Crown Charm"},"desc":{"zh":"迷你皇冠钥匙扣（彩色合金）","en":"Mini Crown Keychain — Colourful Alloy Crown Charm"}},
+"victoria-day-7":{"name":{"en":"Little Crown Magnet — Strong Magnetic Fridge/Whiteboard Magnet"},"desc":{"zh":"小皇冠冰箱贴（强磁）","en":"Little Crown Magnet — Strong Magnetic Fridge/Whiteboard Magnet"}},
+"victoria-day-8":{"name":{"en":"Rainbow Glow Stick Bracelets — Glow-in-the-Dark Party Wristbands"},"desc":{"zh":"七彩荧光棒手环（夜光）","en":"Rainbow Glow Stick Bracelets — Glow-in-the-Dark Party Wristbands"}},
+"victoria-day-9":{"name":{"en":"Canadian Flag Toothpick Flags — 6.5cm Party Food Picks"},"desc":{"zh":"加拿大国旗牙签旗（6.5cm，15cm加长）","en":"Canadian Flag Toothpick Flags — 6.5cm Party Food Picks"}},
+"victoria-day-10":{"name":{"en":"Fireworks PET Stickers — Gold Foil 3D Journal Stickers"},"desc":{"zh":"烟花烫金手账贴纸（PET立体）","en":"Fireworks PET Stickers — Gold Foil 3D Journal Stickers"}},
+"p1":{name:{en:"Maple Brownie",fr:"Brownie à l'érable"},desc:{zh:"加拿大原产枫糖制作，浓郁香甜，独立包装，适合送礼或自享。每盒12块，保质期6个月。",en:"Made with pure Canadian maple syrup — rich and sweet, individually wrapped. Perfect as a gift or for yourself. 12 pieces per box, 6-month shelf life.",fr:"Préparé avec du sirop d'érable pur du Canada — riche et sucré, emballé individuellement. Parfait à offrir ou à savourer. 12 morceaux par boîte, conservation de 6 mois."}},
+"p2":{name:{en:"Canada Goose Expedition Parka",fr:"Parka Expedition Canada Goose"},desc:{zh:"经典 Expedition 系列，625蓬松度白鸭绒，可抵御-30°C严寒。加拿大专柜直采，含防伪标签。",en:"Classic Expedition series with 625 fill-power white duck down, rated to -30°C. Sourced directly from a Canadian boutique, with authenticity tag.",fr:"Série classique Expedition, duvet de canard blanc 625, résiste jusqu'à -30 °C. Acheté directement en boutique au Canada, avec étiquette d'authenticité."}},
+"p3":{name:{en:"UGG Classic Snow Boots",fr:"Bottes de neige classiques UGG"},desc:{zh:"澳洲美利奴羊毛内里，防滑橡胶大底。加拿大专柜采购，多色可选，尺码齐全。",en:"Australian Merino wool lining with a non-slip rubber sole. Sourced from a Canadian boutique; multiple colours and full size range available.",fr:"Doublure en laine mérinos d'Australie et semelle antidérapante en caoutchouc. Acheté en boutique au Canada; plusieurs couleurs et toutes les tailles disponibles."}},
+"p4":{name:{en:"Canadian Craft Beer Combo (6 bottles)",fr:"Coffret de bières artisanales canadiennes (6 bouteilles)"},desc:{zh:"6瓶装精选本地精酿啤酒，包含 IPA、Stout、Pale Ale 各2瓶。冰袋保温发货。",en:"Six bottles of selected local craft beer — 2 each of IPA, Stout and Pale Ale. Shipped with ice packs.",fr:"Six bouteilles de bières artisanales locales — 2 IPA, 2 Stouts et 2 Pale Ales. Expédié avec des blocs réfrigérants."}},
+"p5":{name:{en:"The Ordinary Serum Set",fr:"Coffret de sérums The Ordinary"},desc:{zh:"加拿大本土护肤品牌，成分党最爱。含烟酰胺、透明质酸、维C精华各一瓶。",en:"Beloved Canadian skincare brand, a favourite with ingredient-conscious buyers. Includes one bottle each of niacinamide, hyaluronic acid and vitamin C serum.",fr:"Marque canadienne de soins très appréciée des amateurs d'ingrédients. Comprend un flacon de niacinamide, un d'acide hyaluronique et un de sérum à la vitamine C."}},
+"p6":{name:{en:"Maple Syrup Gift Box 250ml × 3",fr:"Coffret cadeau sirop d'érable 250 ml × 3"},desc:{zh:"100%纯枫糖浆，加拿大魁北克特产。A级琥珀色，口感醇厚，礼盒包装。",en:"100% pure maple syrup, a Québec specialty. Grade A amber, rich taste, gift-box packaged.",fr:"Sirop d'érable 100 % pur, spécialité du Québec. Ambré de catégorie A, goût riche, emballage cadeau."}}
+};
+function langLocale(){return currentLang==='zh'?'zh-CN':currentLang==='en'?'en-CA':'fr-CA'}
+// 去掉商品描述里的 "Source: ..." 行与拼多多链接（来源仅后台可见，顾客看不到）
+function stripSource(desc){
+  if(!desc)return'';
+  let s=String(desc);
+  s=s.replace(/source\s*:\s*https?:\/\/\S+/gi,'');
+  s=s.replace(/https?:\/\/\S*pinduoduo\.com\S*/gi,'');
+  s=s.split(/\r?\n/).map(l=>l.trim()).filter(l=>l&&!/^source\s*:?$/i.test(l)).join('\n');
+  return s.trim();
+}
+function getProductName(p){
+  const tr=PRODUCT_I18N[p.id];
+  if(tr&&tr.name&&tr.name[currentLang])return tr.name[currentLang];
+  if(currentLang!=='zh'&&tr&&tr.name&&tr.name.en)return tr.name.en;
+  return p.name;
+}
+function getProductDesc(p){
+  const tr=PRODUCT_I18N[p.id];
+  if(tr&&tr.desc&&tr.desc[currentLang])return stripSource(tr.desc[currentLang]);
+  return stripSource(p.desc);
+}
+function getLevelName(name){
+  const tr=LEVEL_I18N[name];
+  if(tr&&tr[currentLang])return tr[currentLang];
+  return name;
+}
+function applyStaticI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh)});
+}
+function applyAuthModalText(){
+  document.getElementById('authModalTitle').textContent=t(authMode==='login'?'login':'register');
+  document.getElementById('authSubmitBtn').textContent=t(authMode==='login'?'login':'register');
+  document.getElementById('authSwitchText').textContent=t(authMode==='login'?'no_account':'has_account');
+  document.getElementById('authSwitchLink').textContent=t(authMode==='login'?'register_now':'go_login');
+  document.getElementById('phoneSwitchText').textContent=t(authMode==='login'?'no_account':'has_account');
+  document.getElementById('phoneSwitchLink').textContent=t(authMode==='login'?'register_now':'go_login');
+  document.getElementById('verifyOtpBtn').textContent=t(authMode==='login'?'verify_login':'verify_register');
+  if(!otpSent)document.getElementById('sendOtpBtn').textContent=t('send_otp');
+}
+function setLang(lang){
+  if(!LANGS.includes(lang))return;
+  currentLang=lang;
+  localStorage.setItem('tnf_lang',lang);
+  document.documentElement.lang=lang==='zh'?'zh-CN':lang;
+  document.title=t('page_title');
+  document.querySelectorAll('#langSwitcher .lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  applyStaticI18n();
+  applyAuthModalText();
+  updateAccountBtn();
+  updateCloudStatus(isCloudMode);
+  renderFilters();renderProducts();updateCartUI();
+  if(currentDetailProduct)openDetail(currentDetailProduct.id);
+  const co=document.getElementById('checkoutModal');
+  if(co&&co.classList.contains('active')&&checkoutAddresses.length)drawCheckout();
+  const am=document.getElementById('accountModal');
+  if(am&&am.classList.contains('active')&&currentCustomer)renderAccountBody();
+}
+
+// 图片地址解析：商品图可能是完整 URL（Unsplash 等），也可能是站内相对路径，两种都原样使用。
+// 注意：不要再给图片地址拼 vercel.app 前缀——完整 URL 一旦被加前缀就会变成双重地址而破图（2026-11-12 修）。
+function resolveImg(u){if(!u)return '';return String(u).trim();}
+const DEFAULT_PRODUCTS=[
+
+{id:'p1',name:'Maple Brownie 枫糖布朗尼',price:128,desc:'加拿大原产枫糖制作，浓郁香甜，独立包装，适合送礼或自享。每盒12块，保质期6个月。',category:'food',images:['https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop']},
+{id:'p2',name:'Canada Goose 远征羽绒服',price:6800,desc:'经典 Expedition 系列，625蓬松度白鸭绒，可抵御-30°C严寒。加拿大专柜直采，含防伪标签。',category:'fashion',images:['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=400&fit=crop','https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=400&fit=crop']},
+{id:'p3',name:'UGG 经典雪地靴',price:980,desc:'澳洲美利奴羊毛内里，防滑橡胶大底。加拿大专柜采购，多色可选，尺码齐全。',category:'fashion',images:['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=400&fit=crop']},
+{id:'p4',name:'加拿大精酿啤酒组合',price:268,desc:'6瓶装精选本地精酿啤酒，包含 IPA、Stout、Pale Ale 各2瓶。冰袋保温发货。',category:'food',images:['https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&h=400&fit=crop']},
+{id:'p5',name:'The Ordinary 精华套装',price:198,desc:'加拿大本土护肤品牌，成分党最爱。含烟酰胺、透明质酸、维C精华各一瓶。',category:'beauty',images:['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=400&fit=crop']},
+{id:'p6',name:'枫糖浆礼盒 250ml×3',price:188,desc:'100%纯枫糖浆，加拿大魁北克特产。A级琥珀色，口感醇厚，礼盒包装。',category:'food',images:['https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=400&fit=crop','https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=600&h=400&fit=crop']}
+];
+const DEFAULT_CATEGORIES=[{id:'all',name:'全部'},{id:'food',name:'食品'},{id:'fashion',name:'服饰'},{id:'beauty',name:'美妆'},{id:'other',name:'其他'}];
+
+// ⚠️ 配置区：填入 jsonbin.io 的「公开数据 URL」后，所有设备（电脑/手机）都会自动从这里读取商品数据
+// 在管理后台「🚀 发布网站」页面创建云端数据库后，把生成的地址粘贴到下面引号里即可
+const CLOUD_DATA_URL='https://api.jsonbin.io/v3/b/6a6e386df5f4af5e29ded56d/latest';
+
+let siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES};
+let isCloudMode=false;
+let tiersByProduct={}; // productId -> [{min_qty,total_price}, ...] sorted desc by min_qty
+
+async function loadData(){
+  try{
+    const [{data:products,error:pErr},{data:categories,error:cErr},{data:tiers,error:tErr}]=await Promise.all([
+      sb.from('products').select('*').order('created_at'),
+      sb.from('categories').select('*').order('sort_order'),
+      sb.from('product_price_tiers').select('*')
+    ]);
+    if(pErr||cErr||tErr)throw(pErr||cErr||tErr);
+    siteData={
+      products:(products||[]).map(p=>({id:p.id,name:p.name,price:Number(p.price),category:p.category,desc:p.description||'',images:p.images||[]})),
+      categories:(categories&&categories.length)?categories.map(c=>({id:c.id,name:c.name})):DEFAULT_CATEGORIES
+    };
+    tiersByProduct={};
+    (tiers||[]).forEach(t=>{
+      if(!tiersByProduct[t.product_id])tiersByProduct[t.product_id]=[];
+      tiersByProduct[t.product_id].push({min_qty:t.min_qty,total_price:Number(t.total_price)});
+    });
+    Object.values(tiersByProduct).forEach(list=>list.sort((a,b)=>b.min_qty-a.min_qty));
+    isCloudMode=true;updateCloudStatus(true);renderAll();
+    initAuthState();
+  }catch(e){
+    console.log('Supabase load failed, falling back to local:',e);
+    const localProducts=localStorage.getItem('tnf_products');
+    const localCats=localStorage.getItem('tnf_categories');
+    if(localProducts){siteData={products:JSON.parse(localProducts),categories:localCats?JSON.parse(localCats):DEFAULT_CATEGORIES}}
+    else{siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES}}
+    isCloudMode=false;updateCloudStatus(false);renderAll();
+    initAuthState();
+  }
+}
+
+// 计算某商品在给定数量下的"总价"（应用阶梯价，找不到阶梯价就用 单价*数量）
+function computeLineTotal(product,qty){
+  const tiers=tiersByProduct[product.id];
+  if(tiers){
+    const match=tiers.find(t=>qty>=t.min_qty);
+    if(match)return match.total_price;
+  }
+  return product.price*qty;
+}
+
+function updateCloudStatus(online){
+  const badge=document.getElementById('cloudStatus');
+  if(!badge)return;
+  badge.style.display='flex';
+  if(online){badge.className='cloud-status online';document.getElementById('cloudStatusDot').textContent='🟢';document.getElementById('cloudStatusText').textContent=t('cloud_online')}
+  else{badge.className='cloud-status offline';document.getElementById('cloudStatusDot').textContent='🟡';document.getElementById('cloudStatusText').textContent=t('cloud_offline')}
+}
+
+function getProducts(){return siteData.products}
+function getCategories(){return siteData.categories}
+
+function renderAll(){renderFilters();renderProducts();updateCartUI()}
+
+let cart={};
+function addToCart(id,btn){
+  cart[id]=(cart[id]||0)+1;updateCartUI();showToast(t('toast_added'));
+  if(btn){btn.textContent='✓';btn.classList.add('added');setTimeout(()=>{btn.textContent='+';btn.classList.remove('added')},1200)}
+}
+function removeFromCart(id){delete cart[id];updateCartUI()}
+function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];updateCartUI()}
+function updateCartUI(){
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  const badge=document.getElementById('cartCount');
+  badge.textContent=count;badge.style.display=count>0?'flex':'none';
+  const body=document.getElementById('cartBody');
+  const footer=document.getElementById('cartFooter');
+  const products=getProducts();
+  if(count===0){body.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>'+t('cart_empty')+'</p></div>';footer.style.display='none';return}
+  let total=0;
+  body.innerHTML=Object.entries(cart).map(([id,qty])=>{
+    const p=products.find(x=>x.id===id);if(!p)return'';
+    const lineTotal=computeLineTotal(p,qty);
+    total+=lineTotal;
+    const tiers=tiersByProduct[p.id];
+    const tierHint=tiers?`<div style="font-size:.72rem;color:var(--success)">${t('tier_hint')}</div>`:'';
+    const img=p.images&&p.images[0]?`<img src="${resolveImg(p.images[0])}" alt="">`:'📦';
+    return`<div class="cart-item"><div class="cart-item-img">${img}</div><div class="cart-item-info"><h4>${getProductName(p)}</h4><div class="price">${fmtPrice(lineTotal)}${qty>1?` <span style="font-size:.7rem;color:var(--text-light);font-weight:400">(${qty} ${t('pieces')})</span>`:''}</div>${tierHint}<div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('${id}',-1)">−</button><span>${qty}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button><button class="qty-btn" onclick="removeFromCart('${id}')" style="margin-left:auto;color:var(--primary)">🗑️</button></div></div></div>`
+  }).join('');
+  document.getElementById('cartTotal').textContent=fmtPrice(total);footer.style.display='block'
+}
+function toggleCart(){document.getElementById('cartModal').classList.toggle('active')}
+
+// ===================== 登录 / 注册 =====================
+let currentCustomer=null,currentLevel=null,authMode='login',authChannel='email',otpSent=false;
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+function switchAuthChannel(channel){
+  authChannel=channel;
+  document.getElementById('authEmailBlock').style.display=channel==='email'?'flex':'none';
+  document.getElementById('authPhoneBlock').style.display=channel==='phone'?'flex':'none';
+  document.getElementById('channelEmailBtn').style.background=channel==='email'?'var(--card-2)':'transparent';
+  document.getElementById('channelEmailBtn').style.color=channel==='email'?'var(--text)':'var(--text-light)';
+  document.getElementById('channelEmailBtn').style.boxShadow=channel==='email'?'0 1px 3px rgba(0,0,0,.25)':'none';
+  document.getElementById('channelPhoneBtn').style.background=channel==='phone'?'var(--card-2)':'transparent';
+  document.getElementById('channelPhoneBtn').style.color=channel==='phone'?'var(--text)':'var(--text-light)';
+  document.getElementById('channelPhoneBtn').style.boxShadow=channel==='phone'?'0 1px 3px rgba(0,0,0,.25)':'none';
+}
+function toggleAuthMode(){
+  authMode=authMode==='login'?'register':'login';
+  applyAuthModalText();
+  document.getElementById('authExtraFields').style.display=authMode==='register'?'flex':'none';
+  document.getElementById('authForgotWrap').style.display=authMode==='login'?'block':'none';
+  document.getElementById('authError').style.display='none';
+  document.getElementById('phoneExtraFields').style.display=authMode==='register'?'flex':'none';
+  resetOtpState();
+}
+function resetOtpState(){
+  otpSent=false;
+  document.getElementById('phoneOtpCode').style.display='none';
+  document.getElementById('phoneOtpCode').value='';
+  document.getElementById('verifyOtpBtn').style.display='none';
+  document.getElementById('sendOtpBtn').disabled=false;
+  document.getElementById('sendOtpBtn').textContent=t('send_otp');
+  document.getElementById('phoneAuthError').style.display='none';
+}
+function normalizePhone(raw){
+  const digits=raw.replace(/\D/g,'');
+  if(raw.trim().startsWith('+'))return'+'+digits;
+  if(digits.length===11)return'+86'+digits; // 默认按中国大陆手机号处理
+  return'+'+digits;
+}
+async function sendPhoneOtp(){
+  const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
+  const phoneRaw=document.getElementById('phoneNum').value.trim();
+  if(!phoneRaw){errEl.textContent=t('err_enter_phone');errEl.style.display='block';return}
+  if(authMode==='register'){
+    const ln=document.getElementById('phoneLastName').value.trim();
+    const fn=document.getElementById('phoneFirstName').value.trim();
+    if(!ln||!fn){errEl.textContent=t('err_enter_name');errEl.style.display='block';return}
+  }
+  const phone=normalizePhone(phoneRaw);
+  const btn=document.getElementById('sendOtpBtn');btn.disabled=true;btn.textContent=t('sending');
+  try{
+    const options={shouldCreateUser:authMode==='register'};
+    if(authMode==='register'){
+      options.data={first_name:document.getElementById('phoneFirstName').value.trim(),last_name:document.getElementById('phoneLastName').value.trim()};
+    }
+    const{error}=await sb.auth.signInWithOtp({phone,options});
+    if(error)throw error;
+    otpSent=true;
+    document.getElementById('phoneOtpCode').style.display='block';
+    document.getElementById('verifyOtpBtn').style.display='block';
+    showToast(t('toast_otp_sent'));
+    startOtpCountdown();
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+    btn.disabled=false;btn.textContent=t('send_otp');
+  }
+}
+function startOtpCountdown(){
+  let sec=60;const btn=document.getElementById('sendOtpBtn');
+  btn.disabled=true;
+  const timer=setInterval(()=>{
+    sec--;
+    if(sec<=0){clearInterval(timer);btn.disabled=false;btn.textContent=t('resend_otp')}
+    else{btn.textContent=t('resend_in',{sec})}
+  },1000);
+}
+async function verifyPhoneOtp(){
+  const errEl=document.getElementById('phoneAuthError');errEl.style.display='none';
+  const phone=normalizePhone(document.getElementById('phoneNum').value.trim());
+  const code=document.getElementById('phoneOtpCode').value.trim();
+  if(!code){errEl.textContent=t('err_enter_otp');errEl.style.display='block';return}
+  const btn=document.getElementById('verifyOtpBtn');btn.disabled=true;btn.textContent=t('verifying');
+  try{
+    const{error}=await sb.auth.verifyOtp({phone,token:code,type:'sms'});
+    if(error)throw error;
+    closeModal('authModal');
+    document.getElementById('phoneNum').value='';document.getElementById('phoneOtpCode').value='';
+    document.getElementById('phoneLastName').value='';document.getElementById('phoneFirstName').value='';
+    resetOtpState();
+    await initAuthState();
+    showToast(getWelcomeMessage(authMode==='register'?'register':'welcome_back'),4000);
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+  }
+  btn.disabled=false;btn.textContent=t(authMode==='login'?'verify_login':'verify_register');
+}
+function openAuth(){authMode='login';switchAuthChannel('email');toggleAuthMode();toggleAuthMode();openModal('authModal')}
+async function submitAuth(){
+  const email=document.getElementById('authEmail').value.trim();
+  const password=document.getElementById('authPassword').value;
+  const errEl=document.getElementById('authError');errEl.style.display='none';
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){errEl.textContent=t('err_bad_email');errEl.style.display='block';return}
+  if(password.length<6){errEl.textContent=t('err_short_pw');errEl.style.display='block';return}
+  const btn=document.getElementById('authSubmitBtn');const originalBtnText=btn.textContent;btn.disabled=true;btn.textContent=t('processing');
+  try{
+    if(authMode==='register'){
+      const lastName=document.getElementById('authLastName').value.trim();
+      const firstName=document.getElementById('authFirstName').value.trim();
+      const phone=document.getElementById('authPhone').value.trim();
+      if(!lastName||!firstName){errEl.textContent=t('err_enter_name');errEl.style.display='block';return}
+      if(!phone){errEl.textContent=t('err_enter_phone');errEl.style.display='block';return}
+      // 姓名/手机号先存进账号的 metadata，等真正登录（session建立）后再落到 customers 表，避免邮箱未验证时因权限问题静默失败
+      const{data,error}=await sb.auth.signUp({email,password,options:{data:{first_name:firstName,last_name:lastName,phone}}});
+      if(error)throw error;
+      closeModal('authModal');
+      clearAuthForm();
+      if(data.session){
+        await initAuthState();
+        showToast(getWelcomeMessage('register'),4000);
+      }else{
+        showToast(t('toast_register_check_email'),5000);
+      }
+    }else{
+      const{error}=await sb.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      closeModal('authModal');
+      clearAuthForm();
+      await initAuthState();
+      showToast(getWelcomeMessage('welcome_back'),4000);
+    }
+  }catch(e){
+    errEl.textContent=translateError(e);
+    errEl.style.display='block';
+  }
+  btn.disabled=false;btn.textContent=originalBtnText;
+}
+function clearAuthForm(){
+  document.getElementById('authEmail').value='';document.getElementById('authPassword').value='';
+  document.getElementById('authLastName').value='';document.getElementById('authFirstName').value='';document.getElementById('authPhone').value='';
+}
+async function forgotPassword(){
+  const email=document.getElementById('authEmail').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showToast(t('toast_enter_email_first'));return}
+  try{
+    const{error}=await sb.auth.resetPasswordForEmail(email);
+    if(error)throw error;
+    showToast(t('toast_reset_sent'));
+  }catch(e){showToast(t('toast_send_failed')+translateError(e))}
+}
+async function logout(){await sb.auth.signOut();currentCustomer=null;currentLevel=null;updateAccountBtn();closeModal('accountModal');showToast(t('toast_logged_out'))}
+async function initAuthState(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session){
+    // 用登录后拿到的 session 补建/更新客户资料行（RLS 要求必须是本人已登录状态才能写入）
+    const meta=session.user.user_metadata||{};
+    await sb.from('customers').upsert({
+      id:session.user.id,email:session.user.email||null,
+      phone:session.user.phone?('+'+session.user.phone):(meta.phone||null),
+      first_name:meta.first_name||null,last_name:meta.last_name||null
+    },{onConflict:'id'});
+    const{data:cust}=await sb.from('customers').select('*').eq('id',session.user.id).single();
+    currentCustomer=cust;
+    if(cust&&cust.level_id){
+      const{data:lvl}=await sb.from('membership_levels').select('*').eq('id',cust.level_id).single();
+      currentLevel=lvl;
+    }
+  }else{currentCustomer=null;currentLevel=null}
+  updateAccountBtn();
+}
+function getDisplayName(){
+  if(!currentCustomer)return'';
+  const name=((currentCustomer.last_name||'')+(currentCustomer.first_name||'')).trim();
+  if(name)return name;
+  if(currentCustomer.email)return currentCustomer.email.split('@')[0];
+  if(currentCustomer.phone)return currentCustomer.phone.slice(-4);
+  return t('my_account');
+}
+function getWelcomeMessage(kind){
+  const prefix=t(kind==='register'?'welcome_register':'welcome_back');
+  const lvl=currentLevel?getLevelName(currentLevel.name):getLevelName('普通会员');
+  const pts=currentCustomer?(currentCustomer.points||0):0;
+  return`${prefix}，${getDisplayName()}！${lvl} · ${pts}${t('points_unit')}`;
+}
+function updateAccountBtn(){
+  document.getElementById('accountBtnText').textContent=currentCustomer?('👋 '+getDisplayName()):t('login')
+}
+function openAccount(){
+  if(!currentCustomer){openAuth();return}
+  renderAccountBody();openModal('accountModal');
+}
+async function renderAccountBody(){
+  const body=document.getElementById('accountBody');
+  body.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px">'+t('loading')+'</p>';
+  const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  const{data:orders}=await sb.from('orders').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  accountAddressesCache=addresses||[];
+  const addrHtml=(addresses&&addresses.length)?addresses.map(a=>`
+    <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-weight:600;font-size:.9rem">${a.receiver_name} ${a.phone}</div>
+          <div style="font-size:.85rem;color:var(--text-light);margin-top:4px">${a.address}</div>
+        </div>
+        <button onclick="editAddressById('${a.id}')" style="border:none;background:none;color:var(--primary);font-size:.8rem;cursor:pointer;white-space:nowrap">${t('edit')}</button>
+      </div>
+    </div>`).join(''):'<p style="color:var(--text-light);font-size:.9rem">'+t('no_address')+'</p>';
+  const productsForLookup=getProducts();
+  const ordersHtml=(orders&&orders.length)?orders.map(o=>{
+    const itemsHtml=(o.items||[]).map(it=>{
+      const p=productsForLookup.find(x=>x.id===it.product_id);
+      const img=p&&p.images&&p.images[0]?p.images[0]:'';
+      return `<div style="display:flex;gap:10px;align-items:center;padding:6px 0">
+        <div style="width:44px;height:44px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem">${img?`<img src="${resolveImg(img)}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div>
+        <div style="flex:1;min-width:0"><div style="font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:.75rem;color:var(--text-light)">x${it.qty}</div></div>
+        <div style="font-size:.85rem;font-weight:600">$${it.line_total}</div>
+      </div>`;
+    }).join('');
+    return`
+    <div style="border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px;border-bottom:1px solid var(--border)">
+        <span style="font-size:.78rem;color:var(--text-light)">${new Date(o.created_at).toLocaleDateString(langLocale())} · ${t('order_no')} ${o.id.slice(0,8)}</span>
+        <span style="font-size:.8rem">${orderStatusLabel(o)}</span>
+      </div>
+      ${itemsHtml}
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
+        <span style="font-size:.8rem;color:var(--text-light)">${t('paid_amount')}</span>
+        <span style="font-weight:700;color:var(--primary)">$${o.final_amount}</span>
+      </div>
+      ${o.status==='pending'?`<button class="btn btn-outline" style="width:100%;margin-top:8px;padding:8px" onclick="closeModal('accountModal');reopenPayment('${o.id}',${o.final_amount})">${t('view_payment')}</button>`:''}
+    </div>`;
+  }).join(''):'<p style="color:var(--text-light);font-size:.9rem">'+t('no_orders')+'</p>';
+  body.innerHTML=`
+    <div style="background:var(--bg);border-radius:14px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:1.05rem">${currentLevel?getLevelName(currentLevel.name):getLevelName('普通会员')}</div>
+          <div style="font-size:.8rem;color:var(--text-light)">${t('total_spent')} $${currentCustomer.total_spend||0}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--primary);font-size:1.2rem">${currentCustomer.points||0}</div>
+          <div style="font-size:.75rem;color:var(--text-light)">${t('points')}</div>
+        </div>
+      </div>
+    </div>
+    <h4 style="margin-bottom:10px;font-size:.95rem">${t('my_orders')}</h4>
+    ${ordersHtml}
+    <h4 style="margin:16px 0 10px;font-size:.95rem">${t('address_title')}</h4>
+    ${addrHtml}
+    <button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="openAddressModal()">${t('add_address')}</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:8px;color:var(--primary);border-color:var(--primary)" onclick="logout()">${t('logout')}</button>
+  `;
+}
+function orderStatusLabel(o){
+  if(o.status==='pending')return t('order_pending');
+  if(o.status==='paid')return t('order_paid');
+  if(o.status==='shipped')return o.tracking_number?t('order_shipped',{tn:o.tracking_number}):t('order_shipped_no_tn');
+  if(o.status==='completed')return t('order_completed');
+  if(o.status==='cancelled')return t('order_cancelled');
+  return o.status;
+}
+function reopenPayment(orderId,amount){drawPaymentStep(orderId,amount);openModal('checkoutModal')}
+
+// ===================== 地址 =====================
+let addressModalContext='account',accountAddressesCache=[];
+function editAddressById(id){const a=accountAddressesCache.find(x=>x.id===id);if(a)openAddressModal('account',a)}
+let editingAddressId=null;
+function openAddressModal(context,addr){
+  addressModalContext=context||'account';
+  editingAddressId=addr?addr.id:null;
+  document.getElementById('addrName').value=addr?addr.receiver_name:'';
+  document.getElementById('addrPhone').value=addr?addr.phone:'';
+  document.getElementById('addrAddress').value=addr?addr.address:'';
+  document.getElementById('addrError').style.display='none';
+  openModal('addressModal');
+}
+function translateError(e){
+  const msg=(e&&(e.message||e.error_description||e.msg))||String(e||'');
+  const m=msg.toLowerCase();
+  if(m.includes('signups not allowed')||m.includes('signup is disabled')||m.includes('otp for this phone'))return t('err_phone_not_registered');
+  if(m.includes('sms')&&(m.includes('rate limit')||m.includes('security purposes')))return t('err_rate_limit');
+  if(m.includes('token has expired')||m.includes('invalid otp')||m.includes('otp_expired'))return t('err_otp_invalid');
+  if(m.includes('phone')&&(m.includes('already registered')||m.includes('already exists')))return t('err_phone_registered');
+  if(m.includes('row-level security')||m.includes('violates row-level'))return t('err_session_expired');
+  if(m.includes('jwt')||m.includes('not authenticated')||m.includes('invalid token'))return t('err_session_expired');
+  if(m.includes('already registered')||m.includes('already been registered'))return t('err_email_registered');
+  if(m.includes('invalid login'))return t('err_bad_login');
+  if(m.includes('email not confirmed'))return t('err_email_unconfirmed');
+  if(m.includes('sending')||m.includes('smtp')||m.includes('email'))return t('err_email_send');
+  if(m.includes('network'))return t('err_network');
+  if(m.includes('duplicate key'))return t('err_duplicate');
+  return msg||t('err_generic');
+}
+async function submitAddress(){
+  const name=document.getElementById('addrName').value.trim();
+  const phone=document.getElementById('addrPhone').value.trim();
+  const address=document.getElementById('addrAddress').value.trim();
+  const errEl=document.getElementById('addrError');errEl.style.display='none';
+  if(!name||!phone||!address){errEl.textContent=t('err_addr_incomplete');errEl.style.display='block';return}
+  const btn=document.getElementById('addrSubmitBtn');btn.disabled=true;btn.textContent=t('saving');
+  try{
+    const{data:{user}}=await sb.auth.getUser();
+    if(!user){errEl.textContent=t('err_session_expired');errEl.style.display='block';btn.disabled=false;btn.textContent=t('save_address');closeModal('addressModal');openAuth();return}
+    if(editingAddressId){
+      const updatePayload={receiver_name:name,phone,address};
+      const{error:updErr}=await sb.from('customer_addresses').update(updatePayload).eq('id',editingAddressId).eq('customer_id',user.id);
+      if(updErr)throw updErr;
+    }else{
+      const{error:insErr}=await sb.from('customer_addresses').insert({
+        customer_id:user.id,receiver_name:name,phone,address
+      });
+      if(insErr)throw insErr;
+    }
+    closeModal('addressModal');showToast(t('toast_addr_saved'));
+    if(addressModalContext==='checkout'){
+      const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',user.id).order('created_at',{ascending:false});
+      if(addresses&&addresses.length){await renderCheckout(addresses);openModal('checkoutModal')}
+    }else{
+      renderAccountBody();
+    }
+  }catch(e){errEl.textContent=translateError(e);errEl.style.display='block'}
+  finally{btn.disabled=false;btn.textContent=t('save_address')}
+}
+
+// ===================== 结算 / 下单 =====================
+async function checkout(){
+  if(Object.keys(cart).length===0)return;
+  if(!currentCustomer){toggleCart();openAuth();return}
+  const{data:addresses}=await sb.from('customer_addresses').select('*').eq('customer_id',currentCustomer.id).order('created_at',{ascending:false});
+  if(!addresses||addresses.length===0){toggleCart();showToast(t('toast_add_addr_first'));openAddressModal('checkout');return}
+  toggleCart();
+  await renderCheckout(addresses);
+  openModal('checkoutModal');
+}
+let checkoutAddresses=[],checkoutSelectedAddr=null,checkoutUsePoints=0;
+async function renderCheckout(addresses){
+  checkoutAddresses=addresses;
+  checkoutSelectedAddr=addresses[0].id;
+  checkoutUsePoints=0;
+  drawCheckout();
+}
+function drawCheckout(){
+  const products=getProducts();
+  let goodsAmount=0;
+  const itemsHtml=Object.entries(cart).map(([id,qty])=>{
+    const p=products.find(x=>x.id===id);if(!p)return'';
+    const lineTotal=computeLineTotal(p,qty);
+    goodsAmount+=lineTotal;
+    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${getProductName(p)} x${qty}</span><span>$${lineTotal}</span></div>`;
+  }).join('');
+  const shipping=0; // 加拿大本地派送目前免运费，运费政策待定
+  const discountPercent=currentLevel?Number(currentLevel.discount_percent):0;
+  const memberDiscount=discountPercent>0?Math.round(goodsAmount*discountPercent/100*100)/100:0;
+  const canRedeem=(currentCustomer.points||0)>=10000;
+  const pointsDiscount=(checkoutUsePoints/10000)*10;
+  let final=goodsAmount-memberDiscount-pointsDiscount+shipping;if(final<0)final=0;
+
+  const addrOptions=checkoutAddresses.map(a=>`<option value="${a.id}" ${a.id===checkoutSelectedAddr?'selected':''}>${a.receiver_name} ${a.phone} - ${a.address.slice(0,20)}${a.address.length>20?'...':''}</option>`).join('');
+
+  document.getElementById('checkoutBody').innerHTML=`
+    <div style="background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:.85rem;color:var(--text-light)">${t('my_points')}</span>
+      <span style="font-weight:700;color:var(--primary)">${currentCustomer.points||0} ${t('points_unit')}</span>
+    </div>
+    <div style="margin-bottom:14px">${itemsHtml}</div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:.85rem;color:var(--text-light);display:block;margin-bottom:6px">${t('address_title')}</label>
+      <select id="checkoutAddrSelect" onchange="checkoutSelectedAddr=this.value" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-family:inherit">${addrOptions}</select>
+    </div>
+    ${canRedeem?`
+    <label style="display:flex;align-items:center;gap:10px;background:#2e2410;border:1px solid #473518;border-radius:10px;padding:12px;margin-bottom:12px;cursor:pointer">
+      <input type="checkbox" ${checkoutUsePoints>=10000?'checked':''} onchange="checkoutUsePoints=this.checked?10000:0;drawCheckout()" style="width:18px;height:18px">
+      <span style="font-size:.85rem">${t('points_redeem',{pts:currentCustomer.points})}</span>
+    </label>`:''}
+    <div style="border-top:1px solid var(--border);padding-top:12px;font-size:.88rem">
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('goods_amount')}</span><span>${fmtPrice(goodsAmount)}</span></div>
+      ${memberDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('member_discount',{level:getLevelName(currentLevel.name),pct:discountPercent})}</span><span>-${fmtPrice(memberDiscount)}</span></div>`:''}
+      ${pointsDiscount>0?`<div style="display:flex;justify-content:space-between;padding:3px 0;color:var(--success)"><span>${t('points_discount')}</span><span>-${fmtPrice(pointsDiscount)}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>${t('shipping')}</span><span>${shipping>0?fmtPrice(shipping):t('free_shipping')}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--border);margin-top:6px"><span>${t('total')}</span><span style="color:var(--primary)">${fmtPrice(final)}</span></div>
+    </div>
+    <div id="checkoutError" style="color:var(--primary);font-size:.85rem;display:none;margin-top:8px"></div>
+    <button class="checkout-btn" style="margin-top:14px" id="checkoutSubmitBtn" onclick="submitOrder()">${t('submit_order')}</button>
+  `;
+}
+async function submitOrder(){
+  const btn=document.getElementById('checkoutSubmitBtn');btn.disabled=true;btn.textContent=t('submitting');
+  const errEl=document.getElementById('checkoutError');errEl.style.display='none';
+  try{
+    const items=Object.entries(cart).map(([id,qty])=>({product_id:id,qty}));
+    const{data:orderId,error}=await sb.rpc('create_order',{p_items:items,p_address_id:checkoutSelectedAddr,p_use_points:checkoutUsePoints});
+    if(error)throw error;
+    const{data:order}=await sb.from('orders').select('*').eq('id',orderId).single();
+    cart={};updateCartUI();
+    await initAuthState();
+    drawPaymentStep(orderId,order?order.final_amount:null);
+  }catch(e){
+    errEl.textContent=translateError(e);errEl.style.display='block';
+    btn.disabled=false;btn.textContent=t('submit_order');
+  }
+}
+function drawPaymentStep(orderId,amount){
+  document.getElementById('checkoutBody').innerHTML=`
+    <div style="text-align:center;padding:10px 0 16px">
+      <div style="font-size:2.4rem">✅</div>
+      <h3 style="margin:10px 0 4px">${t('order_submitted')}</h3>
+      <p style="color:var(--text-light);font-size:.85rem">${t('order_no')} ${orderId.slice(0,8)}</p>
+    </div>
+    <div style="background:var(--bg);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px">
+        <span id="payAmountText" style="font-weight:800;font-size:2.2rem;color:var(--primary)">$${amount}</span>
+        <button onclick="copyAmount(${amount})" style="border:1px solid var(--border);background:var(--card-2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;cursor:pointer;font-family:inherit">${t('copy')}</button>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--text-light);text-align:center;background:var(--bg);padding:14px;border-radius:10px">${t('contact_pay')}</p>
+    <button class="checkout-btn" style="margin-top:16px" onclick="closeModal('checkoutModal')">${t('done')}</button>
+  `;
+}
+function copyAmount(amount){
+  navigator.clipboard.writeText(String(amount)).then(()=>showToast(t('toast_copied')+amount)).catch(()=>showToast(t('toast_copy_failed')+amount));
+}
+
+let currentFilter='all',productImageIndex={},searchQuery='';
+function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
+function renderFilters(){
+  const cats=getCategories();
+  document.getElementById('filters').innerHTML=cats.map(c=>{const d=getHolidayDate(c.id);return`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}${d?` <span style="font-size:.72em;opacity:.65;font-weight:400">· ${d}</span>`:''}</button>`}).join('')
+}
+function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
+function renderProducts(){
+  const products=getProducts();
+  const grid=document.getElementById('productsGrid');
+  let filtered=currentFilter==='all'?products:products.filter(p=>p.category===currentFilter);
+  if(searchQuery){filtered=filtered.filter(p=>((getProductName(p)||'')+' '+(getProductDesc(p)||'')+' '+(p.name||'')+' '+(p.desc||'')).toLowerCase().includes(searchQuery))}
+  if(filtered.length===0){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">📦</div><p>${searchQuery?t('no_search_results'):t('no_products')}</p></div>`;return}
+  grid.innerHTML=filtered.map(p=>{
+    const img=p.images&&p.images[0]?p.images[0]:'';
+    const hasMultiple=p.images&&p.images.length>1;
+    const catName=getCategoryName(p.category);
+    const idx=productImageIndex[p.id]||0;
+    const currentImg=p.images&&p.images[idx]?p.images[idx]:img;
+    const dotsHtml=hasMultiple?`<div class="img-dots">${p.images.map((_,i)=>`<div class="img-dot ${i===idx?'active':''}"></div>`).join('')}</div>`:'';
+    const navHtml=hasMultiple?`<button class="img-nav prev" onclick="event.stopPropagation();cycleImage('${p.id}',-1)">‹</button><button class="img-nav next" onclick="event.stopPropagation();cycleImage('${p.id}',1)">›</button>`:'';
+    return`<div class="product-card" onclick="openDetail('${p.id}')"><div class="product-img-wrap"><img src="${resolveImg(currentImg)}" alt="${getProductName(p)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%>📦</div>')">${dotsHtml}${navHtml}</div><div class="product-info"><span class="product-tag">${catName}</span><h3>${getProductName(p)}</h3><div class="product-price-row"><div class="product-price">${fmtPrice(p.price)}</div><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('${p.id}',this)" title="${t('add_to_cart')}">+</button></div></div></div>`
+  }).join('')
+}
+function cycleImage(productId,dir){
+  const products=getProducts();
+  const p=products.find(x=>x.id===productId);
+  if(!p||!p.images||p.images.length<=1)return;
+  let idx=productImageIndex[productId]||0;
+  idx=(idx+dir+p.images.length)%p.images.length;
+  productImageIndex[productId]=idx;renderProducts()
+}
+function getCategoryName(catId){const tr=CAT_I18N[catId];if(tr&&tr[currentLang])return tr[currentLang];const cats=getCategories();const c=cats.find(x=>x.id===catId);return c?c.name:catId}
+
+let currentDetailProduct=null,detailImageIndex=0;
+function openDetail(id){
+  const products=getProducts();
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  currentDetailProduct=p;detailImageIndex=0;
+  const catName=getCategoryName(p.category);
+  const images=p.images&&p.images.length>0?p.images:[''];
+  const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
+  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" alt="" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${getProductName(p)}</h2><div class="detail-price">${fmtPrice(p.price)} <span style="font-size:.8rem;color:var(--text-light);font-weight:400;margin-left:4px">${t('incl_fee')}</span></div><p class="detail-desc">${getProductDesc(p)}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
+  document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
+}
+function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
+function closeDetail(){document.getElementById('detailModal').classList.remove('active');document.body.style.overflow=''}
+function showToast(msg,duration){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),duration||2000)}
+
+// 访问次数统计（静默执行，失败不影响页面）
+(async()=>{try{await sb.rpc('increment_visit_count')}catch(e){}})();
+
+// 邮箱确认链接跳回本站时，提示"注册成功"并要求重新登录（而不是自动帮TA登进去）
+(function handleEmailConfirmRedirect(){
+  const url=window.location.hash+window.location.search;
+  if(url.includes('type=signup')){
+    history.replaceState(null,'',window.location.pathname);
+    sb.auth.signOut().finally(()=>{
+      updateAccountBtn();
+      showToast(t('toast_registered_login'),4000);
+    });
+  }
+})();
+
+loadData();
+
+// 初始化语言（localStorage 优先，默认中文）
+setLang(currentLang);
+</script>
+</body>
+</html>
