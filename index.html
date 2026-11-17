@@ -164,7 +164,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 .empty-products{text-align:center;padding:60px 20px;color:var(--text-light)}
 .empty-products-icon{font-size:3rem;margin-bottom:12px}
 @media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.detail-gallery{height:260px}.header-inner{padding:12px 16px;gap:8px}.logo{font-size:1.02rem}.admin-link span,.cart-btn span:not(.cart-count){display:none}.cart-btn,.admin-link{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
+@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.filter-btn{flex-shrink:0}.detail-gallery{height:260px}.header-inner{padding:12px 12px;gap:6px}.logo{font-size:.9rem}.admin-link span,.cart-btn span:not(.cart-count){display:none}.cart-btn,.admin-link{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
 .lang-switcher{display:flex;gap:2px;background:var(--card-2);border:1px solid var(--border);border-radius:20px;padding:3px;flex-shrink:0}
 .lang-btn{border:none;background:transparent;color:var(--text-light);padding:4px 10px;border-radius:14px;cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s}
 .lang-btn:hover{color:var(--text)}
@@ -183,7 +183,6 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
     <p class="header-tagline" data-i18n="tagline">从中国精选节日好物，直送加拿大 · 质检·打包·发货，全程透明可追踪</p>
     <div class="header-actions">
       <div class="lang-switcher" id="langSwitcher"><button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button><button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button></div>
-      <a href="admin.html" class="admin-link" style="display:none">⚙️ <span data-i18n="admin">管理后台</span></a>
       <button class="cart-btn" id="accountBtn" onclick="openAccount()">👤 <span id="accountBtnText">登录</span></button>
       <button class="cart-btn" onclick="toggleCart()">🛒 <span data-i18n="cart">购物袋</span><span class="cart-count" id="cartCount" style="display:none">0</span></button>
     </div>
@@ -431,7 +430,7 @@ order_completed:"✅ 包裹已投递",order_cancelled:"❌ 订单已取消"
 },
 en:{
 page_title:"True North Finds · Chinese Finds, Delivered in Canada",
-tagline:"Hand-picked holiday finds from China, delivered across Canada — quality-checked, packed and shipped, fully transparent and trackable",
+tagline:"Hand-picked holiday finds from China, delivered across Canada",
 admin:"Admin",cart:"Shopping Bag",login:"Log in",register:"Sign up",
 products_title:"Featured Products",products_sub:"Hand-picked holiday finds from China",
 search_ph:"Search products…",
@@ -514,7 +513,7 @@ order_completed:"✅ Delivered",order_cancelled:"❌ Order cancelled"
 },
 fr:{
 page_title:"True North Finds · Trouvailles de Chine, livrées au Canada",
-tagline:"Des trouvailles festives choisies en Chine, livrées partout au Canada — contrôle qualité, emballage et expédition, en toute transparence et avec suivi",
+tagline:"Des trouvailles festives choisies en Chine, livrées partout au Canada",
 admin:"Admin",cart:"Panier",login:"Connexion",register:"S'inscrire",
 products_title:"Produits en vedette",products_sub:"Trouvailles festives choisies en Chine",
 search_ph:"Rechercher un produit…",
@@ -1160,7 +1159,7 @@ async function renderAccountBody(){
       return `<div style="display:flex;gap:10px;align-items:center;padding:6px 0">
         <div style="width:44px;height:44px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.2rem">${img?`<img src="${resolveImg(img)}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div>
         <div style="flex:1;min-width:0"><div style="font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:.75rem;color:var(--text-light)">x${it.qty}</div></div>
-        <div style="font-size:.85rem;font-weight:600">$${it.line_total}</div>
+        <div style="font-size:.85rem;font-weight:600">${fmtPrice(it.line_total)}</div>
       </div>`;
     }).join('');
     return`
@@ -1172,7 +1171,7 @@ async function renderAccountBody(){
       ${itemsHtml}
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
         <span style="font-size:.8rem;color:var(--text-light)">${t('paid_amount')}</span>
-        <span style="font-weight:700;color:var(--primary)">$${o.final_amount}</span>
+        <span style="font-weight:700;color:var(--primary)">${fmtPrice(o.final_amount)}</span>
       </div>
       ${o.status==='pending'?`<button class="btn btn-outline" style="width:100%;margin-top:8px;padding:8px" onclick="closeModal('accountModal');reopenPayment('${o.id}',${o.final_amount})">${t('view_payment')}</button>`:''}
     </div>`;
@@ -1182,7 +1181,7 @@ async function renderAccountBody(){
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
           <div style="font-weight:700;font-size:1.05rem">${currentLevel?getLevelName(currentLevel.name):getLevelName('普通会员')}</div>
-          <div style="font-size:.8rem;color:var(--text-light)">${t('total_spent')} $${currentCustomer.total_spend||0}</div>
+          <div style="font-size:.8rem;color:var(--text-light)">${t('total_spent')} ${fmtPrice(currentCustomer.total_spend||0)}</div>
         </div>
         <div style="text-align:right">
           <div style="font-weight:700;color:var(--primary);font-size:1.2rem">${currentCustomer.points||0}</div>
@@ -1293,7 +1292,7 @@ function drawCheckout(){
     const p=products.find(x=>x.id===id);if(!p)return'';
     const lineTotal=computeLineTotal(p,qty);
     goodsAmount+=lineTotal;
-    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${getProductName(p)} x${qty}</span><span>$${lineTotal}</span></div>`;
+    return `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:4px 0"><span>${getProductName(p)} x${qty}</span><span>${fmtPrice(lineTotal)}</span></div>`;
   }).join('');
   const shipping=0; // 加拿大本地派送目前免运费，运费政策待定
   const discountPercent=currentLevel?Number(currentLevel.discount_percent):0;
@@ -1355,7 +1354,7 @@ function drawPaymentStep(orderId,amount){
     </div>
     <div style="background:var(--bg);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px">
       <div style="display:flex;align-items:center;justify-content:center;gap:10px">
-        <span id="payAmountText" style="font-weight:800;font-size:2.2rem;color:var(--primary)">$${amount}</span>
+        <span id="payAmountText" style="font-weight:800;font-size:2.2rem;color:var(--primary)">${fmtPrice(amount)}</span>
         <button onclick="copyAmount(${amount})" style="border:1px solid var(--border);background:var(--card-2);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;cursor:pointer;font-family:inherit">${t('copy')}</button>
       </div>
     </div>
@@ -1411,7 +1410,10 @@ function openDetail(id){
   const images=p.images&&p.images.length>0?p.images:[''];
   const imgFallback=`this.style.display='none';this.insertAdjacentHTML('afterend','<div style=display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-size:1.6rem;color:var(--text-light)>📦</div>')`;
   const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((img,i)=>`<img src="${resolveImg(img)}" alt="" class="detail-thumb ${i===0?'active':''}" onclick="setDetailImage(${i})" loading="lazy" onerror="${imgFallback}">`).join('')}</div>`:'';
-  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${getProductName(p)}</h2><div class="detail-price">${fmtPrice(p.price)} <span style="font-size:.8rem;color:var(--text-light);font-weight:400;margin-left:4px">${t('incl_fee')}</span></div><p class="detail-desc">${getProductDesc(p)}</p><div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
+  const shownName=getProductName(p);
+  const shownDesc=getProductDesc(p);
+  const descHtml=(shownDesc&&shownDesc!==shownName)?`<p class="detail-desc">${shownDesc}</p>`:'';
+  document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${shownName}</h2><div class="detail-price">${fmtPrice(p.price)}</div>${descHtml}<div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
   document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
 }
 function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
