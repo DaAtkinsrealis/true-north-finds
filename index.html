@@ -164,7 +164,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .empty-products{text-align:center;padding:60px 20px;color:var(--text-light)}
 .empty-products-icon{font-size:3rem;margin-bottom:12px}
-@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;min-width:0;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent 100%);mask-image:linear-gradient(to right,#000 90%,transparent 100%)}.product-filters::-webkit-scrollbar{display:none}.product-filters.at-end{-webkit-mask-image:none;mask-image:none}.filter-btn{flex-shrink:0}}
 @media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.filter-btn{flex-shrink:0}.detail-gallery{height:260px}.header-inner{padding:12px 12px;gap:6px}.logo{font-size:.9rem}.cart-btn span:not(.cart-count){display:none}.cart-btn{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
 .lang-switcher{display:flex;gap:2px;background:var(--card-2);border:1px solid var(--border);border-radius:20px;padding:3px;flex-shrink:0}
 .lang-btn{border:none;background:transparent;color:var(--text-light);padding:4px 10px;border-radius:14px;cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s}
@@ -1381,7 +1381,13 @@ function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProd
 function renderFilters(){
   const cats=getCategories();
   document.getElementById('filters').innerHTML=cats.map(c=>{const d=getHolidayDate(c.id);return`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}${d?` <span style="font-size:.72em;opacity:.65;font-weight:400">· ${d}</span>`:''}</button>`}).join('')
+  updateFilterFade();
 }
+// 2026-11-20: fade affordance for the scrollable filter strip — hide the
+// right-edge fade once the user has scrolled to the last chip.
+function updateFilterFade(){const f=document.getElementById('filters');if(!f)return;f.classList.toggle('at-end',f.scrollLeft+f.clientWidth>=f.scrollWidth-4)}
+document.getElementById('filters').addEventListener('scroll',updateFilterFade,{passive:true});
+window.addEventListener('resize',updateFilterFade);
 function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
 function renderProducts(){
   const products=getProducts();
