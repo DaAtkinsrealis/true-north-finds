@@ -420,7 +420,7 @@ points_redeem:"你有 <strong>{pts}</strong> 积分，可使用 <strong>10000</s
 goods_amount:"商品金额",member_discount:"会员折扣（{level} {pct}%）",
 points_discount:"积分抵扣",shipping:"运费",
 free_shipping:"免运费",submit_order:"提交订单",
-no_search_results:"没有找到相关商品",no_products:"暂无商品，请前往后台添加",
+no_search_results:"没有找到相关商品",no_products:"该分类暂无商品",
 add_to_cart:"加入购物袋",continue_browsing:"继续浏览",
 tier_hint:"已按优惠价计算",pieces:"件",
 welcome_register:"注册成功！欢迎",welcome_back:"欢迎回来",
@@ -503,7 +503,7 @@ points_redeem:"You have <strong>{pts}</strong> points — you can redeem <strong
 goods_amount:"Items total",member_discount:"Member discount ({level} {pct}%)",
 points_discount:"Points redeemed",shipping:"Shipping",
 free_shipping:"Free shipping",submit_order:"Place Order",
-no_search_results:"No matching products found",no_products:"No products yet — please add some in the admin panel",
+no_search_results:"No matching products found",no_products:"No products in this category yet",
 add_to_cart:"Add to Bag",continue_browsing:"Continue browsing",
 tier_hint:"Discounted price applied",pieces:"pcs",
 welcome_register:"Welcome — registration complete!",welcome_back:"Welcome back",
@@ -586,7 +586,7 @@ points_redeem:"Vous avez <strong>{pts}</strong> points — vous pouvez échanger
 goods_amount:"Total des articles",member_discount:"Réduction membre ({level} {pct} %)",
 points_discount:"Points échangés",shipping:"Livraison",
 free_shipping:"Livraison gratuite",submit_order:"Passer la commande",
-no_search_results:"Aucun produit correspondant",no_products:"Aucun produit pour le moment — veuillez en ajouter dans l'administration",
+no_search_results:"Aucun produit correspondant",no_products:"Aucun produit dans cette catégorie pour le moment",
 add_to_cart:"Ajouter au panier",continue_browsing:"Continuer mes achats",
 tier_hint:"Prix réduit appliqué",pieces:"art.",
 welcome_register:"Bienvenue — inscription terminée !",welcome_back:"Bon retour",
@@ -1379,7 +1379,9 @@ function copyAmount(amount){
 let currentFilter='all',productImageIndex={},searchQuery='';
 function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
 function renderFilters(){
-  const cats=getCategories();
+  const products=getProducts();
+  const cats=getCategories().filter(c=>c.id==='all'||products.some(p=>p.category===c.id));
+  if(currentFilter!=='all'&&!cats.some(c=>c.id===currentFilter))currentFilter='all';
   document.getElementById('filters').innerHTML=cats.map(c=>{const d=getHolidayDate(c.id);return`<button class="filter-btn ${c.id===currentFilter?'active':''}" data-filter="${c.id}" onclick="filterProducts('${c.id}')">${getCategoryName(c.id)}${d?` <span style="font-size:.72em;opacity:.65;font-weight:400">· ${d}</span>`:''}</button>`}).join('')
   updateFilterFade();
 }
