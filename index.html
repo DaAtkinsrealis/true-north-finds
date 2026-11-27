@@ -953,11 +953,16 @@ function updateCartUI(){
   }).join('');
   document.getElementById('cartTotal').textContent=fmtPrice(total);footer.style.display='block'
 }
-function toggleCart(){document.getElementById('cartModal').classList.toggle('active')}
+function toggleCart(){var cm=document.getElementById('cartModal');if(!cm.classList.contains('active'))closeOtherModals('cartModal');cm.classList.toggle('active')}
 
 // ===================== 登录 / 注册 =====================
 let currentCustomer=null,currentLevel=null,authMode='login',authChannel='email',otpSent=false;
-function openModal(id){document.getElementById(id).classList.add('active')}
+const MODAL_IDS=['detailModal','cartModal','authModal','accountModal','addressModal','checkoutModal'];
+// 2026-11-27 修复：一次只允许一个弹窗（Grok 评审 P1 弹窗叠加属实）。
+// openModal 默认先关其他弹窗；openAddressModal 从账户页打开时传 keepOthers=true，
+// 保留“账户→地址→保存后回到账户”的叠层返回路径。
+function closeOtherModals(exceptId){MODAL_IDS.forEach(function(mid){if(mid!==exceptId){var el=document.getElementById(mid);if(el&&el.classList.contains('active')){el.classList.remove('active');if(mid==='detailModal')document.body.style.overflow=''}}})}
+function openModal(id,keepOthers){if(!keepOthers)closeOtherModals(id);document.getElementById(id).classList.add('active')}
 function closeModal(id){document.getElementById(id).classList.remove('active')}
 function switchAuthChannel(channel){
   authChannel=channel;
@@ -1228,7 +1233,7 @@ function openAddressModal(context,addr){
   document.getElementById('addrPhone').value=addr?addr.phone:'';
   document.getElementById('addrAddress').value=addr?addr.address:'';
   document.getElementById('addrError').style.display='none';
-  openModal('addressModal');
+  openModal('addressModal',true);
 }
 function translateError(e){
   const msg=(e&&(e.message||e.error_description||e.msg))||String(e||'');
@@ -1390,6 +1395,8 @@ function renderFilters(){
 function updateFilterFade(){const f=document.getElementById('filters');if(!f)return;f.classList.toggle('at-end',f.scrollLeft+f.clientWidth>=f.scrollWidth-4)}
 document.getElementById('filters').addEventListener('scroll',updateFilterFade,{passive:true});
 window.addEventListener('resize',updateFilterFade);
+// 2026-11-27 新增：Esc 关闭所有已开弹窗（此前无任何键盘关闭路径）
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('detailModal').classList.contains('active'))closeDetail();MODAL_IDS.forEach(function(mid){if(mid!=='detailModal')closeModal(mid)})}});
 function filterProducts(filter){currentFilter=filter;renderFilters();renderProducts()}
 function renderProducts(){
   const products=getProducts();
@@ -1432,7 +1439,7 @@ function openDetail(id){
   const shownDesc=getProductDesc(p);
   const descHtml=(shownDesc&&shownDesc!==shownName)?`<p class="detail-desc">${shownDesc}</p>`:'';
   document.getElementById('detailBody').innerHTML=`<div class="detail-gallery"><img src="${resolveImg(images[0])}" id="detailMainImg" alt="${getProductName(p)}" loading="lazy" onerror="${imgFallback}"></div>${thumbsHtml}<div class="detail-info"><span class="tag">${catName}</span><h2>${shownName}</h2><div class="detail-price">${fmtPrice(p.price)}</div>${descHtml}<div class="detail-actions"><button class="btn btn-primary" onclick="addToCart('${p.id}',null);closeDetail()">${t('add_to_cart')}</button><button class="btn btn-outline" onclick="closeDetail()">${t('continue_browsing')}</button></div></div>`;
-  document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
+  closeOtherModals('detailModal');document.getElementById('detailModal').classList.add('active');document.body.style.overflow='hidden'
 }
 function setDetailImage(idx){if(!currentDetailProduct)return;detailImageIndex=idx;document.getElementById('detailMainImg').src=currentDetailProduct.images[idx];document.querySelectorAll('.detail-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
 function closeDetail(){document.getElementById('detailModal').classList.remove('active');document.body.style.overflow=''}
