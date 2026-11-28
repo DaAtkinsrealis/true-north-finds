@@ -30,6 +30,7 @@ body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);co
 .cloud-status{position:fixed;top:70px;right:16px;z-index:999;padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:all .3s}
 .cloud-status.online{background:#15291e;color:#5cc98a;border:1px solid #234530}
 .cloud-status.offline{background:#2e2410;color:#e0a855;border:1px solid #473518}
+.cloud-status.loading{background:#1d2733;color:#7fb3e8;border:1px solid #2c4258}
 header{background:var(--card);border-bottom:1px solid var(--border);color:var(--text);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 24px}
 .logo{font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -78,6 +79,7 @@ header{background:var(--card);border-bottom:1px solid var(--border);color:var(--
 .search-wrap::before{content:'🔍';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.78rem;opacity:.6}
 .product-filters{display:flex;gap:6px;flex-wrap:wrap;flex:1}
 .filter-btn{padding:6px 14px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text-light);cursor:pointer;font-size:.8rem;transition:all .25s;font-family:inherit;white-space:nowrap}
+.sort-wrap{flex:0 0 auto}.sort-select{padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.85rem;background:var(--input-bg);color:var(--text);cursor:pointer}.sort-select:focus{outline:none;border-color:var(--accent)}
 .filter-btn:hover{border-color:var(--accent);color:var(--text)}
 .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .products-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
@@ -165,7 +167,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
 .empty-products{text-align:center;padding:60px 20px;color:var(--text-light)}
 .empty-products-icon{font-size:3rem;margin-bottom:12px}
 @media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;min-width:0;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent 100%);mask-image:linear-gradient(to right,#000 90%,transparent 100%)}.product-filters::-webkit-scrollbar{display:none}.product-filters.at-end{-webkit-mask-image:none;mask-image:none}.filter-btn{flex-shrink:0}}
-@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.filter-btn{flex-shrink:0}.detail-gallery{height:260px}.header-inner{padding:12px 12px;gap:6px}.logo{font-size:.9rem}.cart-btn span:not(.cart-count){display:none}.cart-btn{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
+@media(max-width:600px){.process-grid{grid-template-columns:repeat(2,1fr);gap:12px 10px}#process{padding:10px 16px 2px}.section.payment-section{padding:8px 16px 10px}.hero{padding:55px 20px 45px}.section{padding:32px 16px}.products-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px 9px 9px}.product-info h3{font-size:.78rem}.product-price{font-size:.95rem}.browse-bar{flex-direction:column;align-items:stretch;padding:8px}.search-wrap{flex:none}.sort-wrap{flex:none}.sort-select{width:100%}.product-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;min-width:0;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent 100%);mask-image:linear-gradient(to right,#000 90%,transparent 100%)}.filter-btn{flex-shrink:0}.detail-gallery{height:260px}.header-inner{padding:12px 12px;gap:6px}.logo{font-size:.9rem}.cart-btn span:not(.cart-count){display:none}.cart-btn{padding:8px 10px}.header-actions{gap:6px;flex-shrink:0}.cloud-status{top:60px;right:10px;font-size:.7rem}}
 .lang-switcher{display:flex;gap:2px;background:var(--card-2);border:1px solid var(--border);border-radius:20px;padding:3px;flex-shrink:0}
 .lang-btn{border:none;background:transparent;color:var(--text-light);padding:4px 10px;border-radius:14px;cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s}
 .lang-btn:hover{color:var(--text)}
@@ -195,6 +197,7 @@ footer{text-align:center;padding:30px 24px;color:var(--text-light);font-size:.82
   <div class="section-title"><h2 data-i18n="products_title">精选商品</h2><p data-i18n="products_sub">中国精选节日好物</p></div>
   <div class="browse-bar">
     <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜索商品..." data-i18n-ph="search_ph" oninput="searchProducts(this.value)"></div>
+    <div class="sort-wrap"><select id="sortSelect" class="sort-select" onchange="setSort(this.value)"><option value="default" data-i18n="sort_default">默认排序</option><option value="price-asc" data-i18n="sort_price_asc">价格从低到高</option><option value="price-desc" data-i18n="sort_price_desc">价格从高到低</option></select></div>
     <div class="product-filters" id="filters"></div>
   </div>
   <div class="products-grid" id="productsGrid"></div>
@@ -374,7 +377,7 @@ auth_email_ph:"邮箱",auth_pw_ph:"密码（至少6位）",
 auth_forgot:"忘记密码？",auth_otp_ph:"6位验证码",
 addr_name_ph:"收件人姓名",addr_phone_ph:"联系电话",addr_address_ph:"详细收货地址",
 checkout_title:"确认订单",
-cloud_online:"云端同步",cloud_offline:"本地模式",
+cloud_online:"云端同步",cloud_offline:"本地模式",cloud_loading:"同步中…",sort_default:"默认排序",sort_price_asc:"价格从低到高",sort_price_desc:"价格从高到低",
 toast_added:"已加入购物袋！",
 toast_otp_sent:"验证码已发送，请查收短信",
 toast_register_check_email:"注册成功！请查收邮箱，点击确认链接后即可登录",
@@ -457,7 +460,7 @@ auth_email_ph:"Email",auth_pw_ph:"Password (min. 6 characters)",
 auth_forgot:"Forgot password?",auth_otp_ph:"6-digit code",
 addr_name_ph:"Recipient name",addr_phone_ph:"Contact phone",addr_address_ph:"Detailed address",
 checkout_title:"Confirm Order",
-cloud_online:"Cloud sync",cloud_offline:"Local mode",
+cloud_online:"Cloud sync",cloud_offline:"Local mode",cloud_loading:"Syncing…",sort_default:"Default",sort_price_asc:"Price: Low to High",sort_price_desc:"Price: High to Low",
 toast_added:"Added to your bag!",
 toast_otp_sent:"Verification code sent — please check your messages",
 toast_register_check_email:"Registered! Please check your email and click the confirmation link to log in",
@@ -540,7 +543,7 @@ auth_email_ph:"Courriel",auth_pw_ph:"Mot de passe (min. 6 caractères)",
 auth_forgot:"Mot de passe oublié ?",auth_otp_ph:"Code à 6 chiffres",
 addr_name_ph:"Nom du destinataire",addr_phone_ph:"Téléphone",addr_address_ph:"Adresse complète",
 checkout_title:"Confirmer la commande",
-cloud_online:"Synchronisé",cloud_offline:"Mode local",
+cloud_online:"Synchronisé",cloud_offline:"Mode local",cloud_loading:"Synchronisation…",sort_default:"Par défaut",sort_price_asc:"Prix croissant",sort_price_desc:"Prix décroissant",
 toast_added:"Ajouté au panier !",
 toast_otp_sent:"Code de vérification envoyé — vérifiez vos messages",
 toast_register_check_email:"Inscription réussie ! Vérifiez votre courriel et cliquez sur le lien de confirmation pour vous connecter.",
@@ -868,16 +871,21 @@ const DEFAULT_CATEGORIES=[{id:'all',name:'全部'},{id:'food',name:'食品'},{id
 const CLOUD_DATA_URL='https://api.jsonbin.io/v3/b/6a6e386df5f4af5e29ded56d/latest';
 
 let siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES};
+let dataLoaded=false; // true once loadData settles (cloud or fallback); grid shows a loading state until then (2026-11-27 P1-2)
 let isCloudMode=false;
 let tiersByProduct={}; // productId -> [{min_qty,total_price}, ...] sorted desc by min_qty
 
 async function loadData(){
+  let loadTimer=null;
   try{
-    const [{data:products,error:pErr},{data:categories,error:cErr},{data:tiers,error:tErr}]=await Promise.all([
+    // 8s timeout: a hung sync must not strand the page on the loading state; clear the timer on settle to avoid an orphaned rejection (2026-11-27 P1-2)
+    const loadTimeout=new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Supabase load timeout')),8000);});
+    const [{data:products,error:pErr},{data:categories,error:cErr},{data:tiers,error:tErr}]=await Promise.race([Promise.all([
       sb.from('products').select('*').order('created_at'),
       sb.from('categories').select('*').order('sort_order'),
       sb.from('product_price_tiers').select('*')
-    ]);
+    ]),loadTimeout]);
+    clearTimeout(loadTimer);
     if(pErr||cErr||tErr)throw(pErr||cErr||tErr);
     siteData={
       products:(products||[]).map(p=>({id:p.id,name:p.name,price:Number(p.price),category:p.category,desc:p.description||'',images:p.images||[]})),
@@ -889,15 +897,16 @@ async function loadData(){
       tiersByProduct[t.product_id].push({min_qty:t.min_qty,total_price:Number(t.total_price)});
     });
     Object.values(tiersByProduct).forEach(list=>list.sort((a,b)=>b.min_qty-a.min_qty));
-    isCloudMode=true;updateCloudStatus(true);renderAll();
+    isCloudMode=true;dataLoaded=true;updateCloudStatus(true);renderAll();
     initAuthState();
   }catch(e){
+    clearTimeout(loadTimer);
     console.log('Supabase load failed, falling back to local:',e);
     const localProducts=localStorage.getItem('tnf_products');
     const localCats=localStorage.getItem('tnf_categories');
     if(localProducts){siteData={products:JSON.parse(localProducts),categories:localCats?JSON.parse(localCats):DEFAULT_CATEGORIES}}
     else{siteData={products:DEFAULT_PRODUCTS,categories:DEFAULT_CATEGORIES}}
-    isCloudMode=false;updateCloudStatus(false);renderAll();
+    isCloudMode=false;dataLoaded=true;updateCloudStatus(false);renderAll();
     initAuthState();
   }
 }
@@ -916,6 +925,7 @@ function updateCloudStatus(online){
   const badge=document.getElementById('cloudStatus');
   if(!badge)return;
   badge.style.display='flex';
+  if(!dataLoaded){badge.className='cloud-status loading';document.getElementById('cloudStatusDot').textContent='🔵';document.getElementById('cloudStatusText').textContent=t('cloud_loading');return}
   if(online){badge.className='cloud-status online';document.getElementById('cloudStatusDot').textContent='🟢';document.getElementById('cloudStatusText').textContent=t('cloud_online')}
   else{badge.className='cloud-status offline';document.getElementById('cloudStatusDot').textContent='🟡';document.getElementById('cloudStatusText').textContent=t('cloud_offline')}
 }
@@ -1381,9 +1391,11 @@ function copyAmount(amount){
   navigator.clipboard.writeText(String(amount)).then(()=>showToast(t('toast_copied')+amount)).catch(()=>showToast(t('toast_copy_failed')+amount));
 }
 
-let currentFilter='all',productImageIndex={},searchQuery='';
+let currentFilter='all',productImageIndex={},searchQuery='',currentSort='default';
+function setSort(v){currentSort=v;renderProducts()}
 function searchProducts(value){searchQuery=value.trim().toLowerCase();renderProducts()}
 function renderFilters(){
+  if(!dataLoaded){document.getElementById('filters').innerHTML='';return}
   const products=getProducts();
   const cats=getCategories().filter(c=>c.id==='all'||products.some(p=>p.category===c.id));
   if(currentFilter!=='all'&&!cats.some(c=>c.id===currentFilter))currentFilter='all';
@@ -1401,8 +1413,11 @@ function filterProducts(filter){currentFilter=filter;renderFilters();renderProdu
 function renderProducts(){
   const products=getProducts();
   const grid=document.getElementById('productsGrid');
+  if(!dataLoaded){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">⏳</div><p>${t('loading')}</p></div>`;return}
   let filtered=currentFilter==='all'?products:products.filter(p=>p.category===currentFilter);
   if(searchQuery){filtered=filtered.filter(p=>((getProductName(p)||'')+' '+(getProductDesc(p)||'')+' '+(p.name||'')+' '+(p.desc||'')).toLowerCase().includes(searchQuery))}
+  if(currentSort==='price-asc')filtered=filtered.slice().sort((a,b)=>a.price-b.price);
+  else if(currentSort==='price-desc')filtered=filtered.slice().sort((a,b)=>b.price-a.price);
   if(filtered.length===0){grid.innerHTML=`<div class="empty-products" style="grid-column:1/-1"><div class="empty-products-icon">📦</div><p>${searchQuery?t('no_search_results'):t('no_products')}</p></div>`;return}
   grid.innerHTML=filtered.map(p=>{
     const img=p.images&&p.images[0]?p.images[0]:'';
